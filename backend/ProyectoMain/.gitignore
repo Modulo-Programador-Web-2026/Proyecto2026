@@ -1,1 +1,22 @@
-.env
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configuración de VS Code o PyCharm
+.vscode/
+.idea/
+.DS_Store  # Si usas Mac
+
+# Base de datos local
+db.sqlite3
+db.sqlite3-journal
+
+# Logs y archivos de despliegue
+*.log
+local_settings.py
