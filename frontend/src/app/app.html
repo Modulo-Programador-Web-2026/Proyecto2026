@@ -1,23 +1,53 @@
-<div class="container mt-5 text-center">
-  <div class="card shadow p-4">
-    <h2>Hola desde el frontend</h2>
-
-    @if (mensaje) {
-      <p class="text-success fw-bold">
-        {{ mensaje }}
-      </p>
-    }
-
-    @if (version) {
-      <p>
-        Versión API: <strong>{{ version }}</strong>
-      </p>
-    }
-
-    <button 
-      class="btn btn-fucsia"
-      (click)="probarConexion()">
-      Hacer click para probar conexión
-    </button>
+<header class="bg-dark text-white p-3">
+  <div class="container d-flex justify-content-between">
+    <h4>Proyecto 2026</h4>
+    <nav>
+      <a href="#inicio" class="text-white me-3">Inicio</a>
+      <a href="#info" class="text-white me-3">Info</a>
+      <a href="#contacto" class="text-white">Contacto</a>
+    </nav>
   </div>
-</div>
+</header>
+
+<!-- INICIO -->
+<section id="inicio" class="container text-center mt-5">
+  <h1>Bienvenido a nuestro proyecto</h1>
+  <p class="lead">
+    Esta es una plataforma en desarrollo pensada para brindar soluciones digitales.
+  </p>
+
+  <button class="btn btn-fucsia" (click)="probarConexion()">
+    Probar conexión
+  </button>
+
+  @if (mensaje) {
+    <p class="text-success mt-3"> {{ mensaje }}
+    </p>
+  }
+
+  @if (version) {
+    <p>
+      Versión API: <strong>{{ version }}</strong>
+    </p>
+  }
+</section>
+
+<!-- INFO -->
+<section id="info" class="container mt-5">
+  <h2>Sobre el proyecto</h2>
+  <p>
+    Este proyecto busca resolver necesidades reales mediante el uso de tecnología web.
+    Actualmente se encuentra en etapa de desarrollo.
+  </p>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="container mt-5 mb-5">
+  <h2>Contacto</h2>
+  <p>Podés comunicarte con nosotros para más información.</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-pink text-white text-center p-3">
+  <p>© 2026 Mi Proyecto</p>
+</footer>
