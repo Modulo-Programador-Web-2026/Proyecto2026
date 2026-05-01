@@ -1,0 +1,47 @@
+    <div class="landing-wrapper" role="main">
+
+    <header class="navbar" role="banner">
+        <div class="navbar__logo" aria-label="SangreYa - Inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 21C12 21 4 13.5 4 8.5C4 5.42 7.13 3 12 3C16.87 3 20 5.42 20 8.5C20 13.5 12 21 12 21Z"
+            fill="#C0392B"/>
+            <path d="M12 6V14M8 10H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="navbar__name">SangreYa</span>
+        </div>
+        <button class="navbar__lang" aria-label="Cambiar idioma">
+        IDIOMA: ES
+        </button>
+    </header>
+
+    <section class="landing__main" aria-label="Opciones principales">
+
+        <button
+        class="action-card action-card--emergency"
+        (click)="goToEmergency()"
+        aria-label="Necesito sangre para una emergencia">
+        <div class="action-card__text">
+            <span class="action-card__emoji" aria-hidden="true">🚨</span>
+            <h2 class="action-card__title">NECESITO<br>SANGRE</h2>
+            <p class="action-card__subtitle">Para una emergencia.</p>
+        </div>
+        </button>
+
+        <button
+        class="action-card action-card--donate"
+        (click)="goToDonate()"
+        aria-label="Quiero donar sangre">
+        <div class="action-card__text">
+            <span class="action-card__emoji" aria-hidden="true">❤️</span>
+            <h2 class="action-card__title action-card__title--dark">QUIERO<br>DONAR</h2>
+            <p class="action-card__subtitle action-card__subtitle--dark">Tengo tiempo.</p>
+        </div>
+        </button>
+
+    </section>
+
+    <footer class="landing__tagline" role="contentinfo">
+        <p>SangreYa te conecta rápido.<br>Sin registros largos.<br>Enfoque en la vida.</p>
+    </footer>
+
+    </div>

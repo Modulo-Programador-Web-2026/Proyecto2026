@@ -1,0 +1,182 @@
+    /* ── Variables ──────────────────────────────────────────── */
+    :root {
+    --color-primary:      #C0392B;
+    --color-primary-dark: #922B21;
+    --color-white:        #FFFFFF;
+    --color-bg:           #F8F8F8;
+    --color-text-dark:    #1A1A1A;
+    --color-text-mid:     #444444;
+    --color-border:       #E0E0E0;
+    }
+
+    /* ── Reset ──────────────────────────────────────────────── */
+    *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    }
+
+    /* ── Wrapper ─────────────────────────────────────────────── */
+    .landing-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background-color: var(--color-primary);
+    }
+
+    .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+
+    .navbar__name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 0.3px;
+    }
+
+    .navbar__lang {
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    color: var(--color-white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.15s ease;
+    }
+
+    .navbar__lang:hover,
+    .navbar__lang:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
+    }
+
+    /* ── Contenido principal ─────────────────────────────────── */
+    .landing__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+    padding: 48px 32px 32px;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+    }
+
+    @media (max-width: 600px) {
+    .landing__main {
+        grid-template-columns: 1fr;
+        padding: 32px 16px 16px;
+        gap: 16px;
+    }
+    }
+
+    /* ── Cards ───────────────────────────────────────────────── */
+    .action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 48px 32px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    min-height: 260px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    text-align: center;
+    }
+
+    .action-card:focus-visible {
+    outline: 3px solid var(--color-primary-dark);
+    outline-offset: 3px;
+    }
+
+    .action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .action-card:active {
+    transform: scale(0.985);
+    }
+
+    .action-card--emergency {
+    background-color: var(--color-primary);
+    box-shadow: 0 4px 20px rgba(192, 57, 43, 0.3);
+    }
+
+    .action-card--donate {
+    background-color: var(--color-white);
+    border: 2.5px solid var(--color-border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .action-card__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    }
+
+    .action-card__emoji {
+    font-size: 36px;
+    line-height: 1;
+    }
+
+    .action-card__title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-white);
+    }
+
+    .action-card__title--dark {
+    color: var(--color-text-dark);
+    }
+
+    .action-card__subtitle {
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.88);
+    }
+
+    .action-card__subtitle--dark {
+    color: var(--color-text-mid);
+    }
+
+    /* ── Tagline ─────────────────────────────────────────────── */
+    .landing__tagline {
+    text-align: center;
+    padding: 32px 32px 48px;
+    }
+
+    .landing__tagline p {
+    font-size: 15px;
+    color: var(--color-text-mid);
+    line-height: 1.8;
+    }
+
+    /* ── Accesibilidad ───────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+    .action-card {
+        transition: none;
+    }
+    }
