@@ -8,14 +8,6 @@ footer {
     color: white;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(255, 255, 255);
-    background-color: #0f172a;
-    margin: 0;
-    padding: 0;
-}
-
 .btn-fucsia {
     background-color: #d238ac;
     color: rgb(255, 255, 255);
@@ -28,15 +20,15 @@ body {
 
 @media (max-width: 768px) {
     #inicio h1 {
-    font-size: 2rem;
+        font-size: 2rem;
     }
 
     header .container {
-    flex-direction: column;
-    text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
 
     nav {
-    margin-top: 10px;
+        margin-top: 10px;
     }
 }
