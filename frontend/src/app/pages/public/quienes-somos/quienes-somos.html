@@ -1,0 +1,140 @@
+<div class="about-page">
+
+    <header class="about-hero">
+
+        <div class="hero-wrapper">
+
+            <div class="hero-content">
+                <span class="hero-badge">
+                    Comunidad solidaria
+                </span>
+                <h1 class="reveal-text">
+                    Impulsando el cambio,<br>
+                    <span>un donante a la vez</span>
+                </h1>
+                <p class="reveal-subtext">
+                    SangreYa nació en 2026 con un objetivo claro:
+                    que nadie pierda la vida por falta de donantes
+                    en su ciudad.
+                </p>
+            </div>
+
+            <div class="hero-illustration">
+                <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="250" cy="250" r="180" fill="#FCECEC" />
+                    <circle class="hero-ring" cx="250" cy="250" r="150" />
+                    <path d="M250 340 C250 340 180 290 180 225 C180 180 212 150 250 150 C288 150 320 180 320 225 C320 290 250 340 250 340Z" fill="#C0392B" />
+                    <path d="M250 240 C250 240 232 226 232 210 C232 198 240 192 248 194 C252 195 256 199 250 206 C244 199 248 195 252 194 C260 192 268 198 268 210 C268 226 250 240 250 240Z" fill="white" />
+                    <g class="floating-user user-1">
+                        <circle cx="120" cy="180" r="18" fill="#F2C4C4"/>
+                        <path d="M95 215C95 202 106 194 120 194C134 194 145 202 145 215" stroke="#C0392B" stroke-width="3" stroke-linecap="round" />
+                    </g>
+                    <g class="floating-user user-2">
+                        <circle cx="380" cy="180" r="18" fill="#F2C4C4"/>
+                        <path d="M355 215C355 202 366 194 380 194C394 194 405 202 405 215" stroke="#C0392B" stroke-width="3" stroke-linecap="round" />
+                    </g>
+                    <g class="floating-user user-3">
+                        <circle cx="250" cy="95" r="18" fill="#F2C4C4"/>
+                        <path d="M225 130C225 117 236 109 250 109C264 109 275 117 275 130" stroke="#C0392B" stroke-width="3" stroke-linecap="round" />
+                    </g>
+                    <line x1="145" y1="190" x2="205" y2="220" stroke="#C0392B" stroke-dasharray="6 6" opacity="0.4" />
+                    <line x1="355" y1="190" x2="295" y2="220" stroke="#C0392B" stroke-dasharray="6 6" opacity="0.4" />
+                    <line x1="250" y1="140" x2="250" y2="190" stroke="#C0392B" stroke-dasharray="6 6" opacity="0.4" />
+                </svg>
+            </div>
+
+        </div>
+
+    </header>
+
+    <section class="stats-grid">
+
+        <div class="stat-item">
+            <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z" stroke="currentColor" stroke-width="2" />
+                </svg>
+            </div>
+            <span class="stat-number">+10k</span>
+            <h3>Donantes activos</h3>
+            <p> Personas registradas colaborando en campañas solidarias dentro de toda la provincia.</p>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M3 21h18M6 21V7l6-4 6 4v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="stat-number">50+</span>
+            <h3>Centros aliados</h3>
+            <p>Hospitales y centros médicos integrados oficialmente a nuestra plataforma digital.</p>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span class="stat-number">24/7</span>
+            <h3>Información en tiempo real</h3>
+            <p> Campañas y datos actualizados constantemente para actuar rápido ante emergencias.</p>
+        </div>
+
+    </section>
+
+    <section class="about-story">
+
+        <div class="story-block">
+
+            <div class="story-content">
+                <span class="story-label">Nuestra misión</span>
+                <h2>Conectar personas dispuestas a ayudar.</h2>
+                <p>
+                    Facilitamos el acceso a campañas de donación de sangre,
+                    conectando personas solidarias con centros de salud que
+                    necesitan actuar rápidamente. Nuestro objetivo es construir
+                    una comunidad más consciente, participativa y preparada
+                    para responder ante cualquier emergencia.
+                </p>
+            </div>
+
+            <div class="story-visual">
+                <div class="visual-circle">
+                    <div class="rotating-ring"></div>
+                    <div class="blood-type">
+                        {{ currentMissionType }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="story-block reverse">
+
+            <div class="story-content">
+                <span class="story-label">Nuestra visión</span>
+                <h2>Transformar la donación voluntaria.</h2>
+                <p>
+                    Aspiramos a convertirnos en la plataforma líder en gestión
+                    de donantes voluntarios en Argentina, modernizando la forma
+                    en que las personas se informan, participan y colaboran con
+                    campañas de salud que realmente pueden salvar vidas.
+                </p>
+            </div>
+
+           <div class="story-visual">
+                <div class="visual-circle">
+                    <div class="rotating-ring"></div>
+                    <div class="blood-type">
+                        {{ currentVisionType }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="admin-layout">
+
+    <button
+        class="menu-toggle"
+        (click)="toggleSidebar()"
+    >
+        ☰
+    </button>
+
+    <aside 
+        class="sidebar"
+        [class.open]="isSidebarOpen"
+    >
+
+        <div class="sidebar-top">
+
+            <div class="brand">
+
+                <div class="brand-circle">
+                    S
+                </div>
+
+                <div class="brand-text">
+                    <h2>SangreYa</h2>
+                    <span>Panel administrativo</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a
+                routerLink="/admin/dashboard"
+                routerLinkActive="active-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                routerLink="/admin/campanas"
+                routerLinkActive="active-link"
+            >
+                Campañas
+            </a>
+
+            <a
+                routerLink="/admin/inscripciones"
+                routerLinkActive="active-link"
+            >
+                Inscripciones
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn">
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="admin-content">
+        <router-outlet></router-outlet>
+    </main>
+
+</div>
