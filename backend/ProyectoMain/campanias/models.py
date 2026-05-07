@@ -4,6 +4,13 @@ from django.db import models
 class Estado_Campania(models.Model):
     estado=models.CharField(max_length=50,unique=True)
 
+def _str_(self):
+    return self.estado
+
+
+
+
+
 class Campania(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=1500)
