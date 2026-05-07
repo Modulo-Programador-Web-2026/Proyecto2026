@@ -6,4 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', TestView.as_view(), name='test-endpoint'),
     path('usuarios/', include('usuarios.urls')),
+    path('inscripciones/', include('inscripciones.urls')),
+    path('campanias/', include('campanias.urls')),
 ]
