@@ -1,0 +1,22 @@
+from django.db import models
+
+
+class Estado_Campania(models.Model):
+    estado=models.CharField(max_length=50,unique=True)
+
+class Campania(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=1500)
+    ubicacion = models.CharField(max_length=100)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+rol = models.ForeignKey('Rol', on_delete=models.PROTECT, null=False)
+
+def _str_(self):
+        return self.titulo
+
+
+
+    
+
+    
