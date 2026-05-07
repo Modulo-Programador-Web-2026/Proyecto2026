@@ -116,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -132,3 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+#esto le dice a django que use nuestro modelo de usuario y no el que trae por default
+AUTH_USER_MODEL = 'usuarios.Usuario'
