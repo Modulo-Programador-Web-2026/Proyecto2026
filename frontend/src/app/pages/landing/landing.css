@@ -2,22 +2,6 @@
    SangreYa — Landing Page
    ============================================================ */
 
-:host {
-  --red:        #C0392B;
-  --red-dark:   #922B21;
-  --red-light:  #FCEBEB;
-  --text:       #1A1A1A;
-  --text-mid:   #555;
-  --text-light: #888;
-  --bg:         #F0F0F0;
-  --white:      #FFFFFF;
-  --border:     #E0E0E0;
-  --shadow:     0 2px 12px rgba(0,0,0,0.07);
-  --radius:     14px;
-  --font:       'Lato', 'Segoe UI', Arial, sans-serif;
-  display: block;
-}
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 .page {
