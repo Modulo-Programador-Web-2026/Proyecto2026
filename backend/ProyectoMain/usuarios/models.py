@@ -11,8 +11,8 @@ class Rol(models.Model):
   
 
 class GrupoSanguineo(models.Model):
-    grupo = models.CharField(max_length=5, unique=True)
-    factor = models.CharField(max_length=5, unique=True)
+    grupo = models.CharField(max_length=5)
+    factor = models.CharField(max_length=5)
 
     def __str__(self):
         return f"{self.grupo} {self.factor}"

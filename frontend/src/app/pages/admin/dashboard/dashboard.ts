@@ -6,4 +6,17 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class Dashboard {}
+
+export class AdminDashboard {
+
+  modalAbierto: string | null = null;
+
+  abrirModal(tipo: string) {
+    this.modalAbierto = tipo;
+  }
+
+  cerrarModal() {
+    this.modalAbierto = null;
+  }
+
+}

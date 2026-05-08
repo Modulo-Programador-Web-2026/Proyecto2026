@@ -19,7 +19,7 @@ class Campania(models.Model):
     fecha_fin = models.DateField()
 estado_campania = models.ForeignKey('Estado_Campania', on_delete=models.PROTECT, null=False)
 
-def _str_(self):
+def __str__(self):
         return self.titulo
 
 
