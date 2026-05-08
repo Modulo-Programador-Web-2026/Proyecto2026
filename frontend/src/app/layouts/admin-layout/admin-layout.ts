@@ -4,10 +4,14 @@ import { RouterOutlet, RouterLink, RouterLinkActive  } from '@angular/router';
 @Component({
     selector: 'app-admin-layout',
     standalone: true,
-    imports: [RouterOutlet, RouterLink, RouterLinkActive],
+    imports: [
+        RouterOutlet, 
+        RouterLink, 
+        RouterLinkActive,
+    ],
     templateUrl: './admin-layout.html',
     styleUrl: './admin-layout.css'
-})
+})  
 
 export class AdminLayout {
     isSidebarOpen = false;
