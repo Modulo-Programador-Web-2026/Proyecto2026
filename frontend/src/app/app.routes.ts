@@ -6,8 +6,7 @@ import { QuienesSomos } from './pages/public/quienes-somos/quienes-somos';
 import { AdminDashboard } from './pages/admin/dashboard/dashboard';
 import { AdminCampanias } from './pages/admin/campanias/campanias';
 import { AdminInscripciones } from './pages/admin/inscripciones/inscripciones';
-import { Dashboard } from './pages/admin/dashboard/dashboard';
-import { Login } from './pages/login/login';
+import { Login } from './pages/public/login/login';
 import { Campanias } from './pages/public/campanias/campanias';
 
 

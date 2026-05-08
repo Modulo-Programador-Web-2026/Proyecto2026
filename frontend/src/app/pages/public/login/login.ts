@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import { CommonModule } from '@angular/common';
 
 import {
@@ -10,6 +12,7 @@ import {
 } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -33,8 +36,13 @@ export class Login {
   mensaje = '';
 
   constructor(
+
     private fb: FormBuilder,
-    private http: HttpClient
+
+    private http: HttpClient,
+
+    private router: Router
+
   ) {
 
     this.loginForm = this.fb.group({
@@ -79,13 +87,19 @@ export class Login {
 
     ).subscribe({
 
-      next: (response) => {
+  next: (response) => {
 
-        console.log(response);
+    console.log(response);
 
-        this.mensaje = 'Login correcto';
+    this.mensaje = 'Login correcto';
 
-      },
+    const authToken = Math.random().toString(36).substring(2);
+
+    localStorage.setItem('token', authToken);
+
+    this.router.navigate(['/admin/dashboard']);
+
+  },
 
       error: (error) => {
 
