@@ -17,9 +17,9 @@ class Campania(models.Model):
     ubicacion = models.CharField(max_length=100)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-rol = models.ForeignKey('Rol', on_delete=models.PROTECT, null=False)
+estado_campania = models.ForeignKey('Estado_Campania', on_delete=models.PROTECT, null=False)
 
-def _str_(self):
+def __str__(self):
         return self.titulo
 
 
