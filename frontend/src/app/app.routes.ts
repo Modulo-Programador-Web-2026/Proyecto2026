@@ -6,6 +6,10 @@ import { QuienesSomos } from './pages/public/quienes-somos/quienes-somos';
 import { AdminDashboard } from './pages/admin/dashboard/dashboard';
 import { AdminCampanias } from './pages/admin/campanias/campanias';
 import { AdminInscripciones } from './pages/admin/inscripciones/inscripciones';
+import { Dashboard } from './pages/admin/dashboard/dashboard';
+import { Login } from './pages/login/login';
+import { Campanias } from './pages/public/campanias/campanias';
+
 
 export const routes: Routes = [
 
@@ -15,7 +19,10 @@ export const routes: Routes = [
         component: PublicLayout,
         children: [
             { path: '', component: Landing },
-            { path: 'quienes-somos', component: QuienesSomos }
+            { path: 'quienes-somos', component: QuienesSomos },
+            { path: 'login', component: Login },
+            { path: 'campanias', component: Campanias }
+
         ]
     },
 

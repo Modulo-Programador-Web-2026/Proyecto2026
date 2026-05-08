@@ -1,0 +1,116 @@
+<div class="container">
+
+  <div class="card">
+
+    <!-- IZQUIERDA -->
+
+    <div class="left">
+
+      <h1>Iniciar Sesión</h1>
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+      >
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+
+          <label>Email</label>
+
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+          >
+
+          <small
+            class="error"
+            *ngIf="
+              loginForm.get('email')?.invalid &&
+              loginForm.get('email')?.touched
+            "
+          >
+
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">
+              El email es obligatorio
+            </span>
+
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">
+              Formato inválido
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+          <label>Contraseña</label>
+
+          <input
+            type="password"
+            placeholder="Contraseña"
+            formControlName="password"
+          >
+
+          <small
+            class="error"
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              loginForm.get('password')?.touched
+            "
+          >
+
+            <span *ngIf="loginForm.get('password')?.errors?.['required']">
+              La contraseña es obligatoria
+            </span>
+
+            <span *ngIf="loginForm.get('password')?.errors?.['minlength']">
+              Mínimo 4 caracteres
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- BOTON -->
+
+        <button
+          type="submit"
+          class="submit-btn"
+        >
+          Iniciar sesión
+        </button>
+
+        <!-- MENSAJE -->
+
+        <p class="mensaje">
+          {{ mensaje }}
+        </p>
+
+      </form>
+
+    </div>
+
+    <!-- DERECHA -->
+
+    <div class="right">
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/829/829243.png"
+        alt="donacion"
+      >
+
+      <h2>
+        Unite a la comunidad y doná hoy.
+      </h2>
+
+    </div>
+
+  </div>
+
+</div>
