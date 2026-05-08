@@ -63,9 +63,23 @@
     color: var(--text);
     font-weight: 600;
     transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.sidebar-nav a svg, .menu-toggle svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 .sidebar-nav a:hover {
+    transform: translateX(4px);
+}
+
+.sidebar-nav a:not(.active-link):hover {
     background: rgba(192,57,43,0.08);
     color: var(--red);
     transform: translateX(4px);
@@ -75,6 +89,16 @@
     background: linear-gradient( 135deg, var(--red), var(--red-dark));
     color: var(--white) !important;
     box-shadow: 0 10px 20px rgba(192,57,43,0.18);
+}
+
+.active-link:hover {
+    transform: none;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 .sidebar-bottom {
@@ -91,6 +115,15 @@
     font-weight: 700;
     cursor: pointer;
     transition:  background 0.25s ease, transform 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logout-icon {
+    width: 18px;
+    height: 18px;
 }
 
 .logout-btn:hover {
