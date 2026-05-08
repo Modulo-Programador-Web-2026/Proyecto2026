@@ -4,6 +4,7 @@ import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { Landing } from './pages/public/home/landing';
 import { QuienesSomos } from './pages/public/quienes-somos/quienes-somos';
 import { Dashboard } from './pages/admin/dashboard/dashboard';
+import { Login } from './pages/login/login';
 
 export const routes: Routes = [
 
@@ -13,7 +14,8 @@ export const routes: Routes = [
         component: PublicLayout,
         children: [
             { path: '', component: Landing },
-            { path: 'quienes-somos', component: QuienesSomos }
+            { path: 'quienes-somos', component: QuienesSomos },
+            { path: 'login', component: Login }
         ]
     },
 
