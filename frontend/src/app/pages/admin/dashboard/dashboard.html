@@ -1,47 +1,594 @@
-<div class="page">
-  <main class="dashboard-container">
-    <h2>Panel Administrativo</h2>
-    
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="label">Total Campañas</span>
-        <span class="value">24</span>
-      </div>
-      <div class="stat-card">
-        <span class="label">Donantes Inscritos</span>
-        <span class="value">1,204</span>
-      </div>
-      <div class="stat-card highlight">
-        <span class="label">Objetivo Mensual</span>
-        <span class="value">85%</span>
-      </div>
+<div class="dashboard-page">
+
+    <section class="dashboard-header">
+
+        <div>
+            <h1>Dashboard</h1>
+            <p>Resumen general del sistema SangreYa.</p>
+        </div>
+
+        <button class="primary-btn">
+            Nueva campaña
+        </button>
+
+    </section>
+
+    <section class="kpi-grid">
+
+        <article class="kpi-card">
+            <span class="kpi-label">Total campañas</span>
+            <h2>24</h2>
+            <p class="positive">+12% este mes</p>
+        </article>
+
+        <article class="kpi-card">
+            <span class="kpi-label">Inscripciones</span>
+            <h2>1,204</h2>
+            <p class="positive">+8% esta semana</p>
+        </article>
+
+        <article class="kpi-card">
+            <span class="kpi-label">Donantes activos</span>
+            <h2>856</h2>
+            <p class="positive">+18% mensual</p>
+        </article>
+
+        <article class="kpi-card highlight">
+            <span class="kpi-label">Objetivo mensual</span>
+            <h2 class="porcentaje">85%</h2>
+            <p>Muy buen rendimiento</p>
+        </article>
+
+    </section>
+
+    <section class="charts-grid">
+
+        <article class="chart-card">
+
+            <div class="card-header">
+
+                <h3>Tipos de campañas</h3>
+
+                <button
+                    class="view-btn"
+                    (click)="abrirModal('campanas')"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+
+            </div>
+
+            <div class="campaign-chart-layout">
+
+
+                <div class="chart-placeholder pie-chart">
+
+                    <div class="pie-center">
+                        100%
+                    </div>
+
+                    <div class="chart-tooltip">
+                        <strong>Campaña Sol de Mayo</strong>
+                        <span>45% del total</span>
+                    </div>
+
+                </div>
+
+                <div class="chart-legend">
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-color"
+                            style="background: var(--red);"
+                        ></span>
+
+                        <div>
+                            <strong>Campaña Sol de Mayo</strong>
+                            <p>45%</p>
+                        </div>
+
+                    </div>
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-color"
+                            style="background: #f5b7b1;"
+                        ></span>
+
+                        <div>
+                            <strong>Campaña Hospital Central</strong>
+                            <p>25%</p>
+                        </div>
+
+                    </div>
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-color"
+                            style="background: #fadbd8;"
+                        ></span>
+
+                        <div>
+                            <strong>Campaña Donar Salva</strong>
+                            <p>30%</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        <article class="chart-card">
+
+            <div class="card-header">
+
+              <h3>Inscripciones mensuales</h3>
+
+                <button
+                    class="view-btn"
+                    (click)="abrirModal('inscripciones')"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+
+            </div>
+
+            <div class="bar-chart">
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Enero</strong>
+                        <span>45 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 80%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Enero
+                    </span>
+
+                </div>
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Febrero</strong>
+                        <span>65 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 65%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Febrero
+                    </span>
+
+                </div>
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Marzo</strong>
+                        <span>15 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 15%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Marzo
+                    </span>
+
+                </div>
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Abril</strong>
+                        <span>75 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 75%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Abril
+                    </span>
+
+                </div>
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Mayo</strong>
+                        <span>45 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 45%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Mayo
+                    </span>
+
+                </div>
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Junio</strong>
+                        <span>25 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 25%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Junio
+                    </span>
+
+                </div>
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>Julio</strong>
+                        <span>35 inscripciones</span>
+                    </div>
+
+                    <div
+                        class="bar"
+                        style="height: 35%;"
+                    ></div>
+
+                    <span class="bar-label">
+                        Julio
+                    </span>
+
+                </div>
+
+            </div>
+            
+            <p class="chart-hint">
+
+                <svg class="hint-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+
+                Pasá el cursor sobre cada barra para ver más información.
+
+            </p>
+
+        </article>
+
+    </section>
+
+    <section class="table-card">
+
+        <div class="card-header">
+            <h3>Campañas recientes</h3>
+            <button class="secondary-btn">
+                Ver todas
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Campaña</th>
+                        <th>Localidad</th>
+                        <th>Estado</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Colecta Anual ISPC</td>
+                        <td>Córdoba Capital</td>
+                        <td>
+                            <span class="badge active">
+                                Activa
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Donación San Roque</td>
+                        <td>Jesús María</td>
+                        <td>
+                            <span class="badge ended">
+                                Finalizada
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+@if (modalAbierto) {
+
+    <div
+        class="modal-overlay"
+        (click)="cerrarModal()"
+    >
+
+        <div
+            class="modal-content"
+            (click)="$event.stopPropagation()"
+        >
+
+            <button
+                class="close-modal"
+                (click)="cerrarModal()"
+            >
+                ✕
+            </button>
+
+            @if (modalAbierto === 'campanas') {
+
+                <div class="modal-chart">
+
+                    <h2>Tipos de campañas</h2>
+
+                    <div class="campaign-chart-layout">
+
+                        <div class="chart-placeholder pie-chart">
+
+                            <div class="pie-center">
+                                100%
+                            </div>
+
+                            <div class="chart-tooltip">
+                                <strong>Campaña Sol de Mayo</strong>
+                                <span>45% del total</span>
+                            </div>
+
+                        </div>
+
+                        <div class="chart-legend">
+
+                            <div class="legend-item">
+
+                                <span
+                                    class="legend-color"
+                                    style="background: var(--red);"
+                                ></span>
+
+                                <div>
+                                    <strong>Campaña Sol de Mayo</strong>
+                                    <p>45%</p>
+                                </div>
+
+                            </div>
+
+                            <div class="legend-item">
+
+                                <span
+                                    class="legend-color"
+                                    style="background: #f5b7b1;"
+                                ></span>
+
+                                <div>
+                                    <strong>Campaña Hospital Central</strong>
+                                    <p>25%</p>
+                                </div>
+
+                            </div>
+
+                            <div class="legend-item">
+
+                                <span
+                                    class="legend-color"
+                                    style="background: #fadbd8;"
+                                ></span>
+
+                                <div>
+                                    <strong>Campaña Donar Salva</strong>
+                                    <p>30%</p>
+                                </div>
+
+                                </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
+
+            @if (modalAbierto === 'inscripciones') {
+
+                <div class="modal-chart">
+
+                    <h2>Inscripciones mensuales</h2>
+
+                    <div class="bar-chart">
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Enero</strong>
+                                <span>45 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 80%;"
+                             ></div>
+
+                            <span class="bar-label">
+                                Enero
+                            </span>
+
+                        </div>
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Febrero</strong>
+                                <span>65 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 65%;"
+                            ></div>
+
+                            <span class="bar-label">
+                                Febrero
+                            </span>
+
+                        </div>
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Marzo</strong>
+                                <span>15 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 15%;"
+                            ></div>
+
+                            <span class="bar-label">
+                                Marzo
+                            </span>
+
+                        </div>
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Abril</strong>
+                                <span>75 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 75%;"
+                            ></div>
+
+                            <span class="bar-label">
+                                Abril
+                            </span>
+
+                        </div>
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Mayo</strong>
+                                <span>45 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 45%;"
+                            ></div>
+
+                            <span class="bar-label">
+                                Mayo
+                            </span>
+
+                        </div>
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Junio</strong>
+                                <span>25 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 25%;"
+                            ></div>
+
+                            <span class="bar-label">
+                                Junio
+                            </span>
+
+                        </div>
+
+                        <div class="bar-item">
+
+                            <div class="bar-tooltip">
+                                <strong>Julio</strong>
+                                <span>35 inscripciones</span>
+                            </div>
+
+                            <div
+                                class="bar"
+                                style="height: 35%;"
+                            ></div>
+
+                            <span class="bar-label">
+                                Julio
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <p class="chart-hint">
+                        <svg class="hint-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Pasá el cursor sobre cada barra para ver más información.
+                    </p>
+
+                </div>
+
+            }
+
+        </div>
+
     </div>
 
-    <section class="table-section">
-      <h3>Estado de Campañas</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Campaña</th>
-              <th>Localidad</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Colecta Anual ISPC</td>
-              <td>Córdoba Capital</td>
-              <td><span class="badge active">Activa</span></td>
-            </tr>
-            <tr>
-              <td>Donación San Roque</td>
-              <td>Jesús María</td>
-              <td><span class="badge ended">Finalizada</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-</div>
+}

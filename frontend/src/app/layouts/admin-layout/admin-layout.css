@@ -76,8 +76,6 @@
 }
 
 .sidebar-nav a:hover {
-    background: rgba(192,57,43,0.08);
-    color: var(--red);
     transform: translateX(4px);
 }
 
