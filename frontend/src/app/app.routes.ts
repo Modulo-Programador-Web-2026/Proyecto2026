@@ -8,6 +8,9 @@ import { AdminCampanias } from './pages/admin/campanias/campanias';
 import { AdminInscripciones } from './pages/admin/inscripciones/inscripciones';
 import { Login } from './pages/public/login/login';
 import { Campanias } from './pages/public/campanias/campanias';
+import { Usuarios } from './pages/admin/usuarios/usuarios';
+
+
 
 
 export const routes: Routes = [
@@ -20,7 +23,9 @@ export const routes: Routes = [
             { path: '', component: Landing },
             { path: 'quienes-somos', component: QuienesSomos },
             { path: 'login', component: Login },
-            { path: 'campanias', component: Campanias }
+            { path: 'campanias', component: Campanias },
+            { path: 'usuarios', component: Usuarios },
+
 
         ]
     },
@@ -32,9 +37,10 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: AdminDashboard },
             { path: 'campanias', component: AdminCampanias },
-            { path: 'inscripciones', component: AdminInscripciones }
+            { path: 'inscripciones', component: AdminInscripciones },
+            
         ]
-    }
+    },
 
     // Rutas del usuario estándar en un futuro
 
