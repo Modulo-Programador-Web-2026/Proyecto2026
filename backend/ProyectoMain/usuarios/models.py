@@ -14,6 +14,9 @@ class GrupoSanguineo(models.Model):
     grupo = models.CharField(max_length=5)
     factor = models.CharField(max_length=5)
 
+    class Meta:
+        unique_together = ('grupo', 'factor')
+
     def __str__(self):
         return f"{self.grupo} {self.factor}"
 
@@ -28,11 +31,11 @@ class Usuario(AbstractUser):
     dni = models.CharField(max_length=20, unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_registro = models.DateField(auto_now_add=True)
 
     # Relaciones (FK)
-    rol = models.ForeignKey('Rol', on_delete=models.PROTECT, null=False)
-    grupo_sanguineo = models.ForeignKey('GrupoSanguineo', on_delete=models.PROTECT, null=False)
+    rol = models.ForeignKey('Rol', on_delete=models.PROTECT, null=True)
+    grupo_sanguineo = models.ForeignKey('GrupoSanguineo', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
