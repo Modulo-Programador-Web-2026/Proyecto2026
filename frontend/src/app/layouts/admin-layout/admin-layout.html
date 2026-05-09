@@ -78,7 +78,10 @@
 
         <div class="sidebar-bottom">
 
-            <button class="logout-btn">
+            <button 
+                class="logout-btn"
+                (click)="abrirModalLogout()"
+            >
                
                 Cerrar sesión
             </button>
@@ -90,5 +93,38 @@
     <main class="admin-content">
         <router-outlet></router-outlet>
     </main>
+
+    @if (mostrarModalLogout) {
+
+        <div class="logout-modal-overlay">
+
+            <div class="logout-modal">
+
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+
+                <div class="logout-modal-actions">
+
+                    <button 
+                        class="cancel-btn"
+                        (click)="cancelarLogout()"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button 
+                        class="confirm-btn"
+                        (click)="confirmarLogout()"
+                    >
+                        Sí, cerrar sesión
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    }
 
 </div>
