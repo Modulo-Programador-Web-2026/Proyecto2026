@@ -1,0 +1,205 @@
+.detalle-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 72px;
+    font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Estados de carga */
+.estado-mensaje {
+    text-align: center;
+    padding: 80px 0;
+    color: #888;
+    font-size: 15px;
+}
+
+.estado-error {
+    text-align: center;
+    padding: 80px 0;
+    color: #C0392B;
+    font-size: 15px;
+}
+
+/* Card principal */
+.detalle-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,.08);
+}
+
+/* Banner */
+.detalle-banner {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+}
+
+.detalle-banner svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Badge de estado dinámico */
+.estado-badge {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.badge-proximo {
+    background: #bc1212;
+    color: #FFF3E0;
+    padding: 15px;
+}
+
+.badge-curso {
+    background: #2E7D32;
+    color: #FFF3E0;
+    padding: 15px;
+}
+
+.badge-fin {
+    background: #546E7A;
+    color: #FFF3E0;
+    padding: 15px;
+}
+
+/* Cuerpo */
+.detalle-cuerpo {
+    padding: 28px 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Título y ubicación */
+.detalle-titulo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+    line-height: 1.25;
+}
+
+.detalle-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Stats: fechas + inscritos */
+.detalle-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.stat-fechas {
+    flex: 1;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fecha-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: #444;
+}
+
+.fecha-item svg {
+    flex-shrink: 0;
+    color: #6c757d;
+}
+
+.stat-inscritos {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 160px;
+}
+
+.inscritos-numero {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #e63946;
+    line-height: 1;
+}
+
+.inscritos-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+/* Descripción */
+.detalle-descripcion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.descripcion-titulo {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.detalle-descripcion p {
+    font-size: 0.925rem;
+    color: #444;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Botón */
+.btn-donar {
+    width: 100%;
+    padding: 15px;
+    background: #C0392B;
+    color: #fff;
+    border: none;
+    border-radius: 99px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.btn-donar:hover {
+    background: #922B21;
+}
+
+.btn-sub {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: -10px 0 0;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+    .detalle-cuerpo { padding: 20px 18px 28px; }
+    .detalle-titulo { font-size: 1.3rem; }
+    .stat-inscritos { min-width: unset; width: 100%; }
+}

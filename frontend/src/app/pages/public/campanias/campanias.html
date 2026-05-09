@@ -16,9 +16,10 @@
         />
     </div>
     <select class="campanias__select" [(ngModel)]="filtroEstado" (change)="filtrar()">
-        <option value="">Filtro</option>
-        <option value="activa">Activa</option>
-        <option value="finalizada">Finalizada</option>
+            <option value="">Filtrar campañas</option>
+            <option value="proxima">Próximas</option>
+            <option value="activa">Activas</option>
+            <option value="finalizada">Finalizadas</option>
     </select>
     </div>
 </div>
@@ -71,7 +72,7 @@
 
         
 
-            <button class="card__btn">Quiero donar</button>
+            <button class="card__btn" [routerLink]="['/campanias', campania.id]"> Quiero donar</button>
         </div>
 
         </article>
