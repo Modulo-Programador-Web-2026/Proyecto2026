@@ -4,11 +4,10 @@ from django.db import models
 
 
 class Rol(models.Model):
-  tipo_rol= models.CharField(max_length=100, unique=True)
+    tipo_rol= models.CharField(max_length=100, unique=True)
 
-  def __str__(self):
-   return self.tipo_rol
-  
+    def __str__(self):
+        return self.tipo_rol
 
 class GrupoSanguineo(models.Model):
     grupo = models.CharField(max_length=5)
@@ -27,7 +26,6 @@ class Usuario(AbstractUser):
     
     # email ya existe en AbstractUser, no hace falta redefinirlo
     # password tampoco porque django ya lo pone solo.
-   
     dni = models.CharField(max_length=20, unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
