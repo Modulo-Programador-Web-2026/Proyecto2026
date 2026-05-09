@@ -1,5 +1,5 @@
 [
   {"model": "campanias.estado_campania", "pk": 1, "fields": {"estado": "Activa"}},
   {"model": "campanias.estado_campania", "pk": 2, "fields": {"estado": "Finalizada"}},
-  {"model": "campanias.estado_campania", "pk": 3, "fields": {"estado": "Pendiente"}}
+  {"model": "campanias.estado_campania", "pk": 3, "fields": {"estado": "Proximamente"}}
 ]
