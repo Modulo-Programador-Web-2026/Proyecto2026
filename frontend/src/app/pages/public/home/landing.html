@@ -57,111 +57,66 @@
 
     <!-- CAMPAÑAS -->
     <section class="campaigns" id="campanas">
-        <h2>Campañas de donación destacadas</h2>
+    <h2>Campañas de donación destacadas</h2>
 
-        <div class="campaigns__grid">
-        @for (c of campaigns; track c.id) {
-            <article class="card">
+@if (cargando) {
+    <p style="color: #888; text-align:center; padding: 40px 0;">Cargando campañas...</p>
+}
 
-            <!-- Imagen placeholder con ilustración SVG inline -->
-            <div class="card__img">
-                @if (c.id === 1) {
-                <svg viewBox="0 0 320 180" fill="none">
-                    <rect width="320" height="180" fill="#E8F4E8"/>
-                    <circle cx="160" cy="70" r="30" fill="#FFD700" opacity="0.9"/>
-                    <path d="M60 140 Q80 110 110 130 Q130 115 155 128 Q175 112 200 130 Q220 115 260 140Z" fill="#5B9E3A"/>
-                    <rect x="100" y="100" width="120" height="60" rx="4" fill="#5B9E3A" opacity="0.6"/>
-                    <path d="M100 100 Q160 80 220 100" fill="#4A8A2E"/>
-                    <circle cx="80" cy="128" r="18" fill="#4A8A2E"/>
-                    <circle cx="240" cy="128" r="18" fill="#4A8A2E"/>
-                    <!-- Persona sonriente -->
-                    <circle cx="160" cy="118" r="16" fill="#F2C4A0"/>
-                    <path d="M154 122 Q160 128 166 122" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <!-- Corazón -->
-                    <path d="M148 95C148 95 143 92 143 89C143 87.3 144.7 86 147 86.5C147.7 86.7 148.2 87.4 148.5 88C148.8 87.4 149.3 86.7 150 86.5C152.3 86 154 87.3 154 89C154 92 148 95 148 95Z" fill="#C0392B"/>
-                </svg>
-                }
-                @if (c.id === 2) {
-                <svg viewBox="0 0 320 180" fill="none">
-                    <rect width="320" height="180" fill="#E8F0F8"/>
-                    <!-- Hospital -->
-                    <rect x="90" y="50" width="140" height="110" rx="4" fill="#FFFFFF" stroke="#AACCEE" stroke-width="1.5"/>
-                    <rect x="130" y="20" width="60" height="40" rx="4" fill="#FFFFFF" stroke="#AACCEE" stroke-width="1.5"/>
-                    <!-- Cruz -->
-                    <rect x="148" y="28" width="24" height="6" rx="2" fill="#C0392B"/>
-                    <rect x="157" y="22" width="6" height="18" rx="2" fill="#C0392B"/>
-                    <!-- Ventanas -->
-                    <rect x="105" y="80" width="24" height="24" rx="2" fill="#AACCEE"/>
-                    <rect x="148" y="80" width="24" height="24" rx="2" fill="#AACCEE"/>
-                    <rect x="191" y="80" width="24" height="24" rx="2" fill="#AACCEE"/>
-                    <!-- Puerta -->
-                    <rect x="143" y="124" width="34" height="36" rx="3" fill="#AACCEE"/>
-                    <!-- Árboles -->
-                    <circle cx="55" cy="130" r="22" fill="#5B9E3A"/>
-                    <rect x="52" y="148" width="6" height="16" fill="#8B6914"/>
-                    <circle cx="265" cy="130" r="22" fill="#5B9E3A"/>
-                    <rect x="262" y="148" width="6" height="16" fill="#8B6914"/>
-                    <!-- Corazón -->
-                    <path d="M168 75C168 75 160 70 160 65C160 62.3 162.3 61 165 61.5C166.1 61.7 167.2 62.6 168 63.5C168.8 62.6 169.9 61.7 171 61.5C173.7 61 176 62.3 176 65C176 70 168 75 168 75Z" fill="#C0392B"/>
-                </svg>
-                }
-                @if (c.id === 3) {
-                <svg viewBox="0 0 320 180" fill="none">
-                    <rect width="320" height="180" fill="#F0EBF8"/>
-                    <!-- Silueta de Córdoba / mapa abstracto -->
-                    <path d="M60 140 C80 80 120 60 160 70 C200 80 240 90 270 140Z" fill="#C8A8D8" opacity="0.5"/>
-                    <path d="M80 150 C110 100 140 85 170 90 C200 95 230 110 255 150Z" fill="#A880C0" opacity="0.4"/>
-                    <!-- Mano sosteniendo gota -->
-                    <path d="M140 110 C135 95 130 80 145 68 C155 60 165 65 165 78 C165 90 155 105 150 110Z" fill="#C0392B" opacity="0.85"/>
-                    <path d="M120 125 C115 118 112 112 120 108 C128 104 138 108 140 115 C142 122 140 130 135 130 C128 130 122 128 120 125Z" fill="#F2C4A0"/>
-                    <path d="M140 115 C145 115 155 115 158 120 C162 125 158 132 152 132 C146 132 140 130 140 115Z" fill="#F2C4A0"/>
-                    <!-- Corazón en la gota -->
-                    <path d="M149 80C149 80 144 77 144 74C144 72 145.7 71 148 71.5C148.7 71.7 149.2 72.3 149.5 73C149.8 72.3 150.3 71.7 151 71.5C153.3 71 155 72 155 74C155 77 149 80 149 80Z" fill="white"/>
-                    <!-- Puntos de ciudad -->
-                    <circle cx="155" cy="95" r="3" fill="#C0392B"/>
-                    <circle cx="180" cy="105" r="2.5" fill="#C0392B" opacity="0.7"/>
-                    <circle cx="135" cy="108" r="2" fill="#C0392B" opacity="0.6"/>
-                </svg>
-                }
+@if (error) {
+    <p style="color: #C0392B; text-align:center; padding: 40px 0;">{{ error }}</p>
+}
+
+@if (!cargando && !error) {
+    <div class="campaigns__grid">
+    @for (c of campanias; track c.id) {
+        <article class="card">
+
+        <div class="card__img">
+            <svg viewBox="0 0 320 180" fill="none">
+                <rect width="320" height="180" fill="#FDF0F0"/>
+                <circle cx="160" cy="70" r="38" fill="#F2C4C4" opacity="0.5"/>
+                <path d="M160 120C160 120 118 94 118 68C118 52 130 44 140 47C146 49 152 54 160 62C168 54 174 49 180 47C190 44 202 52 202 68C202 94 160 120 160 120Z"
+                    fill="#C0392B" opacity="0.85"/>
+            </svg>
             </div>
 
             <div class="card__body">
-                <h3>{{ c.title }}</h3>
+            <h3>{{ c.titulo }}</h3>
 
-                <div class="card__meta">
+            <div class="card__meta">
                 <span>
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                     <path d="M8 1C5.24 1 3 3.24 3 6C3 9.75 8 15 8 15S13 9.75 13 6C13 3.24 10.76 1 8 1ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6S7.17 4.5 8 4.5 9.5 5.17 9.5 6 8.83 7.5 8 7.5Z" fill="currentColor"/>
-                    </svg>
-                    {{ c.location }}
+                </svg>
+                {{ c.ubicacion }}
                 </span>
                 <span>
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                     <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
                     <path d="M5 1V4M11 1V4M2 7H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    {{ c.dates }}
+                </svg>
+                {{ formatearFecha(c.fecha_inicio) }} — {{ formatearFecha(c.fecha_fin) }}
                 </span>
-                </div>
-
-                @if (c.description) {
-                <p class="card__desc">{{ c.description }}</p>
-                }
-
-                @if (c.progress !== undefined) {
-                <div class="card__progress">
-                    <div class="card__progress-track">
-                    <div class="card__progress-fill" [style.width.%]="c.progress"></div>
-                    </div>
-                    <span>{{ c.progress }}% objetivo alcanzado</span>
-                </div>
-                }
-
-                <a [href]="'/campanas/' + c.id" class="btn-card">Más info</a>
             </div>
-            </article>
-        }
+
+            @if (c.descripcion) {
+                <p class="card__desc">{{ c.descripcion }}</p>
+            }
+
+            <a [routerLink]="['/campanias', c.id]" class="btn-card">Más info</a>
         </div>
-    </section>
+
+        </article>
+    }
+
+        @if (campanias.length === 0) {
+        <p style="color: #888; grid-column: 1/-1; text-align:center; padding: 40px 0;">
+            No hay campañas activas en este momento.
+        </p>
+        }
+    </div>
+}
+</section>
 
     </div>

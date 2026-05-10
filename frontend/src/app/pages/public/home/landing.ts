@@ -1,15 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CampaniaService, Campania } from '../../../services/campanias/campania.service';
 
-export interface Campaign {
-  id: number;
-  title: string;
-  location: string;
-  dates: string;
-  description?: string;
-  progress?: number;
-}
+
 
 @Component({
   selector: 'app-root',
@@ -18,29 +12,39 @@ export interface Campaign {
   templateUrl: './landing.html',
   styleUrl: './landing.css',
 })
-export class Landing {
+export class Landing implements OnInit {
+  campanias: Campania[] = [];
+  cargando: boolean = true;
+  error: string = '';
 
-  readonly campaigns: Campaign[] = [
-    {
-      id: 1,
-      title: 'Campaña CABA: Verano 2024',
-      location: 'Plaza de Mayo, CABA',
-      dates: '15–20 Enero',
-      progress: 80,
-    },
-    {
-      id: 2,
-      title: 'Unidos por el Hospital Italiano',
-      location: 'Buenos Aires, Arg',
-      dates: '25 Enero – 5 Feb',
-      description: 'Abastece nuestro banco de sangre.',
-    },
-    {
-      id: 3,
-      title: 'Suma tu gota de vida Córdoba',
-      location: 'Córdoba Capital',
-      dates: 'Febrero 2024',
-      description: 'Campañas itinerantes en toda la provincia.',
-    },
-  ];
+  constructor(
+    private campaniaService: CampaniaService,
+    private cdr: ChangeDetectorRef
+  ) {}
+  
+  ngOnInit(): void {
+    this.campaniaService.getCampanias().subscribe({
+      next: (datos: Campania[]) => {
+        const hoy = new Date();
+        this.campanias = datos.filter(c => {
+          const [yf, mf, df] = c.fecha_fin.split('-').map(Number);
+          const fin = new Date(yf, mf - 1, df);
+          return hoy <= fin;
+        });
+
+        this.cargando = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.error = 'No se pudieron cargar las campañas.';
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  formatearFecha(fecha: string): string {
+      return new Date(fecha).toLocaleDateString('es-AR', {
+        day: 'numeric', month: 'long'
+      });
+    }
 }
