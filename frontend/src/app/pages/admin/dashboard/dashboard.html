@@ -73,8 +73,8 @@
                     </div>
 
                     <div class="chart-tooltip">
-                        <strong>{{ ((dashboardData$ | async)?.campanias_por_tipo)[0]?.titulo }}</strong>
-                        <span>{{ ((dashboardData$ | async)?.campanias_por_tipo)[0]?.porcentaje }}% del total</span>
+                        <strong>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.titulo }}</strong>
+                        <span>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.porcentaje }}% del total</span>
                     </div>
 
                 </div>
@@ -274,8 +274,8 @@
                             </div>
 
                             <div class="chart-tooltip">
-                                <strong>{{ ((dashboardData$ | async)?.campanias_por_tipo)[0]?.titulo }}</strong>
-                                <span>{{ ((dashboardData$ | async)?.campanias_por_tipo)[0]?.porcentaje }}% del total</span>
+                                <strong>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.titulo }}</strong>
+                                <span>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.porcentaje }}% del total</span>
                             </div>
 
                         </div>
