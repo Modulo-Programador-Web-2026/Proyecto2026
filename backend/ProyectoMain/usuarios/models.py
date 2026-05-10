@@ -23,15 +23,16 @@ class GrupoSanguineo(models.Model):
 
 
 class Usuario(AbstractUser):
+    email = models.EmailField(unique=True)  
     
-    # email ya existe en AbstractUser, no hace falta redefinirlo
-    # password tampoco porque django ya lo pone solo.
+    USERNAME_FIELD = 'email'               
+    REQUIRED_FIELDS = ['username', 'nombre', 'apellido'] 
+
     dni = models.CharField(max_length=20, unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     fecha_registro = models.DateField(auto_now_add=True)
 
-    # Relaciones (FK)
     rol = models.ForeignKey('Rol', on_delete=models.PROTECT, null=True)
     grupo_sanguineo = models.ForeignKey('GrupoSanguineo', on_delete=models.PROTECT, null=True)
 

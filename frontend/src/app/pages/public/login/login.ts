@@ -60,7 +60,7 @@ export class Login {
         [
           Validators.required,
           Validators.minLength(4),
-          Validators.maxLength(20)
+          Validators.maxLength(100)
         ]
       ]
 
@@ -87,19 +87,20 @@ export class Login {
 
     ).subscribe({
 
-  next: (response) => {
+    next: (response: any) => {
+      const rol = response.user.rol;
 
-    console.log(response);
 
-    this.mensaje = 'Login correcto';
+      localStorage.setItem('token', Math.random().toString(36).substring(2));
+      localStorage.setItem('rol', rol);
 
-    const authToken = Math.random().toString(36).substring(2);
 
-    localStorage.setItem('token', authToken);
-
-    this.router.navigate(['/admin/dashboard']);
-
-  },
+      if (rol === 'Administrador') {
+        this.router.navigate(['/admin/dashboard']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    },
 
       error: (error) => {
 
