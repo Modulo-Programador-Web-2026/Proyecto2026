@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CampaniaService, Campania } from '../../../services/campania';
+import { CampaniaService, Campania } from '../../../services/campanias/campania.service';
 import { RouterModule } from '@angular/router';
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { InscripcionService } from '../../../services/inscripcion';
+import { InscripcionService } from '../../../services/inscripciones/inscripcion.service';
 
 @Component({
   selector: 'app-inscripciones',

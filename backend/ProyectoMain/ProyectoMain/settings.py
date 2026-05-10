@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'usuarios',
     'corsheaders',
     'inscripciones',
-    'campanias'
+    'campanias',
+    'dashboard'
 ]
 
 MIDDLEWARE = [

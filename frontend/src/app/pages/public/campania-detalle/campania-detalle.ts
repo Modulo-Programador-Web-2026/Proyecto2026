@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CampaniaService } from '../../../services/campania';
+import { CampaniaService } from '../../../services/campanias/campania.service';
 
 @Component({
   selector: 'app-campania-detalle',
