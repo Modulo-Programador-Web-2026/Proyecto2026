@@ -1,10 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Campania
-from .serializers import CampaniaSerializer
-
-
-
+from .models import Campania, Estado_Campania
+from .serializers import CampaniaSerializer, EstadoCampaniaSerializer
 from datetime import date
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -26,11 +23,8 @@ class CampaniaViewSet(viewsets.ModelViewSet):
     serializer_class = CampaniaSerializer
 
 
+class EstadoCampaniaViewSet(viewsets.ModelViewSet):
 
+    queryset = Estado_Campania.objects.all()
 
-class CampaniaViewSet(viewsets.ModelViewSet):
-
-    queryset = Campania.objects.all()
-
-    serializer_class = CampaniaSerializer
-
+    serializer_class = EstadoCampaniaSerializer
