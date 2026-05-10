@@ -15,18 +15,15 @@ class InscripcionViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'], url_path='inscribirse')
     def inscribirse(self, request):
-        """
-        POST /inscripciones/inscripciones/inscribirse/
-        Body: { nombre, apellido, dni, grupo, campania_id }
-        """
         nombre      = request.data.get('nombre')
         apellido    = request.data.get('apellido')
+        username    = request.data.get('username')
         dni         = request.data.get('dni')
-        grupo_str   = request.data.get('grupo')    # ej: "A+"
+        grupo_str   = request.data.get('grupo')
         campania_id = request.data.get('campania_id')
 
-        # Validar que vengan todos los campos
-        if not all([nombre, apellido, dni, grupo_str, campania_id]):
+        # Validar todos los campos
+        if not all([nombre, apellido, username, dni, grupo_str, campania_id]):
             return Response(
                 {'error': 'Todos los campos son requeridos.'},
                 status=status.HTTP_400_BAD_REQUEST
@@ -54,12 +51,22 @@ class InscripcionViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
 
+        # Verificar si el username ya existe
+        if creado := not Usuario.objects.filter(username=username).exists():
+            pass
+        if Usuario.objects.filter(username=username).exists():
+            return Response(
+                {'error': 'Ese nombre de usuario ya está en uso.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         # Buscar usuario por DNI o crearlo
         usuario, creado = Usuario.objects.get_or_create(
             dni=dni,
             defaults={
                 'nombre':          nombre,
                 'apellido':        apellido,
+                'username':        username,
                 'grupo_sanguineo': grupo_obj,
             }
         )
