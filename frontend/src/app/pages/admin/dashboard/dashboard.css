@@ -123,7 +123,6 @@
     height: 240px;
     margin: 0 auto;
     border-radius: 50%;
-    background: conic-gradient(var(--red) 0% 45%, #f5b7b1 45% 70%, #fadbd8 70% 100%);
     position: relative;
 }
 

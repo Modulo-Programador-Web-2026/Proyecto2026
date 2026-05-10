@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 
-import { UsuarioService } from '../../../services/usuario';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 
 
 @Component({
