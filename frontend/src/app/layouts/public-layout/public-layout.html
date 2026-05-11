@@ -1,19 +1,61 @@
 <div class="page">
 
-    <header class="navbar">
+    <header class="main-navbar navbar navbar-expand-lg navbar-light bg-light">
 
-        <a class="navbar__brand" routerLink="/">
-            <span>SangreYa</span>
-        </a>
+        <div class="container">
 
-        <nav>
-            <a routerLink="/" fragment="que-hacemos">Qué hacemos</a>
-            <a routerLink="/campanias" fragment="campanas">Campañas</a>
-            <a routerLink="/quienes-somos">Quiénes somos</a>
-            <a routerLink="/registro" class="nav-cta">Unite</a>
-            <a routerLink="/login" class="nav-cta">Accedé</a>
-        </nav>
-        
+            <a
+                class="navbar__brand navbar-brand"
+                routerLink="/"
+            >
+                <span>SangreYa</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbar"
+            >
+
+                <nav class="navbar-nav ms-auto navbar__nav">
+
+                    <a class="nav-link" routerLink="/" fragment="que-hacemos">
+                        Qué hacemos
+                    </a>
+
+                    <a class="nav-link" routerLink="/campanias" fragment="campanas">
+                        Campañas
+                    </a>
+
+                    <a class="nav-link" routerLink="/quienes-somos">
+                        Quiénes somos
+                    </a>
+
+                    <a class="nav-link nav-cta" routerLink="/registro">
+                        Unite
+                    </a>
+
+                    <a class="nav-link nav-cta" routerLink="/login">
+                        Accedé
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </div>
+
     </header>
 
     <router-outlet></router-outlet>
