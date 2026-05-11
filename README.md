@@ -1,17 +1,100 @@
-# Proyecto 2026
+# SangreYa
 
-### Instrucciones de instalación
-Para ejecutar este proyecto de forma local, es necesario instalar y configurar tanto el frontend (Angular) como el backend (Django).
-#### 1. Requisitos previos
-Asegúrese de tener instalado:
-* Node.js y npm
-* Python 3
-* pip (gestor de paquetes de Python)
-* Angular CLI
+## Descripción del proyecto
+
+SangreYa es una aplicación web SPA desarrollada con Angular y Django REST Framework orientada a la difusión y gestión de campañas de donación voluntaria de sangre.
+
+La plataforma permite registrar usuarios, administrar campañas, gestionar inscripciones y visualizar estadísticas relacionadas con campañas y participación ciudadana. El sistema busca centralizar la información de campañas de donación y facilitar el acceso tanto para instituciones de salud como para la comunidad.
+
+El proyecto fue desarrollado en el marco de la Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales del ISPC.
+
 ---
-#### 2. Instalación del backend (Django)
-1. Clonar el repositorio:
-```
+
+# Tecnologías utilizadas
+
+## Frontend
+- Angular
+- TypeScript
+- Bootstrap
+- HTML5
+- CSS3
+
+## Backend
+- Python
+- Django
+- Django REST Framework
+
+## Base de datos
+- MySQL
+
+## Herramientas
+- Git
+- GitHub
+- Angular CLI
+- Node.js
+
+---
+
+# Integrantes del equipo
+
+| Integrante | Rol |
+|---|---|
+| Astrid | Product Owner / Desarrollo Frontend y Backend |
+| Abigail | Scrum Master / Desarrollo Frontend y Backend |
+| Mauricio | Desarrollo Frontend y Backend |
+| Marcela | Desarrollo Backend y Frontend |
+| Irina | QA / Testing / Desarrollo Frontend y Backend |
+
+---
+
+# Funcionalidades implementadas
+
+- Landing Page
+- Sección Quiénes Somos
+- Registro de usuarios (en proceso)
+- Inicio de sesión
+- CRUD de campañas
+- CRUD de usuarios
+- Dashboard administrativo
+- Estadísticas administrativas
+- Vista pública de campañas
+- Formulario de inscripción a campañas
+- API REST
+- Formularios reactivos (en proceso)
+- Persistencia en MySQL
+- Fixtures con datos iniciales
+
+---
+
+# Arquitectura del sistema
+
+El proyecto implementa una arquitectura cliente-servidor basada en API REST:
+
+- Frontend desarrollado con Angular bajo arquitectura SPA (Single Page Application).
+- Backend desarrollado con Django REST Framework.
+- Comunicación mediante endpoints REST.
+- Persistencia de datos mediante MySQL.
+
+---
+
+# Requisitos previos
+
+Asegurarse de tener instalado:
+
+- Node.js
+- npm
+- Python 3
+- pip
+- Angular CLI
+- MySQL
+
+---
+
+# Instalación del Backend (Django)
+
+1. Clonar el repositorio
+
+```bash
 git clone <URL-del-repositorio>
 cd backend
 ```
@@ -37,12 +120,20 @@ pip install -r requirements.txt
 ```
 python manage.py migrate
 ```
-6. Iniciar el servidor:
+6. Cargar fixtures:
+```
+python manage.py loaddata fixtures.json
+```
+7. Iniciar el servidor:
 ```
 python manage.py runserver
 ```
+Backend disponible en:
+```
+http://localhost:8000
+```
 ---
-#### 3. Instalación del frontend (Angular)
+# Instalación del frontend (Angular)
 1. Ir a la carpeta del frontend:
 ```
 cd frontend
@@ -61,38 +152,47 @@ http://localhost:4200
 ```
 ---
 ### Uso básico
-Una vez que el sistema está en ejecución, el usuario puede acceder a la aplicación desde su navegador en la dirección `http://localhost:4200`.
-Al ingresar, se mostrará la pantalla principal, donde el usuario puede navegar por las diferentes secciones de la aplicación.
-Las funcionalidades básicas incluyen:
-* Visualizar la información disponible en la página principal.
-* Navegar entre las distintas secciones mediante el menú.
-* Crear, editar o eliminar datos (según las funciones implementadas).
-El sistema se conecta con el backend desarrollado en Django para gestionar los datos en tiempo real.
-Es importante mantener el servidor backend en ejecución para que la aplicación funcione correctamente.
+Una vez ejecutados el frontend y backend:
+
+- El usuario podrá navegar por la Landing Page.
+- Visualizar campañas activas.
+- Registrarse e iniciar sesión.
+- Inscribirse a campañas.
+- Acceder a funcionalidades según rol.
+- Gestionar campañas y usuarios desde el dashboard administrativo.
+
 ---
-## Descripción del Proyecto – Evidencia 1
-En el marco de la *Evidencia 1*, surgieron dudas respecto de si se debía continuar con el proyecto AquaMóvil o bien iniciar un nuevo proyecto de acuerdo a lo establecido por la materia Proyecto Integrador.
+# Estructura general del proyecto
+/frontend
+/backend
+/docs
 
-Según lo consensuado con las materias del módulo Programación Web, se decidió no perder tiempo e iniciar la evidencia presentando un proyecto genérico, con el objetivo de posteriormente adaptarlo según lo que se defina en la materia (ya sea continuar con el proyecto existente o desarrollar uno nuevo).
-Es por este motivo que, en esta instancia, se presenta la Evidencia 1 sin un enfoque específico, a la espera de dar inicio al proyecto definitivo una vez que se establezcan las reglas de trabajo correspondientes a la Evidencia 2.
+---
+# Metodología de trabajo
+El equipo utiliza metodología ágil Scrum.
 
-Cabe destacar que el equipo ya ha propuesto una alternativa de proyecto a AquaMóvil, la cual fue presentada a la docente el día miércoles 15 de abril en la clase de Proyecto Integrador, siendo recibida de manera positiva.
+Herramientas utilizadas:
+- GitHub Projects
+- GitHub Issues
+- Kanban
+- Discord
+- WhatsApp
+- Google Meet
 
-De forma preliminar, esta nueva propuesta aborda la problemática de la dificultad para conseguir donantes de sangre de manera rápida y eficiente, especialmente en situaciones de urgencia médica donde el tiempo es un factor crítico. Actualmente, la búsqueda de donantes suele realizarse a través de redes sociales o contactos personales, lo que genera demoras, incertidumbre y baja efectividad.
+---
+# Wiki del proyecto
+La documentación y organización del proyecto se encuentra disponible en la Wiki del repositorio.
 
-Asimismo, muchas personas dispuestas a donar no cuentan con información clara ni acceso a solicitudes concretas, lo que limita su posibilidad de colaborar. Esta situación impacta directamente en pacientes y sus familias, quienes deben invertir tiempo y esfuerzo en la búsqueda de donantes en contextos de alta vulnerabilidad.
-La problemática fue identificada a partir de la observación de casos reales y experiencias cercanas, evidenciando la necesidad de contar con una herramienta digital que permita optimizar y organizar este proceso.
+Incluye:
+- Requerimientos funcionales y no funcionales
+- Historias de usuario
+- Ceremonias Scrum
+- Arquitectura del sistema
+- DER y modelo relacional
+- Instalación del proyecto
 
-A continuación, se detallan los requerimientos funcionales y no funcionales, los cuales han sido definidos de forma general para que puedan ser aplicables a cualquiera de las alternativas de proyecto.
-
-## Requerimientos Funcionales
-* RF1: El sistema deberá permitir el registro de usuarios.
-* RF2: El sistema deberá permitir el inicio de sesión de usuarios registrados.
-* RF3: El sistema deberá permitir la gestión de información (crear, visualizar, editar y eliminar datos).
-* RF4: El sistema deberá permitir la asignación de roles de usuario.
-* RF5: El sistema deberá mostrar información relevante al usuario según su rol.
-## Requerimientos No Funcionales
-* RNF1: El sistema deberá ser fácil de usar y contar con una interfaz intuitiva.
-* RNF2: El sistema deberá garantizar la seguridad de los datos de los usuarios.
-* RNF3: El sistema deberá ser accesible desde distintos dispositivos (computadoras, tablets y celulares).
-
+---
+Este proyecto fue desarrollado para:
+- Proyecto Integrador II
+- Módulo Programador Web
+- ISPC — Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales
