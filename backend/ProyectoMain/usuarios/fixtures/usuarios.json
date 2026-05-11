@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "username": "administrador",
-      "password": "pbkdf2_sha256$1000000$fakehashadmin$abc123",
+      "password": "pbkdf2_sha256$1200000$s9Rqn7qqvKxTU5E5uudW1n$j2sGVrST6fuDtBoCZXoye6w8S5oqe8hdgaR3/812iTk=",
       "email": "administrador@gmail.com",
       "dni": "30111222",
       "nombre": "Sofia",
@@ -22,7 +22,7 @@
     "pk": 2,
     "fields": {
       "username": "deanwinchester",
-      "password": "pbkdf2_sha256$1000000$fakesecret$xyz789",
+      "password": "pbkdf2_sha256$1200000$sfIgIKQoS0t80Qamq67PQt$UnKDDBenexIY44y+zrRmAoj9ivzQ0xwRgVJQnWCS5mA=",
       "email": "dean@gmail.com",
       "dni": "40111222",
       "nombre": "Dean",
@@ -40,7 +40,7 @@
     "pk": 3,
     "fields": {
       "username": "mariaG",
-      "password": "pbkdf2_sha256$1000000$fakehashmaria$456abc",
+      "password": "pbkdf2_sha256$1200000$sfIgIKQoS0t80Qamq67PQt$UnKDDBenexIY44y+zrRmAoj9ivzQ0xwRgVJQnWCS5mA=",
       "email": "maria@gmail.com",
       "dni": "42123456",
       "nombre": "Maria",
