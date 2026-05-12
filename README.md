@@ -75,6 +75,37 @@ El proyecto implementa una arquitectura cliente-servidor basada en API REST:
 - Comunicación mediante endpoints REST.
 - Persistencia de datos mediante MySQL.
 
+```text
+Proyecto2026/
+├── backend/
+│   ├── ProyectoMain/
+│   ├── campanias/
+│   ├── dashboard/
+│   ├── inscripciones/
+│   ├── usuarios/
+│   ├── manage.py
+│   ├── docs/
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── layouts/
+│   │   │   ├── pages/
+│   │   │   │   ├── admin/
+│   │   │   │   └── public/
+│   │   │   ├── services/
+│   │   │   └── app.routes.ts
+│   │   ├── main.ts
+│   │   └── styles.css
+│   ├── angular.json
+│   ├── package.json
+│   └── README.md
+│
+├── README.md
+└── .gitignore
+
+```
 ---
 
 # Requisitos previos
@@ -87,6 +118,7 @@ Asegurarse de tener instalado:
 - pip
 - Angular CLI
 - MySQL
+
 
 ---
 
