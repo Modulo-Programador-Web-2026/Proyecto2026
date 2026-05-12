@@ -21,22 +21,17 @@ export class Campanias implements OnInit {
   busqueda: string = '';
   filtroEstado: string = '';
 
-  constructor(private campaniaService: CampaniaService, 
-              private cdr: ChangeDetectorRef) {}
+  constructor(private campaniaService: CampaniaService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit ejecutado');   
     this.campaniaService.getCampanias().subscribe({
       next: (datos: Campania[]) => {
-        console.log('datos recibidos:', datos); 
         this.campanias = datos;
         this.filtrar();
-        console.log('filtradas:', this.campaniasFiltradas);
         this.cargando = false;
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.log('error:', err); 
         this.error = 'No se pudieron cargar las campañas.';
         this.cargando = false;
       }
@@ -44,28 +39,29 @@ export class Campanias implements OnInit {
   }
 
   filtrar(): void {
-  this.campaniasFiltradas = this.campanias.filter(c => {
-    const hoy    = new Date();
-    hoy.setHours(0, 0, 0, 0);
+    this.campaniasFiltradas = this.campanias.filter(c => {
+      const hoy    = new Date();
+      hoy.setHours(0, 0, 0, 0);
 
-    const [yi, mi, di] = c.fecha_inicio.split('-').map(Number);
-    const [yf, mf, df] = c.fecha_fin.split('-').map(Number);
-    const inicio = new Date(yi, mi - 1, di);
-    const fin    = new Date(yf, mf - 1, df);
+      const [yi, mi, di] = c.fecha_inicio.split('-').map(Number);
+      const [yf, mf, df] = c.fecha_fin.split('-').map(Number);
+      const inicio = new Date(yi, mi - 1, di);
+      const fin    = new Date(yf, mf - 1, df);
 
-    let estado = '';
-    if (hoy < inicio) estado = 'proxima';
-    else if (hoy > fin) estado = 'finalizada';
-    else estado = 'activa';
+      let estado = '';
+      if (hoy < inicio) estado = 'proxima';
+      else if (hoy > fin) estado = 'finalizada';
+      else estado = 'activa';
 
-    const coincideBusqueda = c.titulo.toLowerCase()
-      .includes(this.busqueda.toLowerCase());
+      const coincideBusqueda = c.titulo.toLowerCase()
+        .includes(this.busqueda.toLowerCase());
 
-    if (!this.filtroEstado) {
-      return coincideBusqueda && estado !== 'finalizada';
-    }
-    return coincideBusqueda && estado === this.filtroEstado;
-  });
-  this.cdr.detectChanges();
-}
+      if (!this.filtroEstado) {
+        return coincideBusqueda && estado !== 'finalizada';
+      }
+      return coincideBusqueda && estado === this.filtroEstado;
+    });
+    this.cdr.detectChanges();
+  }
+  
 }

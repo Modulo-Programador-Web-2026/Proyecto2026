@@ -71,43 +71,33 @@ export class Login {
   onSubmit() {
 
     if (this.loginForm.invalid) {
-
       this.loginForm.markAllAsTouched();
-
       return;
     }
 
-    console.log(this.loginForm.value);
 
     this.http.post(
-
       'http://127.0.0.1:8000/login/',
-
       this.loginForm.value
-
     ).subscribe({
 
     next: (response: any) => {
-      const rol = response.user.rol;
 
+      const rol = response.user.rol;
 
       localStorage.setItem('token', Math.random().toString(36).substring(2));
       localStorage.setItem('rol', rol);
-
 
       if (rol === 'Administrador') {
         this.router.navigate(['/admin/dashboard']);
       } else {
         this.router.navigate(['/']);
       }
+
     },
 
       error: (error) => {
-
-        console.log(error);
-
         this.mensaje = 'Credenciales incorrectas';
-
       }
 
     });

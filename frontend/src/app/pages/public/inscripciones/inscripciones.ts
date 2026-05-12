@@ -66,9 +66,6 @@ export class Inscripciones implements OnInit {
   this.error = '';
   this.form.markAllAsTouched();
   
-  console.log('Form válido:', this.form.valid);
-  console.log('Valores:', this.form.value);
-  
   if (this.form.invalid) {
     this.error = 'Por favor completá todos los campos.';
     return;
@@ -79,7 +76,6 @@ export class Inscripciones implements OnInit {
       ...this.form.value,
       campania_id: this.campania?.id
     };
-    console.log('Enviando datos:', datos);
 
     this.inscripcionService.crearInscripcion(datos).subscribe({
       next: () => {

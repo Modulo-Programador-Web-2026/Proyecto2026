@@ -17,12 +17,8 @@ export class App {
   constructor(private http: HttpClient) {}
 
   probarConexion() {
-    console.log("click");
-
     this.http.get<any>('http://127.0.0.1:8000/test/')
       .subscribe(response => {
-        console.log(response);
-
         this.mensaje = response.message;
         this.version = response.version;
       });
