@@ -29,17 +29,12 @@ export class Usuarios implements OnInit {
 
 
   ngOnInit(): void {
-
     this.usuarioService
       .getUsuarios()
       .subscribe((data) => {
-
         this.usuarios = data;
-
-        console.log(data);
-
-      });
-
+      })
+    ;
   }
 
 }

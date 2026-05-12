@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 export interface Campania {
   id: number;
@@ -15,6 +14,7 @@ export interface Campania {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CampaniaService {
 
   private apiUrl = 'http://localhost:8000/campanias/campanias/';
@@ -26,7 +26,7 @@ export class CampaniaService {
   }
 
   getCampania(id: string): Observable<Campania> {
-    return this.http.get<Campania>(`${this.apiUrl}${id}/`)
-      .pipe(tap(data => console.log('Service recibió:', data)));
+    return this.http.get<Campania>(`${this.apiUrl}${id}/`);
   }
+
 }

@@ -25,21 +25,17 @@ export class CampaniaDetalle implements OnInit {
 
   ngOnInit(): void {
   const id = this.route.snapshot.paramMap.get('id');
-  console.log('ID de la URL:', id);
 
   const obs = this.campaniaService.getCampania(id!);
-  console.log('Observable creado:', obs);
   
   obs.subscribe({
     next: (data: any) => {
-      console.log('Datos recibidos:', data);
       this.campania = data;
       this.cargando = false;
       this.cdr.detectChanges();
 
     },
     error: (err: any) => {
-      console.log('Error:', err);
       this.error = 'No se pudo cargar la campaña.';
       this.cargando = false;
       this.cdr.detectChanges();
