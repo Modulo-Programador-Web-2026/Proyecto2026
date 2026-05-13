@@ -1,0 +1,87 @@
+<section class="campanias">
+
+<div class="campanias__header">
+    <h2 class="campanias__titulo">Todas las Campañas de Donación (Córdoba)</h2>
+    <div class="campanias__filtros">
+    <div class="campanias__buscador">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="6.5" cy="6.5" r="5" stroke="#888" stroke-width="1.5"/>
+        <path d="M10.5 10.5L14 14" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input
+        type="text"
+        placeholder="Buscar"
+        [(ngModel)]="busqueda"
+        (input)="filtrar()"
+        />
+    </div>
+    <select class="campanias__select" [(ngModel)]="filtroEstado" (change)="filtrar()">
+            <option value="">Filtrar campañas</option>
+            <option value="proxima">Próximas</option>
+            <option value="activa">Activas</option>
+            <option value="finalizada">Finalizadas</option>
+    </select>
+    </div>
+</div>
+
+@if (cargando) {
+    <p class="campanias__mensaje">Cargando campañas...</p>
+}
+
+@if (error) {
+    <p class="campanias__error">{{ error }}</p>
+}
+
+@if (!cargando && !error) {
+    <div class="campanias__grid">
+    @for (campania of campaniasFiltradas; track campania.id) {
+        <article class="card">
+
+        <div class="card__imagen">
+            <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#FDF0F0"/>
+            <circle cx="160" cy="90" r="45" fill="#F2C4C4" opacity="0.5"/>
+            <path d="M160 130C160 130 120 105 120 80C120 66 132 58 142 60C148 61 154 66 160 72C166 66 172 61 178 60C188 58 200 66 200 80C200 105 160 130 160 130Z" fill="#C0392B" opacity="0.85"/>
+            <circle cx="110" cy="70" r="14" fill="#F2C4C4"/>
+            <path d="M97 88C97 82 103 78 110 78C117 78 123 82 123 88" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="210" cy="70" r="14" fill="#F2C4C4"/>
+            <path d="M197 88C197 82 203 78 210 78C217 78 223 82 223 88" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="124" y1="76" x2="145" y2="66" stroke="#C0392B" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+            <line x1="196" y1="76" x2="175" y2="66" stroke="#C0392B" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+            </svg>
+        </div>
+
+        <div class="card__cuerpo">
+            <h3 class="card__titulo">{{ campania.titulo }}</h3>
+
+            <div class="card__meta">
+            <span class="card__meta-item">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M8 1C5.24 1 3 3.24 3 6C3 9.75 8 15 8 15S13 9.75 13 6C13 3.24 10.76 1 8 1ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6S7.17 4.5 8 4.5 9.5 5.17 9.5 6 8.83 7.5 8 7.5Z" fill="#888"/>
+                </svg>
+                {{ campania.ubicacion }}
+            </span>
+            <span class="card__meta-item">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="2" y="3" width="12" height="11" rx="2" stroke="#888" stroke-width="1.5" fill="none"/>
+                <path d="M5 1V4M11 1V4M2 7H14" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                {{ campania.fecha_inicio }} — {{ campania.fecha_fin }}
+            </span>
+            </div>
+
+        
+
+            <button class="card__btn" [routerLink]="['/campanias', campania.id]"> Quiero donar</button>
+        </div>
+
+        </article>
+    }
+
+    @if (campaniasFiltradas.length === 0) {
+        <p class="campanias__vacio">No se encontraron campañas.</p>
+    }
+    </div>
+}
+
+</section>

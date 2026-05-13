@@ -1,3 +1,103 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'bootstrap/dist/css/bootstrap.min.css';
+:root {
+  --red:        #C0392B;
+  --red-dark:   #922B21;
+  --red-light:  #FCEBEB;
+  --text:       #1A1A1A;
+  --text-mid:   #555;
+  --text-light: #888;
+  --bg:         #F0F0F0;
+  --white:      #FFFFFF;
+  --border:     #E0E0E0;
+  --shadow:     0 2px 12px rgba(0,0,0,0.07);
+  --radius:     14px;
+  --font:       'Lato', 'Segoe UI', Arial, sans-serif;
+}
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg); 
+  color: var(--text);
+  margin: 0;
+}
+
+
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+
+.navbar nav a.nav-cta {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.main-navbar {
+  padding: 0 52px;
+  min-height: 64px;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.main-navbar .container {
+  align-items: center;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.navbar__nav {
+  gap: 36px;
+}
+
+.nav-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-mid) !important;
+  text-decoration: none;
+}
+
+.nav-link.nav-cta {
+  color: var(--red) !important;
+  font-weight: 600;
+}
+@media (max-width: 991px) {
+
+  .navbar-collapse {
+    background: transparent;
+    padding: 1rem 0;
+  }
+
+  .navbar__nav {
+    gap: 12px;
+  }
+
+  .main-navbar {
+    height: auto;
+    min-height: 64px;
+  }
+  .navbar-collapse {
+  transition: height 0.3s ease;
+}
+
+.main-navbar.navbar-light {
+  background-color: var(--white) !important;
+}
+}

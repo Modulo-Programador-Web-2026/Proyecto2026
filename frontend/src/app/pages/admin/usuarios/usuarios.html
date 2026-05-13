@@ -1,0 +1,135 @@
+<div class="contenedor-principal">
+
+  <h1>Gestión de Usuarios</h1>
+
+  <!-- CARD ESTADÍSTICA -->
+  <div class="card-estadistica">
+
+    <div>
+      <h2>{{ usuarios.length }}</h2>
+      <p>Usuarios Registrados</p>
+    </div>
+
+    <div class="icono-usuarios">
+      👥
+    </div>
+
+  </div>
+
+  <!-- BARRA SUPERIOR -->
+  <div class="barra-superior">
+
+    <!-- BUSCADOR -->
+    <div class="buscador">
+
+      <input
+        type="text"
+        placeholder="Buscar usuario por nombre, email, DNI..."
+      />
+
+      <button>
+        🔍
+      </button>
+
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filtros">
+
+      <button class="activo">
+        Todos
+      </button>
+
+      <button>
+        Donantes
+      </button>
+
+      <button>
+        Voluntarios
+      </button>
+
+      <select>
+        <option>
+          Grupo Sanguíneo
+        </option>
+      </select>
+
+    </div>
+
+    <!-- BOTÓN -->
+    <button class="btn-perfiles">
+      Ver Perfiles Completos
+    </button>
+
+  </div>
+
+  <!-- HEADER TABLA -->
+  <div class="tabla-header">
+
+    <span>Perfil</span>
+    <span>Contacto</span>
+    <span>Datos</span>
+    <span>Acciones</span>
+
+  </div>
+
+  <!-- LISTA USUARIOS -->
+  @for (usuario of usuarios; track usuario.id) {
+
+    <div class="usuario-card">
+
+      <!-- PERFIL -->
+      <div class="perfil">
+
+        <div class="avatar">
+          👤
+        </div>
+
+        <div>
+
+          <small>Perfil</small>
+
+          <h3>
+            {{ usuario.nombre }} {{ usuario.apellido }}
+          </h3>
+
+          <p>
+            DNI: #{{ usuario.dni }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- CONTACTO -->
+      <div class="contacto">
+
+        <small>Contacto</small>
+
+        <p>
+          {{ usuario.email }}
+        </p>
+
+      </div>
+
+      <!-- DATOS -->
+      <div class="datos">
+
+        <small>Grupo Sanguíneo</small>
+
+        <span class="grupo">
+          {{ usuario.grupo_sanguineo }}
+        </span>
+
+      </div>
+
+      <!-- ACCIONES -->
+      <div class="acciones">
+        ⋯
+      </div>
+
+    </div>
+
+  }
+
+</div>

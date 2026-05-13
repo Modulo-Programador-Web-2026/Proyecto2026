@@ -1,0 +1,122 @@
+    <div class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero__text">
+        <h1>
+            Impulsá el cambio:<br>
+            <span>Doná sangre</span>
+        </h1>
+        <p>Unite a campañas locales y salva vidas con cada donación.</p>
+        <a href="#campanas" class="btn-cta">Descubrir campañas</a>
+        </div>
+
+        <div class="hero__illustration" aria-hidden="true">
+        <svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Corazón central -->
+            <path d="M150 195C150 195 86 153 86 108C86 84 104 68 124 72C136 74 145 83 150 92C155 83 164 74 176 72C196 68 214 84 214 108C214 153 150 195 150 195Z"
+            fill="#C0392B"/>
+
+            <!-- Corazones pequeños -->
+            <path d="M78 116C78 116 70 111 70 106C70 103 72.5 101 75 101.5C76.2 101.7 77.2 102.7 78 103.5C78.8 102.7 79.8 101.7 81 101.5C83.5 101 86 103 86 106C86 111 78 116 78 116Z"
+            fill="#C0392B" opacity="0.65"/>
+            <path d="M222 116C222 116 214 111 214 106C214 103 216.5 101 219 101.5C220.2 101.7 221.2 102.7 222 103.5C222.8 102.7 223.8 101.7 225 101.5C227.5 101 230 103 230 106C230 111 222 116 222 116Z"
+            fill="#C0392B" opacity="0.65"/>
+            <path d="M150 58C150 58 143 53 143 49C143 46.5 145 45 147 45.4C148.1 45.6 149.1 46.5 150 47.2C150.9 46.5 151.9 45.6 153 45.4C155 45 157 46.5 157 49C157 53 150 58 150 58Z"
+            fill="#C0392B" opacity="0.55"/>
+
+            <!-- Persona arriba centro -->
+            <circle cx="150" cy="28" r="13" fill="#F2C4C4"/>
+            <path d="M132 54C132 45 140.3 39 150 39C159.7 39 168 45 168 54" stroke="#C0392B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Persona arriba izquierda -->
+            <circle cx="54" cy="54" r="11" fill="#F2C4C4"/>
+            <path d="M38 76C38 68.5 45.3 63.5 54 63.5C62.7 63.5 70 68.5 70 76" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Persona arriba derecha -->
+            <circle cx="246" cy="54" r="11" fill="#F2C4C4"/>
+            <path d="M230 76C230 68.5 237.3 63.5 246 63.5C254.7 63.5 262 68.5 262 76" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Persona abajo izquierda -->
+            <circle cx="38" cy="206" r="11" fill="#F2C4C4"/>
+            <path d="M22 228C22 220.5 29.3 215.5 38 215.5C46.7 215.5 54 220.5 54 228" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Persona abajo derecha -->
+            <circle cx="262" cy="206" r="11" fill="#F2C4C4"/>
+            <path d="M246 228C246 220.5 253.3 215.5 262 215.5C270.7 215.5 278 220.5 278 228" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Líneas de conexión punteadas -->
+            <line x1="65" y1="66" x2="130" y2="38" stroke="#C0392B" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.45"/>
+            <line x1="235" y1="66" x2="170" y2="38" stroke="#C0392B" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.45"/>
+            <line x1="49" y1="197" x2="110" y2="150" stroke="#C0392B" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.45"/>
+            <line x1="251" y1="197" x2="190" y2="150" stroke="#C0392B" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.45"/>
+        </svg>
+        </div>
+    </section>
+
+    <!-- CAMPAÑAS -->
+    <section class="campaigns" id="campanas">
+    <h2>Campañas de donación destacadas</h2>
+
+@if (cargando) {
+    <p style="color: #888; text-align:center; padding: 40px 0;">Cargando campañas...</p>
+}
+
+@if (error) {
+    <p style="color: #C0392B; text-align:center; padding: 40px 0;">{{ error }}</p>
+}
+
+@if (!cargando && !error) {
+    <div class="campaigns__grid">
+    @for (c of campanias; track c.id) {
+        <article class="card">
+
+        <div class="card__img">
+            <svg viewBox="0 0 320 180" fill="none">
+                <rect width="320" height="180" fill="#FDF0F0"/>
+                <circle cx="160" cy="70" r="38" fill="#F2C4C4" opacity="0.5"/>
+                <path d="M160 120C160 120 118 94 118 68C118 52 130 44 140 47C146 49 152 54 160 62C168 54 174 49 180 47C190 44 202 52 202 68C202 94 160 120 160 120Z"
+                    fill="#C0392B" opacity="0.85"/>
+            </svg>
+            </div>
+
+            <div class="card__body">
+            <h3>{{ c.titulo }}</h3>
+
+            <div class="card__meta">
+                <span>
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1C5.24 1 3 3.24 3 6C3 9.75 8 15 8 15S13 9.75 13 6C13 3.24 10.76 1 8 1ZM8 7.5C7.17 7.5 6.5 6.83 6.5 6S7.17 4.5 8 4.5 9.5 5.17 9.5 6 8.83 7.5 8 7.5Z" fill="currentColor"/>
+                </svg>
+                {{ c.ubicacion }}
+                </span>
+                <span>
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                    <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M5 1V4M11 1V4M2 7H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                {{ formatearFecha(c.fecha_inicio) }} — {{ formatearFecha(c.fecha_fin) }}
+                </span>
+            </div>
+
+            @if (c.descripcion) {
+                <p class="card__desc">{{ c.descripcion }}</p>
+            }
+
+            <a [routerLink]="['/campanias', c.id]" class="btn-card">Más info</a>
+        </div>
+
+        </article>
+    }
+
+        @if (campanias.length === 0) {
+        <p style="color: #888; grid-column: 1/-1; text-align:center; padding: 40px 0;">
+            No hay campañas activas en este momento.
+        </p>
+        }
+    </div>
+}
+</section>
+
+    </div>

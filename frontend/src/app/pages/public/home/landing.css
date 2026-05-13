@@ -1,0 +1,296 @@
+/* ============================================================
+   SangreYa — Landing Page
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVBAR ──────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+  height: 64px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.navbar nav a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.navbar nav a:hover { color: var(--red); }
+
+.navbar nav a.nav-cta {
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 72px 52px 60px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.hero__text {
+  flex: 1;
+}
+
+.hero__text h1 {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.hero__text h1 span {
+  color: var(--red);
+}
+
+.hero__text p {
+  font-size: 17px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 400px;
+}
+
+.btn-cta {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 30px;
+  border-radius: 99px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(192,57,43,0.35);
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn-cta:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+}
+
+.hero__illustration {
+  flex-shrink: 0;
+  width: 420px;
+  height: 390px;
+}
+
+.hero__illustration svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── CAMPAÑAS ────────────────────────────────────────────── */
+.campaigns {
+  padding: 40px 52px 72px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.campaigns h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 24px;
+  letter-spacing: -0.2px;
+}
+
+.campaigns__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* Imagen / ilustración */
+.card__img {
+  width: 100%;
+  height: 175px;
+  overflow: hidden;
+  background: var(--red-light);
+}
+
+.card__img svg,
+.card__img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Cuerpo */
+.card__body {
+  padding: 16px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.card__body h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+/* Meta: ubicación + fecha */
+.card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+/* Descripción */
+.card__desc {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* Barra de progreso */
+.card__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card__progress-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.card__progress-fill {
+  height: 100%;
+  background: var(--red);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+.card__progress span {
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+/* Botón card */
+.btn-card {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 9px 22px;
+  border-radius: 99px;
+  text-decoration: none;
+  align-self: flex-start;
+  margin-top: auto;
+  transition: background 0.15s;
+}
+
+.btn-card:hover { background: var(--red-dark); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .campaigns__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 700px) {
+  .navbar { padding: 0 20px; }
+
+  .hero {
+    flex-direction: column;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .hero__text p { margin: 0 auto 28px; }
+
+  .hero__illustration { width: 220px; height: 205px; }
+
+  .campaigns { padding: 32px 20px 48px; }
+
+  .campaigns__grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+/* ── ACCESIBILIDAD ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card, .btn-cta, .btn-card { transition: none; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+

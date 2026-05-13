@@ -1,0 +1,26 @@
+[
+  {
+    "model": "campanias.campania",
+    "pk": 1,
+    "fields": {
+      "titulo": "Donación de Sangre Hospital Central",
+      "descripcion": "Campaña solidaria para pacientes en cirugías y emergencias críticas.",
+      "ubicacion": "Hospital Central Córdoba",
+      "fecha_inicio": "2026-06-10",
+      "fecha_fin": "2026-06-15",
+      "estado_campania": 1
+    }
+  },
+  {
+    "model": "campanias.campania",
+    "pk": 2,
+    "fields": {
+      "titulo": "Jornada Donación Plaza Central",
+      "descripcion": "Evento abierto para donantes voluntarios de todos los grupos sanguíneos.",
+      "ubicacion": "Plaza Central Córdoba",
+      "fecha_inicio": "2026-07-01",
+      "fecha_fin": "2026-07-02",
+      "estado_campania": 2
+    }
+  }
+]

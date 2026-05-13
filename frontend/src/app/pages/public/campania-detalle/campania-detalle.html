@@ -1,0 +1,118 @@
+<div class="detalle-wrapper">
+
+@if (cargando) {
+    <div class="estado-mensaje">Cargando campaña...</div>
+}
+
+@if (error) {
+    <div class="estado-error">{{ error }}</div>
+}
+
+<!-- Contenido -->
+@if (!cargando && !error && campania) {
+    <div class="detalle-card">
+
+    <div class="detalle-banner">
+        <svg viewBox="0 0 700 220" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect width="700" height="220" fill="#FDF0F0"/>
+            <rect x="0"   y="140" width="700" height="80"  fill="#e8f4f8"/>
+            <rect x="30"  y="110" width="40"  height="110" fill="#b8d4e8"/>
+            <rect x="80"  y="90"  width="30"  height="130" fill="#c5dcea"/>
+            <rect x="120" y="120" width="50"  height="100" fill="#b8d4e8"/>
+            <rect x="580" y="100" width="60"  height="120" fill="#b8d4e8"/>
+            <rect x="650" y="120" width="50"  height="100" fill="#c5dcea"/>
+
+            <rect x="325" y="50"  width="10"  height="170" fill="#d0e8f0"/>
+            <polygon points="325,50 330,30 335,50" fill="#c0dcea"/>
+
+            <path d="M420 130C420 130 370 100 370 68C370 50 384 42 396 46C402 48 408 54 414 62C420 54 426 48 432 46C444 42 458 50 458 68C458 100 420 130 420 130Z" fill="#C0392B" opacity="0.88"/>
+            <path d="M414 55 L414 45" stroke="#e74c3c" stroke-width="2" opacity="0.5"/>
+            <circle cx="160" cy="108" r="16" fill="#F2C4C4"/>
+            <path d="M146 130C146 122 152 116 160 116C168 116 174 122 174 130" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="230" cy="100" r="16" fill="#F2C4C4"/>
+            <path d="M216 122C216 114 222 108 230 108C238 108 244 114 244 122" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="530" cy="112" r="16" fill="#F2C4C4"/>
+            <path d="M516 134C516 126 522 120 530 120C538 120 544 126 544 134" stroke="#C0392B" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <path d="M200 80C200 80 190 72 190 64C190 59 194 56 198 58C199 59 200 61 200 61C200 61 201 59 202 58C206 56 210 59 210 64C210 72 200 80 200 80Z" fill="#e74c3c" opacity="0.5"/>
+            <path d="M490 85C490 85 482 78 482 71C482 67 485 64 488 66C489 67 490 68 490 68C490 68 491 67 492 66C495 64 498 67 498 71C498 78 490 85 490 85Z" fill="#e74c3c" opacity="0.5"/>
+            <line x1="176" y1="112" x2="370" y2="90" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
+            <line x1="244" y1="108" x2="370" y2="85" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
+            <line x1="516" y1="116" x2="458" y2="90" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
+        </svg>
+        <!-- Badge de estado dinámico -->
+        <span class="estado-badge"
+            [class.badge-proximo]="getEstado() === 'Próximamente'"
+            [class.badge-curso]="getEstado() === 'En Curso'"
+            [class.badge-fin]="getEstado() === 'Finalizada'">
+            {{ getEstado() }}</span>
+    </div>
+
+<!-- Contenido principal -->
+    <div class="detalle-cuerpo">
+
+        <!-- Título y ubicación -->
+        <div class="detalle-info">
+        <h1 class="detalle-titulo">{{ campania.titulo }}</h1>
+        <p class="detalle-ubicacion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            {{ campania.ubicacion }}
+        </p>
+        </div>
+
+        <!-- Fechas e inscritos -->
+        <div class="detalle-stats">
+
+        <div class="stat-fechas">
+            <div class="fecha-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8"  y1="2" x2="8"  y2="6"/>
+                <line x1="3"  y1="10" x2="21" y2="10"/>
+                </svg>
+            Fecha de inicio: {{ formatearFecha(campania.fecha_inicio) }}
+            </div>
+            <div class="fecha-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            Fecha de fin: {{ formatearFecha(campania.fecha_fin) }}
+            </div>
+        </div>
+
+        <div class="stat-inscritos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e63946" stroke-width="2" width="32" height="32">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <div>
+            <span class="inscritos-numero">{{ campania.total_inscritos ?? 0 }}</span>
+            <span class="inscritos-label">Personas Inscritas</span>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- Descripción -->
+        <div class="detalle-descripcion">
+        <h2 class="descripcion-titulo">Descripción</h2>
+        <p>{{ campania.descripcion }}</p>
+        </div>
+
+        <!-- Botón -->
+        <button class="btn-donar" (click)="irAInscripcion()">
+        Inscribirse
+        </button>
+        <p class="btn-sub">Inscripción en 2 minutos</p>
+
+    </div>
+</div>
+}
+
+</div>
