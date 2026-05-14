@@ -70,6 +70,8 @@ export class Login {
 
   onSubmit() {
 
+    this.mensaje = '';
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -96,10 +98,13 @@ export class Login {
 
     },
 
-      error: (error) => {
-        this.mensaje = 'Credenciales incorrectas';
-      }
-
+    error: (error) => {
+      this.mensaje = 'Credenciales incorrectas';
+      this.loginForm.get('password')?.reset();
+      this.loginForm.markAsUntouched();
+    }
+      
+      
     });
 
   }
