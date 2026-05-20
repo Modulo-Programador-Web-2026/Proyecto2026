@@ -89,7 +89,7 @@ export class Login {
       
       const rol = response.user.rol;
 
-      localStorage.setItem('logueado', 'true');
+      localStorage.setItem('token', 'true');
       localStorage.setItem('usuario_id', response.user.id);
 
       localStorage.setItem('rol', rol);
