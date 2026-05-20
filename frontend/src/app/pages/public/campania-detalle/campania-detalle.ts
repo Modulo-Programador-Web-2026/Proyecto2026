@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CampaniaService } from '../../../services/campanias/campania.service';
+import { InscripcionService } from '../../../services/inscripciones/inscripcion.service';
 
 @Component({
   selector: 'app-campania-detalle',
@@ -21,6 +22,7 @@ export class CampaniaDetalle implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private inscripcionService: InscripcionService,
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class CampaniaDetalle implements OnInit {
     const hoy = new Date();
     const inicio = new Date(this.campania.fecha_inicio);
     const fin    = new Date(this.campania.fecha_fin);
-    if (hoy < inicio) return 'Próximamente';
+    if (hoy < inicio) return 'Proxima';
     if (hoy > fin)    return 'Finalizada';
     return 'En Curso';
   }
@@ -59,9 +61,31 @@ export class CampaniaDetalle implements OnInit {
     });
   }
 
-  irAInscripcion(): void {
-    this.router.navigate(['/campanias', this.campania.id, 'inscripcion']);
+inscribirse() {
+  const token = localStorage.getItem('token');
+  const usuarioId = localStorage.getItem('usuario_id'); // ← guardar al hacer login
+
+  if (!token || !usuarioId) {
+    alert('Debés iniciar sesión para inscribirte.');
+    this.router.navigate(['/login']);
+    return;
   }
+
+  const datos = {
+    usuario: Number(usuarioId),
+    campania: this.campania.id
+  };
+
+  this.inscripcionService.inscribirse(datos).subscribe({
+    next: () => alert('Inscripción correcta'),
+    error: (err) => {
+      console.log('Error:', err.error);
+      alert('Error: ' + JSON.stringify(err.error));
+    }
+  });
+}
+
+ 
 
   volver(): void {
     this.router.navigate(['/campanias']);
