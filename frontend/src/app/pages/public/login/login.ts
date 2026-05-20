@@ -84,10 +84,14 @@ export class Login {
     ).subscribe({
 
     next: (response: any) => {
-
+      
+      console.log(response);
+      
       const rol = response.user.rol;
 
-      localStorage.setItem('token', Math.random().toString(36).substring(2));
+      localStorage.setItem('logueado', 'true');
+      localStorage.setItem('usuario_id', response.user.id);
+
       localStorage.setItem('rol', rol);
 
       if (rol === 'Administrador') {
