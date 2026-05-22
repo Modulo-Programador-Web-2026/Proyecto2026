@@ -16,6 +16,7 @@ export class CampaniaDetalle implements OnInit {
   campania: any = null;
   cargando: boolean = true;
   error: string = '';
+  inscriptosCount = 0;
 
   constructor(
     private campaniaService: CampaniaService,
@@ -23,35 +24,44 @@ export class CampaniaDetalle implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private inscripcionService: InscripcionService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-  const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
 
-  const obs = this.campaniaService.getCampania(id!);
-  
-  obs.subscribe({
-    next: (data: any) => {
-      this.campania = data;
-      this.cargando = false;
-      this.cdr.detectChanges();
+    const obs = this.campaniaService.getCampania(id!);
 
-    },
-    error: (err: any) => {
-      this.error = 'No se pudo cargar la campaña.';
-      this.cargando = false;
-      this.cdr.detectChanges();
-    }
-  });
-}
+    obs.subscribe({
+      next: (data: any) => {
+        this.campania = data;
+        this.cargando = false;
+
+        this.inscripcionService.getTotalInscriptos(this.campania.id).subscribe({
+          next: (respuesta) => {
+            this.inscriptosCount = respuesta.totalInscriptos;
+            this.cdr.detectChanges();
+          }
+        });
+        this.cdr.detectChanges();
+
+      },
+
+      error: (err: any) => {
+        this.error = 'No se pudo cargar la campaña.';
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
+    });
+
+  }
 
   getEstado(): string {
     if (!this.campania) return '';
     const hoy = new Date();
     const inicio = new Date(this.campania.fecha_inicio);
-    const fin    = new Date(this.campania.fecha_fin);
+    const fin = new Date(this.campania.fecha_fin);
     if (hoy < inicio) return 'Proxima';
-    if (hoy > fin)    return 'Finalizada';
+    if (hoy > fin) return 'Finalizada';
     return 'En Curso';
   }
 
@@ -61,31 +71,34 @@ export class CampaniaDetalle implements OnInit {
     });
   }
 
-inscribirse() {
-  const token = localStorage.getItem('token');
-  const usuarioId = localStorage.getItem('usuario_id'); // ← guardar al hacer login
+  inscribirse() {
+    const token = localStorage.getItem('token');
+    const usuarioId = localStorage.getItem('usuario_id'); // ← guardar al hacer login
 
-  if (!token || !usuarioId) {
-    alert('Debés iniciar sesión para inscribirte.');
-    this.router.navigate(['/login']);
-    return;
+    if (!token || !usuarioId) {
+      alert('Debés iniciar sesión para inscribirte.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    const datos = {
+      usuario: Number(usuarioId),
+      campania: this.campania.id
+    };
+
+    this.inscripcionService.inscribirse(datos).subscribe({
+      next: (respuesta) => {
+        this.inscriptosCount = respuesta.totalInscriptos;
+        alert('Inscripción correcta');
+      },
+      error: (err) => {
+        console.log('Error:', err.error);
+        alert('Error: ' + JSON.stringify(err.error));
+      }
+    });
   }
 
-  const datos = {
-    usuario: Number(usuarioId),
-    campania: this.campania.id
-  };
 
-  this.inscripcionService.inscribirse(datos).subscribe({
-    next: () => alert('Inscripción correcta'),
-    error: (err) => {
-      console.log('Error:', err.error);
-      alert('Error: ' + JSON.stringify(err.error));
-    }
-  });
-}
-
- 
 
   volver(): void {
     this.router.navigate(['/campanias']);

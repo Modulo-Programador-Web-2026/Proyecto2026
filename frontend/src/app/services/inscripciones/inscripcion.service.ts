@@ -22,15 +22,20 @@ export class InscripcionService {
     );
   }
 
-  inscribirse(datos: any): Observable<any> {
+  getTotalInscriptos(campaniaId: number): Observable<{ totalInscriptos: number }> {
+  return this.http.get<{ totalInscriptos: number }>(
+    `${this.apiUrl}/inscripciones/inscripciones/total/?campania=${campaniaId}`
+  );
+}
 
+
+  inscribirse(datos: any): Observable<{ data: any, totalInscriptos: number }> { 
     const token = localStorage.getItem('token');
-
     const headers = new HttpHeaders({
       Authorization: `Token ${token}`
     });
 
-    return this.http.post(
+ return this.http.post<{ data: any, totalInscriptos: number }>( 
       `${this.apiUrl}/inscripciones/inscripciones/`,
       datos,
       { headers }
