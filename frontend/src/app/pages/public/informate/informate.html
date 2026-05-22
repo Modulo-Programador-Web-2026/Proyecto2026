@@ -1,0 +1,277 @@
+<!-- informate.component.html -->
+<div class="contenedor-pagina">
+
+  <!-- Título de la página -->
+  <h1 class="titulo-pagina">Información sobre la Donación de Sangre</h1>
+
+  <!-- ══════════════════════════════════════════════════════════
+       CARD HERO
+       ══════════════════════════════════════════════════════════ -->
+  <div class="tarjeta tarjeta-hero">
+
+    <!-- Texto izquierda -->
+    <div class="hero-texto">
+      <p class="hero-etiqueta">{{ etiquetaHero }}</p>
+      <h2 class="hero-titular">
+        {{ tituloPrincipal }}<br>{{ tituloSecundario }}
+      </h2>
+    </div>
+
+    <!-- ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->
+
+<svg viewBox="0 0 220 195" xmlns="http://www.w3.org/2000/svg" class="hero-svg" aria-hidden="true">
+        <!-- Persona donante -->
+        <circle cx="110" cy="42" r="22" fill="#FBBF8A"/>
+        <ellipse cx="110" cy="24" rx="22" ry="12" fill="#3D2B1F"/>
+        <rect x="88" y="24" width="44" height="8" fill="#3D2B1F"/>
+        <rect x="88" y="62" width="44" height="52" rx="8" fill="#DC2626"/>
+        <rect x="103" y="62" width="14" height="10" fill="#FBBF8A"/>
+        <rect x="66" y="64" width="22" height="12" rx="6" fill="#DC2626"/>
+        <rect x="132" y="64" width="22" height="12" rx="6" fill="#DC2626"/>
+        <ellipse cx="68" cy="82" rx="7" ry="9" fill="#FBBF8A"/>
+        <ellipse cx="152" cy="82" rx="7" ry="9" fill="#FBBF8A"/>
+        <rect x="90" y="112" width="18" height="40" rx="5" fill="#374151"/>
+        <rect x="112" y="112" width="18" height="40" rx="5" fill="#374151"/>
+        <path d="M103 48 Q110 54 117 48" stroke="#7C3A1F" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="104" cy="41" r="3" fill="#3D2B1F"/>
+        <circle cx="116" cy="41" r="3" fill="#3D2B1F"/>
+        <circle cx="105" cy="40" r="1" fill="white"/>
+        <circle cx="117" cy="40" r="1" fill="white"/>
+        <!-- Corazón grande izquierda -->
+        <g transform="translate(32,55)">
+          <path d="M20 8 C20 4,14 0,10 4 C6 0,0 4,0 8 C0 14,10 22,10 22 C10 22,20 14,20 8 Z" fill="#DC2626" stroke="#B91C1C" stroke-width="1"/>
+        </g>
+        <!-- Corazón mediano derecha arriba -->
+        <g transform="translate(155,38)">
+          <path d="M16 6 C16 3,11 0,8 3 C5 0,0 3,0 6 C0 11,8 17,8 17 C8 17,16 11,16 6 Z" fill="#DC2626" stroke="#B91C1C" stroke-width="1"/>
+        </g>
+        <!-- Corazón pequeño derecha abajo -->
+        <g transform="translate(162,75)">
+          <path d="M12 5 C12 2,8 0,6 2 C4 0,0 2,0 5 C0 8,6 13,6 13 C6 13,12 8,12 5 Z" fill="#EF4444" stroke="#B91C1C" stroke-width="1"/>
+        </g>
+        <!-- Flechas circulares -->
+        <defs>
+          <marker id="flechaRoja" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#DC2626"/>
+          </marker>
+        </defs>
+        <path d="M58 75 Q80 30 120 30" stroke="#DC2626" stroke-width="2.5" fill="none" stroke-dasharray="5,3" marker-end="url(#flechaRoja)"/>
+        <path d="M160 60 Q190 100 170 130" stroke="#DC2626" stroke-width="2.5" fill="none" stroke-dasharray="5,3" marker-end="url(#flechaRoja)"/>
+      </svg>
+
+
+    <!-- Lista de beneficios derecha -->
+    <ul class="lista-beneficios">
+      @for (beneficio of beneficiosHero; track beneficio.texto) {
+      <li [class.beneficio-con-icono]="beneficio.conIcono">
+        @if (beneficio.conIcono) {
+        <span class="icono-check-rojo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="9" fill="#DC2626" />
+            <path d="M5 9.5 L7.5 12 L13 7" stroke="white" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </span>
+        }
+        {{ beneficio.texto }}
+      </li>
+      }
+    </ul>
+
+  </div><!-- fin tarjeta hero -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       FILA DE DOS TARJETAS
+       ══════════════════════════════════════════════════════════ -->
+  <div class="grilla-dos-columnas">
+
+    <!-- ── ¿Puedo ser Donante? ── -->
+    <div class="tarjeta">
+      <h3 class="titulo-tarjeta">{{ tituloSeccionDonante }}</h3>
+
+      <div class="donante-interior">
+
+        <!-- Requisitos básicos -->
+        <ul class="lista-donante">
+          @for (req of requisitosBasicos; track req.texto) {
+          <li>
+            @if (req.icono === 'persona') {
+            <span class="icono-item" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="4" r="3" fill="#DC2626" />
+                <path d="M2 14 C2 10.5 5 8.5 8 8.5 C11 8.5 14 10.5 14 14" stroke="#DC2626" stroke-width="1.8"
+                  fill="none" stroke-linecap="round" />
+              </svg>
+            </span>
+            } @else {
+            <span class="icono-check-negro" aria-hidden="true">✓</span>
+            }
+            {{ req.texto }}
+          </li>
+          }
+        </ul>
+
+        <!-- Exclusiones temporales -->
+        <div class="caja-exclusiones">
+          <p class="titulo-exclusiones">
+            <span aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="8" r="7" stroke="#DC2626" stroke-width="1.8" />
+                <line x1="4.5" y1="8" x2="11.5" y2="8" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </span>
+            {{ tituloExclusiones }}
+          </p>
+          <ul class="lista-exclusiones">
+            @for (excl of exclusionesTemporales; track excl.texto) {
+            <li>{{ excl.texto }}</li>
+            }
+          </ul>
+        </div>
+
+      </div>
+    </div><!-- fin tarjeta donante -->
+
+    <!-- ── Requisitos Día de la Donación ── -->
+    <div class="tarjeta">
+      <h3 class="titulo-tarjeta">{{ tituloRequisitos }}</h3>
+
+      <ul class="lista-requisitos">
+        @for (req of requisitosDia; track req.texto) {
+        <li>
+          <span class="icono-requisito" aria-hidden="true">
+
+            <!-- DNI -->
+            @if (req.icono === 'dni') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="4" width="16" height="12" rx="2" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+              <circle cx="6.5" cy="9" r="2" fill="#DC2626" />
+              <line x1="10" y1="8" x2="16" y2="8" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="10" y1="11" x2="15" y2="11" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            }
+
+            <!-- Agua -->
+            @if (req.icono === 'agua') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 4 L7 16 H13 L14 4 Z" fill="#DBEAFE" stroke="#DC2626" stroke-width="1.5"
+                stroke-linejoin="round" />
+              <path d="M6 7 Q10 9 14 7" stroke="#93C5FD" stroke-width="1" fill="none" />
+            </svg>
+            }
+
+            <!-- No ayuno -->
+            @if (req.icono === 'noAyuno') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="8" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+              <line x1="4" y1="4" x2="16" y2="16" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+              <path d="M7 10 H13" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            }
+
+            <!-- Entrevista -->
+            @if (req.icono === 'entrevista') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="2" width="14" height="16" rx="2" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+              <line x1="7" y1="7" x2="13" y2="7" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="7" y1="10" x2="13" y2="10" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="7" y1="13" x2="10" y2="13" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            }
+
+          </span>
+          {{ req.texto }}
+        </li>
+        }
+      </ul>
+    </div><!-- fin tarjeta requisitos -->
+
+  </div><!-- fin grilla -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PROCEDIMIENTO DE DONACIÓN
+       ══════════════════════════════════════════════════════════ -->
+  <div class="tarjeta tarjeta-procedimiento">
+    <h3 class="titulo-tarjeta">{{ tituloProcedimiento }}</h3>
+
+    <div class="fila-pasos">
+      @for (paso of pasosProcedimiento; track paso.numero; let ultimo = $last) {
+
+      <div class="paso">
+        <div class="paso-icono-contenedor">
+
+          <!-- Registro -->
+          @if (paso.icono === 'registro') {
+          <svg width="52" height="52" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" fill="#FEE2E2" />
+            <rect x="12" y="20" width="24" height="14" rx="2" fill="#DC2626" opacity="0.15" stroke="#DC2626"
+              stroke-width="1.5" />
+            <rect x="16" y="12" width="16" height="11" rx="2" fill="white" stroke="#DC2626" stroke-width="1.5" />
+            <line x1="19" y1="17" x2="29" y2="17" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+            <line x1="19" y1="20" x2="26" y2="20" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+            <rect x="20" y="27" width="8" height="5" rx="1" fill="white" stroke="#DC2626" stroke-width="1" />
+          </svg>
+          }
+
+          <!-- Entrevista médica -->
+          @if (paso.icono === 'entrevistaMedica') {
+          <svg width="52" height="52" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" fill="#FEE2E2" />
+            <circle cx="24" cy="16" r="5" fill="#FBBF8A" />
+            <path d="M17 36 C17 29 31 29 31 36" fill="#DC2626" opacity="0.7" />
+            <path d="M20 22 Q16 26 17 30 Q18 33 21 33" stroke="#DC2626" stroke-width="1.5" fill="none"
+              stroke-linecap="round" />
+            <circle cx="21" cy="34" r="2" stroke="#DC2626" stroke-width="1.5" fill="none" />
+          </svg>
+          }
+
+          <!-- Extracción -->
+          @if (paso.icono === 'extraccion') {
+          <svg width="52" height="52" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" fill="#FEE2E2" />
+            <path d="M20 14 Q24 8 28 14 L30 30 Q30 36 24 36 Q18 36 18 30 Z" fill="#DC2626" opacity="0.75" />
+            <path d="M24 14 L24 10" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="21" y1="10" x2="27" y2="10" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="22" y1="25" x2="26" y2="25" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="24" y1="23" x2="24" y2="27" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          }
+
+          <!-- Descanso -->
+          @if (paso.icono === 'descanso') {
+          <svg width="52" height="52" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" fill="#FEE2E2" />
+            <rect x="10" y="29" width="28" height="6" rx="3" fill="#DC2626" opacity="0.3" stroke="#DC2626"
+              stroke-width="1.2" />
+            <circle cx="32" cy="22" r="5" fill="#FBBF8A" />
+            <path d="M12 29 L28 29 Q30 23 26 21 L20 22 L18 24 Z" fill="#DC2626" opacity="0.55" />
+            <rect x="12" y="20" width="5" height="9" rx="1" fill="#DBEAFE" stroke="#60A5FA" stroke-width="1" />
+          </svg>
+          }
+
+        </div>
+        <p class="paso-etiqueta">
+          <strong>{{ paso.numero }}. {{ paso.titulo }}</strong><br>
+          {{ paso.subtitulo }}
+        </p>
+      </div>
+
+      <!-- Flecha entre pasos (no se muestra después del último) -->
+      @if (!ultimo) {
+      <span class="flecha-paso" aria-hidden="true">→</span>
+      }
+
+      }
+    </div>
+
+    <p class="pie-procedimiento">
+      <strong>{{ pieProcedimiento }}</strong>
+      <span class="flecha-pie" aria-hidden="true">→</span>
+      {{ avisoPostDonacion }}
+    </p>
+
+  </div><!-- fin tarjeta procedimiento -->
+
+</div><!-- fin contenedor-pagina -->
