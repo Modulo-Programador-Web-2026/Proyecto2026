@@ -42,8 +42,6 @@ export interface PasoProcedimiento {
 export class Informate {
 
   // ── Sección Hero ────────────────────────────────────────────────────────────
-
-  readonly etiquetaHero = 'Información General';
   readonly tituloPrincipal = '1 Donación';
   readonly tituloSecundario = 'Salva 3 Vidas.';
 
@@ -58,7 +56,7 @@ export class Informate {
   readonly tituloSeccionDonante = '¿Puedo ser Donante?';
 
   readonly requisitosBasicos: RequisitoBasico[] = [
-    { texto: 'Personas entre 18 y 65 años.', icono: 'persona' },
+    { texto: 'Personas entre 18 y 65 años.', icono: 'check' },
     { texto: 'Peso mayor a 50 kg.', icono: 'check' },
     { texto: 'Buen estado general de salud.', icono: 'check' },
     { texto: 'Haber descansado correctamente.', icono: 'check' },
