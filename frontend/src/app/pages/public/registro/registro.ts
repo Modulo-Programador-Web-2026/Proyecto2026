@@ -31,7 +31,7 @@ export class Registro implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       dni: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
-      rol: ['', Validators.required],
+      rol: [2],
       grupo_sanguineo: ['', Validators.required]
     });
   }
