@@ -1,0 +1,138 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    padding: 40px 16px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    width: 100%;
+    max-width: 860px;
+    overflow: hidden;
+}
+
+.left {
+    flex: 1;
+    padding: 48px 40px;
+}
+
+.left h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #1a1a1a;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1a1a1a;
+}
+
+.input-group input,
+.input-group select {
+    padding: 12px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #C0392B;
+}
+
+.error {
+    color: #C0392B;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #C0392B;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #922B21;
+}
+
+.submit-btn:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.mensaje-ok {
+    color: #27ae60;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.mensaje-error {
+    color: #C0392B;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.right {
+    flex: 1;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    gap: 20px;
+}
+
+.right img {
+    width: 180px;
+}
+
+.right h2 {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+@media (max-width: 640px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .right {
+        display: none;
+    }
+}
+.input-group select {
+appearance: none;
+-webkit-appearance: none;
+}

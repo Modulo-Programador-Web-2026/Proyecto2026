@@ -49,3 +49,14 @@ def login_view(request):
         }, status=200)
 
     return Response({'error': 'Credenciales incorrectas'}, status=400)
+
+
+
+
+@api_view(['POST'])
+def registro_view(request):
+    serializer = UsuarioSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Usuario registrado correctamente'}, status=201)
+    return Response(serializer.errors, status=400)

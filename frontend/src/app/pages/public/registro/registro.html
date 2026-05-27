@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="card">
+
+        <div class="left">
+            <h1>Crear cuenta</h1>
+
+            <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+
+                <div class="input-group">
+                    <label>Usuario</label>
+                    <input type="text" placeholder="Usuario" formControlName="username">
+                    @if (registroForm.get('username')?.invalid && registroForm.get('username')?.touched) {
+                    <small class="error">
+                        @if (registroForm.get('username')?.errors?.['required']) { El usuario es obligatorio }
+                        @if (registroForm.get('username')?.errors?.['minlength']) { Mínimo 3 caracteres }
+                    </small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>Nombre</label>
+                    <input type="text" placeholder="Nombre" formControlName="nombre">
+                    @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+                    <small class="error">El nombre es obligatorio</small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>Apellido</label>
+                    <input type="text" placeholder="Apellido" formControlName="apellido">
+                    @if (registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched) {
+                    <small class="error">El apellido es obligatorio</small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>DNI</label>
+                    <input type="text" placeholder="DNI" formControlName="dni">
+                    @if (registroForm.get('dni')?.invalid && registroForm.get('dni')?.touched) {
+                    <small class="error">
+                        @if (registroForm.get('dni')?.errors?.['required']) { El DNI es obligatorio }
+                        @if (registroForm.get('dni')?.errors?.['minlength'] ||
+                        registroForm.get('dni')?.errors?.['maxlength']) { Entre 7 y 8 caracteres }
+                    </small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" formControlName="email">
+                    @if (registroForm.get('email')?.invalid && registroForm.get('email')?.touched) {
+                    <small class="error">
+                        @if (registroForm.get('email')?.errors?.['required']) { El email es obligatorio }
+                        @if (registroForm.get('email')?.errors?.['email']) { Formato inválido }
+                    </small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="Contraseña" formControlName="password">
+                    @if (registroForm.get('password')?.invalid && registroForm.get('password')?.touched) {
+                    <small class="error">
+                        @if (registroForm.get('password')?.errors?.['required']) { La contraseña es obligatoria }
+                        @if (registroForm.get('password')?.errors?.['minlength']) { Mínimo 6 caracteres }
+                    </small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>Grupo sanguíneo</label>
+                    <select formControlName="grupo_sanguineo">
+                        <option value="">Seleccioná tu grupo</option>
+                        @for (grupo of grupos; track grupo.id) {
+                        <option [value]="grupo.id">{{ grupo.grupo }} {{ grupo.factor }}</option>
+                        }
+                    </select>
+                    @if (registroForm.get('grupo_sanguineo')?.invalid && registroForm.get('grupo_sanguineo')?.touched) {
+                    <small class="error">El grupo sanguíneo es obligatorio</small>
+                    }
+                </div>
+
+                <button type="submit" class="submit-btn" [disabled]="cargando">
+                    {{ cargando ? 'Registrando...' : 'Crear cuenta' }}
+                </button>
+
+                @if (mensaje) { <p class="mensaje-ok">{{ mensaje }}</p> }
+                @if (error) { <p class="mensaje-error">{{ error }}</p> }
+
+            </form>
+        </div>
+
+        <div class="right">
+<img src="https://cdn-icons-png.flaticon.com/128/3843/3843288.png" alt="registro">
+            <h2>Unite a la comunidad y doná hoy.</h2>
+        </div>
+
+    </div>
+</div>
