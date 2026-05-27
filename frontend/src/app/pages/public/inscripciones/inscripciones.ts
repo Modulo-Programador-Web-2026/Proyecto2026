@@ -77,7 +77,7 @@ export class Inscripciones implements OnInit {
       campania_id: this.campania?.id
     };
 
-    this.inscripcionService.crearInscripcion(datos).subscribe({
+    this.inscripcionService.inscribirse(datos).subscribe({
       next: () => {
         this.exito    = true;
         this.enviando = false;

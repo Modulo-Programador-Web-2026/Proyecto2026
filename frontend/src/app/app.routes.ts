@@ -12,6 +12,8 @@ import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Inscripciones } from './pages/public/inscripciones/inscripciones';
 import { CampaniaDetalle } from './pages/public/campania-detalle/campania-detalle';
 import { Registro } from './pages/public/registro/registro';
+import { Informate } from './pages/public/informate/informate';
+
 
 
 
@@ -30,6 +32,8 @@ export const routes: Routes = [
             { path: 'campanias/:id', component: CampaniaDetalle },
             { path: 'usuarios', component: Usuarios },
             { path: 'registro', component: Registro },
+
+            { path: 'informate', component: Informate }
 
 
         ]

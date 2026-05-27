@@ -40,11 +40,15 @@
             <line x1="516" y1="116" x2="458" y2="90" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
         </svg>
         <!-- Badge de estado dinámico -->
-        <span class="estado-badge"
-            [class.badge-proximo]="getEstado() === 'Próximamente'"
-            [class.badge-curso]="getEstado() === 'En Curso'"
-            [class.badge-fin]="getEstado() === 'Finalizada'">
-            {{ getEstado() }}</span>
+
+    
+    <span class="estado-badge"
+        [class.badge-proximo]="getEstado() === 'Proxima'"
+        [class.badge-curso]="getEstado() === 'En Curso'"
+        [class.badge-fin]="getEstado() === 'Finalizada'">
+        {{ getEstado() }}</span>
+
+
     </div>
 
 <!-- Contenido principal -->
@@ -92,7 +96,7 @@
             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
             <div>
-            <span class="inscritos-numero">{{ campania.total_inscritos ?? 0 }}</span>
+            <span class="inscritos-numero">{{ inscriptosCount }}</span>
             <span class="inscritos-label">Personas Inscritas</span>
             </div>
         </div>
@@ -106,10 +110,9 @@
         </div>
 
         <!-- Botón -->
-        <button class="btn-donar" (click)="irAInscripcion()">
-        Inscribirse
-        </button>
+        <button class="btn-donar" (click)="inscribirse()">Inscribirse a la campaña</button>
         <p class="btn-sub">Inscripción en 2 minutos</p>
+        
 
     </div>
 </div>

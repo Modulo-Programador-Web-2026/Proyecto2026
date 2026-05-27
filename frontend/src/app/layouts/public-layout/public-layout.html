@@ -4,10 +4,26 @@
 
         <div class="container">
 
+            @if (!isHome) {
+            <button class="btn-regresar" (click)="goBack()">
+                ← Regresar
+            </button>
+        }
+
             <a
                 class="navbar__brand navbar-brand"
-                routerLink="/"
-            >
+                routerLink="/">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="28"
+                        height="28"
+                        fill="#e74c3c">
+
+    <path d="M12 2C12 2 6 10 6 14a6 6 0 0 0 12 0c0-4-6-12-6-12z"/>
+
+  </svg>
+
+            
                 <span>SangreYa</span>
             </a>
 
@@ -30,8 +46,8 @@
 
                 <nav class="navbar-nav ms-auto navbar__nav">
 
-                    <a class="nav-link" routerLink="/" fragment="que-hacemos">
-                        Qué hacemos
+                    <a class="nav-link" routerLink="/informate" fragment="informate">
+                        Informate
                     </a>
 
                     <a class="nav-link" routerLink="/campanias" fragment="campanas">
@@ -42,13 +58,21 @@
                         Quiénes somos
                     </a>
 
-                    <a class="nav-link nav-cta" routerLink="/registro">
+                    @if (!isLoggedIn()) {
+                        <a class="nav-link nav-cta" routerLink="/registro">
                         Unite
                     </a>
 
-                    <a class="nav-link nav-cta" routerLink="/login">
-                        Accedé
-                    </a>
+                        <a class="nav-link nav-cta" routerLink="/login">
+                            Accedé
+                        </a>
+                    }
+
+                    @if (isLoggedIn()) {
+                        <a class="nav-link nav-cta" (click)="logout()" style="cursor:pointer">
+                            Salir
+                        </a>
+                    }
 
                 </nav>
 
