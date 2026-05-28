@@ -13,7 +13,7 @@ import { Inscripciones } from './pages/public/inscripciones/inscripciones';
 import { CampaniaDetalle } from './pages/public/campania-detalle/campania-detalle';
 import { Registro } from './pages/public/registro/registro';
 import { Informate } from './pages/public/informate/informate';
-
+import { authGuard } from './guards/auth-guard';
 
 
 
@@ -40,14 +40,15 @@ export const routes: Routes = [
     },
 
     // Rutas del administrador
-    {
+        {
         path: 'admin',
         component: AdminLayout,
+        canActivate: [authGuard],   
         children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: AdminDashboard },
             { path: 'campanias', component: AdminCampanias },
             { path: 'inscripciones', component: AdminInscripciones },
-            
         ]
     },
 
