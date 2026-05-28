@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-
 import { Router } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
-
+import { AuthService } from '../../../services/auth/auth';
 import {
   FormBuilder,
   FormGroup,
@@ -41,7 +39,9 @@ export class Login {
 
     private http: HttpClient,
 
-    private router: Router
+    private router: Router,
+
+    private authService: AuthService
 
   ) {
 
@@ -83,32 +83,31 @@ export class Login {
       this.loginForm.value
     ).subscribe({
 
-    next: (response: any) => {
-      
-      console.log(response);
-      
-      const rol = response.user.rol;
+      next: (response: any) => {
+        console.log(response);
+        const rol = response.user.rol;
 
-      localStorage.setItem('token', 'true');
-      localStorage.setItem('usuario_id', response.user.id);
+        
+        localStorage.setItem('token', 'true');
+        localStorage.setItem('usuario_id', response.user.id);
+        localStorage.setItem('rol', rol);
 
-      localStorage.setItem('rol', rol);
+        
+        this.authService.isAuthenticated.set(true);
 
-      if (rol === 'Administrador') {
-        this.router.navigate(['/admin/dashboard']);
-      } else {
-        this.router.navigate(['/']);
+        if (rol === 'Administrador') {
+          this.router.navigate(['/admin/dashboard']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      },
+      error: (error) => {
+        this.mensaje = 'Credenciales incorrectas';
+        this.loginForm.get('password')?.reset();
+        this.loginForm.markAsUntouched();
       }
 
-    },
 
-    error: (error) => {
-      this.mensaje = 'Credenciales incorrectas';
-      this.loginForm.get('password')?.reset();
-      this.loginForm.markAsUntouched();
-    }
-      
-      
     });
 
   }
