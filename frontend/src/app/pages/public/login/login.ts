@@ -36,11 +36,8 @@ export class Login {
   constructor(
 
     private fb: FormBuilder,
-
     private http: HttpClient,
-
     private router: Router,
-
     private authService: AuthService
 
   ) {
@@ -77,36 +74,24 @@ export class Login {
       return;
     }
 
-
     this.http.post(
-      'http://127.0.0.1:8000/login/',
+      'http://127.0.0.1:8000/api/token/',
       this.loginForm.value
     ).subscribe({
 
       next: (response: any) => {
-        console.log(response);
-        const rol = response.user.rol;
-
         
-        localStorage.setItem('token', 'true');
-        localStorage.setItem('usuario_id', response.user.id);
-        localStorage.setItem('rol', rol);
+        localStorage.setItem('refresh_token', response.refresh);
+        this.authService.login(response.access);
 
-        
-        this.authService.isAuthenticated.set(true);
-
-        if (rol === 'Administrador') {
-          this.router.navigate(['/admin/dashboard']);
-        } else {
-          this.router.navigate(['/']);
-        }
       },
       error: (error) => {
+
         this.mensaje = 'Credenciales incorrectas';
         this.loginForm.get('password')?.reset();
         this.loginForm.markAsUntouched();
-      }
 
+      }
 
     });
 
