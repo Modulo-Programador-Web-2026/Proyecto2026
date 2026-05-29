@@ -42,6 +42,8 @@ export class Registro implements OnInit {
       error: () => this.error = 'No se pudieron cargar los roles'
     });
 
+
+    
     this.http.get<any[]>('http://localhost:8000/usuarios/grupos-sanguineos/').subscribe({
       next: (data) => this.grupos = data,
       error: () => this.error = 'No se pudieron cargar los grupos sanguíneos'

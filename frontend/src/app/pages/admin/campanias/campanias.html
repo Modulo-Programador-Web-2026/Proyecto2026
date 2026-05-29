@@ -1,13 +1,135 @@
-<div class="placeholder-page">
+<div class="container">
 
-    <div class="placeholder-card">
+    <div class="card">
 
-        <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"></path>
-            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-        </svg>
-        <h2>Pendiente de desarrollo</h2>
-        <p>La sección de campañas estará disponible próximamente.</p>
+        <div class="left">
+
+            <h1>Nueva Campaña</h1>
+
+            <form
+                [formGroup]="campaniaForm"
+                (ngSubmit)="onSubmit()">
+
+                <div class="input-group">
+
+                    <label>Título</label>
+
+                    <input
+                        type="text"
+                        formControlName="titulo"
+                        placeholder="Título">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Descripción</label>
+
+                    <textarea
+                        rows="6"
+                        formControlName="descripcion"
+                        placeholder="Descripción">
+                    </textarea>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Ubicación</label>
+
+                    <input
+                        type="text"
+                        formControlName="ubicacion"
+                        placeholder="Hospital, clínica o centro de donación">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Fecha inicio</label>
+
+                    <input
+                        type="date"
+                        formControlName="fecha_inicio">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Fecha fin</label>
+
+                    <input
+                        type="date"
+                        formControlName="fecha_fin">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Estado</label>
+
+                    <select formControlName="estado_campania">
+
+                        <option value="">
+                            Seleccionar
+                        </option>
+
+                        @for (estado of estados; track estado.id) {
+
+                        <option [value]="estado.id">
+
+                            {{ estado.estado }}
+
+                        </option>
+
+                        }
+
+                    </select>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    [disabled]="cargando">
+
+                    {{ cargando
+                    ? 'Creando campaña...'
+                    : 'Crear campaña' }}
+
+                </button>
+
+                @if(mensaje){
+
+                    <p class="mensaje-ok">
+                        {{mensaje}}
+                    </p>
+
+                }
+
+                @if(error){
+
+                    <p class="mensaje-error">
+                        {{error}}
+                    </p>
+
+                }
+
+            </form>
+
+        </div>
+
+        <div class="right">
+
+            <img
+                src="https://cdn-icons-png.flaticon.com/128/3063/3063188.png"
+                alt="Campaña">
+
+            <h2>
+                Gestioná campañas de donación de sangre.
+            </h2>
+
+        </div>
 
     </div>
 

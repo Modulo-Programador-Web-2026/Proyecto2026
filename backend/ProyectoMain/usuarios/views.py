@@ -22,6 +22,7 @@ class GrupoSanguineoViewSet(viewsets.ModelViewSet):
 
     queryset = GrupoSanguineo.objects.all()
     serializer_class = GrupoSanguineoSerializer
+    permission_classes = [AllowAny]
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
