@@ -30,9 +30,9 @@ export class InscripcionService {
 
 
   inscribirse(datos: any): Observable<{ data: any, totalInscriptos: number }> { 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
-      Authorization: `Token ${token}`
+      Authorization: `Bearer ${token}`
     });
 
  return this.http.post<{ data: any, totalInscriptos: number }>( 

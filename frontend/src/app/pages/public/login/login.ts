@@ -76,13 +76,24 @@ export class Login {
 
     this.http.post(
       'http://127.0.0.1:8000/api/token/',
-      this.loginForm.value
+      {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      }
     ).subscribe({
 
       next: (response: any) => {
         
         localStorage.setItem('refresh_token', response.refresh);
+        localStorage.setItem('rol', response.user.rol);
+
         this.authService.login(response.access);
+
+        if (response.user.rol === 'Administrador') {
+          this.router.navigate(['/admin/dashboard']);
+        } else {
+          this.router.navigate(['/']);
+        }
 
       },
       error: (error) => {

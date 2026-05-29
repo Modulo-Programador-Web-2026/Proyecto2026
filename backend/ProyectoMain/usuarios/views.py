@@ -4,7 +4,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from .models import Usuario,Rol, GrupoSanguineo
-from .serializers import UsuarioSerializer,RolSerializer, GrupoSanguineoSerializer
+from .serializers import UsuarioSerializer,RolSerializer, GrupoSanguineoSerializer, CustomTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -55,3 +56,6 @@ def registro_view(request):
         serializer.save()
         return Response({'message': 'Usuario registrado correctamente'}, status=201)
     return Response(serializer.errors, status=400)
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

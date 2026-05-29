@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CampaniaService } from '../../../services/campanias/campania.service';
 import { InscripcionService } from '../../../services/inscripciones/inscripcion.service';
+import { AuthService } from '../../../services/auth/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-campania-detalle',
@@ -24,6 +26,7 @@ export class CampaniaDetalle implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef,
     private inscripcionService: InscripcionService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -72,35 +75,51 @@ export class CampaniaDetalle implements OnInit {
   }
 
   inscribirse() {
-    const token = localStorage.getItem('token');
-    const usuarioId = localStorage.getItem('usuario_id'); // ← guardar al hacer login
 
-    if (!token || !usuarioId) {
-      alert('Debés iniciar sesión para inscribirte.');
-      this.router.navigate(['/login']);
+    if (!this.authService.isAuthenticated()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atención',
+        text: 'Debés iniciar sesión para continuar',
+        confirmButtonText: 'Aceptar',
+      }).then(() => {
+        this.router.navigate(['/login']);
+      });
       return;
-    }
-
-    const datos = {
-      usuario: Number(usuarioId),
-      campania: this.campania.id
     };
 
-    this.inscripcionService.inscribirse(datos).subscribe({
+    this.inscripcionService.inscribirse({
+      campania: this.campania.id
+    }).subscribe({
+
       next: (respuesta) => {
         this.inscriptosCount = respuesta.totalInscriptos;
-        alert('Inscripción correcta');
+        Swal.fire({
+          icon: 'success',
+          title: 'Inscripción exitosa',
+          text: 'Te has inscrito correctamente a la campaña',
+          showConfirmButton: false,
+          timer: 2000
+        });
       },
+
       error: (err) => {
-        console.log('Error:', err.error);
-        alert('Error: ' + JSON.stringify(err.error));
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un problema al inscribirse a la campaña',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
+
     });
+
   }
-
-
 
   volver(): void {
     this.router.navigate(['/campanias']);
   }
+
 }
