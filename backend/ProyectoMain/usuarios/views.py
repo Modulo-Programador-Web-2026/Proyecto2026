@@ -1,29 +1,33 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from .models import Usuario,Rol, GrupoSanguineo
 from .serializers import UsuarioSerializer,RolSerializer, GrupoSanguineoSerializer
-from rest_framework.permissions import AllowAny
+
 
 class UsuarioViewSet(viewsets.ModelViewSet):
 
     queryset = Usuario.objects.all()
+
     serializer_class = UsuarioSerializer
+
 
 class RolViewSet(viewsets.ModelViewSet):
 
     queryset = Rol.objects.all()
+
     serializer_class = RolSerializer
+
 
 class GrupoSanguineoViewSet(viewsets.ModelViewSet):
 
     queryset = GrupoSanguineo.objects.all()
+
     serializer_class = GrupoSanguineoSerializer
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
 def login_view(request):
     email = request.data.get('email')
     password = request.data.get('password')
@@ -47,8 +51,9 @@ def login_view(request):
     return Response({'error': 'Credenciales incorrectas'}, status=400)
 
 
+
+
 @api_view(['POST'])
-@permission_classes([AllowAny])
 def registro_view(request):
     serializer = UsuarioSerializer(data=request.data)
     if serializer.is_valid():

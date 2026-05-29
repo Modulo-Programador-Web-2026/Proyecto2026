@@ -6,12 +6,10 @@ from .serializers import CampaniaSerializer, EstadoCampaniaSerializer
 from datetime import date
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from django.utils import timezone
-from usuarios.permissions import EsAdministrador
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
 def campania_activa(request):
     campania = Campania.objects.order_by('fecha_inicio').first()
 
@@ -19,6 +17,8 @@ def campania_activa(request):
         return Response({'error': 'No hay campañas.'}, status=404)
 
     return Response(CampaniaSerializer(campania).data)
+
+
 
 
 @api_view(['POST'])
@@ -33,21 +33,17 @@ def inscribirse_campania(request, campania_id):
 
     return Response({"mensaje": "Inscripción correcta"})
 
-class CampaniaViewSet(viewsets.ModelViewSet):
 
+
+
+
+class CampaniaViewSet(viewsets.ModelViewSet):
     queryset = Campania.objects.all()
     serializer_class = CampaniaSerializer
 
-    def get_permissions(self):
-
-        if self.action in ['list', 'retrieve']:
-            permission_classes = [AllowAny]
-        else:
-            permission_classes = [EsAdministrador]
-
-        return [permission() for permission in permission_classes]
 
 class EstadoCampaniaViewSet(viewsets.ModelViewSet):
 
     queryset = Estado_Campania.objects.all()
+
     serializer_class = EstadoCampaniaSerializer
