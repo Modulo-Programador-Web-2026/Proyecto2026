@@ -24,7 +24,7 @@ export class PublicLayout {
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('token') === 'true';
+    return localStorage.getItem('access_token') === 'true';
   }
 
   logout() {
