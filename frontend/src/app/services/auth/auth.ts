@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private readonly TOKEN_KEY = 'token';
+  private readonly TOKEN_KEY = 'access_token';
 
   isAuthenticated = signal<boolean>(this.checkToken());
 
@@ -29,4 +29,5 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
+
 }
