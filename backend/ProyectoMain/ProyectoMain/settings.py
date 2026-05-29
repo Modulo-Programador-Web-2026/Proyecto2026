@@ -88,7 +88,6 @@ WSGI_APPLICATION = 'ProyectoMain.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -99,19 +98,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
-"""
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'proyecto_bd',
-        'USER': 'root',
-        'PASSWORD': '12345678',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -130,9 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
