@@ -17,14 +17,13 @@ export class AuthService {
   login(token: string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
     this.isAuthenticated.set(true);
-    this.router.navigate(['/admin/dashboard']);
   }
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem('refresh_token');
     localStorage.removeItem('rol');
     this.isAuthenticated.set(false);
-    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
