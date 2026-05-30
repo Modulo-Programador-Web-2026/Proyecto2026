@@ -173,7 +173,22 @@ h1 {
 }
 
 .acciones {
-  font-size: 28px;
-  text-align: center;
-  cursor: pointer;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
 }
+
+.btn-ver, .btn-editar, .btn-eliminar {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-ver      { background: #EBF5FB; color: #185FA5; }
+.btn-editar   { background: #FEF9E7; color: #B7950B; }
+.btn-eliminar { background: #FCEBEB; color: #C0392B; }
