@@ -113,7 +113,7 @@ export class AdminDashboard implements OnInit {
   crearCampania(): void {
 
     this.router.navigate(
-      ['/admin/campanias']
+      ['/admin/campanias/nueva']
     );
 
   }

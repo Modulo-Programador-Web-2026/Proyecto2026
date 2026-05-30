@@ -1,39 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { signal } from '@angular/core';
+import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-campanias-admin',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [DatePipe],
   templateUrl: './campanias.html',
   styleUrls: ['./campanias.css']
 })
 export class AdminCampanias implements OnInit {
 
-  campaniaForm: FormGroup;
-
+  campanias = signal<any[]>([]);
   estados: any[] = [];
+  
 
-  mensaje = '';
   error = '';
-  cargando = false;
 
   constructor(
-    private fb: FormBuilder,
-    private http: HttpClient
-  ) {
-
-    this.campaniaForm = this.fb.group({
-      titulo: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      ubicacion: ['', [Validators.required]],
-      fecha_inicio: ['', [Validators.required]],
-      fecha_fin: ['', [Validators.required]],
-      estado_campania: ['', [Validators.required]]
-    });
-
-  }
+  private http: HttpClient,
+  private router: Router
+) {}
 
   ngOnInit(): void {
 
@@ -44,66 +35,70 @@ export class AdminCampanias implements OnInit {
       error: () => this.error = 'No se pudieron cargar los estados'
     });
 
+    this.cargarCampanias();
+
   }
 
-  onSubmit() {
+  cargarCampanias() {
+    this.http.get<any[]>(
+      'http://localhost:8000/campanias/campanias/'
+    ).subscribe({
 
-    this.mensaje = '';
-    this.error = '';
+      next: (data) => {
+        this.campanias.set(data);
+      },
 
-    if (this.campaniaForm.invalid) {
+      error: () => {
+        this.error = 'No se pudieron cargar las campañas';
+      }
 
-      this.campaniaForm.markAllAsTouched();
-      return;
+    });
+  }
 
-    }
+  crearCampania() {
+    this.router.navigate(['/admin/campanias/nueva']);
+  }
 
-    const fechaInicio = new Date(
-      this.campaniaForm.value.fecha_inicio
-    );
+  editarCampania(id: number) {
+    this.router.navigate(['/admin/campanias/editar', id]);
+  }
 
-    const fechaFin = new Date(
-      this.campaniaForm.value.fecha_fin
-    );
+  
+  eliminarCampania(id: number) {
 
-    if (fechaFin < fechaInicio) {
+  Swal.fire({
+    title: '¿Eliminar campaña?',
+    text: 'Esta acción no se puede deshacer',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#C0392B',
+    cancelButtonColor: '#7f8c8d',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
 
-      this.error =
-        'La fecha de finalización no puede ser anterior a la fecha de inicio';
+    if (!result.isConfirmed) return;
 
-      return;
-
-    }
-
-    this.cargando = true;
-
-    this.http.post(
-      'http://localhost:8000/campanias/campanias/',
-      this.campaniaForm.value
+    this.http.delete(
+      `http://localhost:8000/campanias/campanias/${id}/`
     ).subscribe({
 
       next: () => {
 
-        this.cargando = false;
+        this.campanias.set(this.campanias().filter(c => c.id !== id));
 
-        this.mensaje =
-          'Campaña creada correctamente';
-
-        this.campaniaForm.reset();
+        Swal.fire({
+          title: 'Eliminada',
+          text: 'La campaña fue eliminada correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
 
       },
 
-      error: () => {
-
-        this.cargando = false;
-
-        this.error =
-          'Error al crear la campaña';
-
-      }
-
+      error: () => { Swal.fire('Error', 'No se pudo eliminar la campaña', 'error'); }
     });
-
-  }
-
+  });
+}
 }

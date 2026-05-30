@@ -1,136 +1,66 @@
-<div class="container">
+    <div class="container">
 
-    <div class="card">
+    <div class="panel">
 
-        <div class="left">
+        <div class="header">
 
-            <h1>Nueva Campaña</h1>
+        <h1>Gestión de Campañas</h1>
 
-            <form
-                [formGroup]="campaniaForm"
-                (ngSubmit)="onSubmit()">
+        <button class="nueva-btn" (click)="crearCampania()">
+            + Nueva Campaña
+        </button>
 
-                <div class="input-group">
+        </div>
 
-                    <label>Título</label>
+        <table>
 
-                    <input
-                        type="text"
-                        formControlName="titulo"
-                        placeholder="Título">
+        <thead>
+            <tr>
+            <th>Título</th>
+            <th>Ubicación</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+            </tr>
+        </thead>
 
-                </div>
+        <tbody>
 
-                <div class="input-group">
+        @for(campania of campanias(); track campania.id){
 
-                    <label>Descripción</label>
+            <tr>
 
-                    <textarea
-                        rows="6"
-                        formControlName="descripcion"
-                        placeholder="Descripción">
-                    </textarea>
+                <td>{{ campania.titulo }}</td>
 
-                </div>
+                <td>{{ campania.ubicacion }}</td>
 
-                <div class="input-group">
+                <td>{{ campania.fecha_inicio | date:'dd/MM/yyyy' }}</td>
 
-                    <label>Ubicación</label>
+                <td>{{ campania.fecha_fin | date:'dd/MM/yyyy' }}</td>
 
-                    <input
-                        type="text"
-                        formControlName="ubicacion"
-                        placeholder="Hospital, clínica o centro de donación">
+                <td>{{ campania.estado_campania_texto }}</td>
 
-                </div>
+                <td>
 
-                <div class="input-group">
-
-                    <label>Fecha inicio</label>
-
-                    <input
-                        type="date"
-                        formControlName="fecha_inicio">
-
-                </div>
-
-                <div class="input-group">
-
-                    <label>Fecha fin</label>
-
-                    <input
-                        type="date"
-                        formControlName="fecha_fin">
-
-                </div>
-
-                <div class="input-group">
-
-                    <label>Estado</label>
-
-                    <select formControlName="estado_campania">
-
-                        <option value="">
-                            Seleccionar
-                        </option>
-
-                        @for (estado of estados; track estado.id) {
-
-                        <option [value]="estado.id">
-
-                            {{ estado.estado }}
-
-                        </option>
-
-                        }
-
-                    </select>
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="submit-btn"
-                    [disabled]="cargando">
-
-                    {{ cargando
-                    ? 'Creando campaña...'
-                    : 'Crear campaña' }}
-
+                <button class="editar-btn" (click)="editarCampania(campania.id)">
+                Editar
                 </button>
 
-                @if(mensaje){
+                <button class="eliminar-btn" (click)="eliminarCampania(campania.id)">
+                    Eliminar
+                </button>
 
-                    <p class="mensaje-ok">
-                        {{mensaje}}
-                    </p>
+                </td>
 
-                }
+            </tr>
 
-                @if(error){
+            }
 
-                    <p class="mensaje-error">
-                        {{error}}
-                    </p>
+        </tbody>
 
-                }
-
-            </form>
-
-        </div>
-
-        <div class="right">
-
-            <img
-                src="https://cdn-icons-png.flaticon.com/128/3063/3063188.png"
-                alt="Campaña">
-
-            <h2>
-                Gestioná campañas de donación de sangre.
-            </h2>
-
-        </div>
+        </table>
 
     </div>
 
-</div>
+    </div>
