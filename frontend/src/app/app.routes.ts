@@ -14,6 +14,7 @@ import { CampaniaDetalle } from './pages/public/campania-detalle/campania-detall
 import { Registro } from './pages/public/registro/registro';
 import { Informate } from './pages/public/informate/informate';
 import { authGuard } from './guards/auth-guard';
+import { CampaniaForm } from './pages/admin/campanias/campania-form/campania-form';
 
 
 
@@ -49,7 +50,9 @@ export const routes: Routes = [
             { path: 'dashboard', component: AdminDashboard },
             { path: 'campanias', component: AdminCampanias },
             { path: 'inscripciones', component: AdminInscripciones },
-            { path: 'usuarios', component: Usuarios}
+            { path: 'usuarios', component: Usuarios},
+            { path: 'campanias/nueva', component: CampaniaForm },
+            { path: 'campanias/editar/:id', component: CampaniaForm },
         ]
     },
 
