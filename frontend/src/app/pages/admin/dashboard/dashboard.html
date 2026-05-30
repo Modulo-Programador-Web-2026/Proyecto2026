@@ -7,7 +7,7 @@
             <p>Resumen general del sistema SangreYa.</p>
         </div>
 
-        <button class="primary-btn">
+        <button class="primary-btn" (click)="crearCampania()">
             Nueva campaña
         </button>
 
@@ -49,11 +49,9 @@
 
                 <h3>Tipos de campañas</h3>
 
-                <button
-                    class="view-btn"
-                    (click)="abrirModal('campanas')"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button class="view-btn" (click)="abrirModal('campanas')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
@@ -64,9 +62,7 @@
             <div class="campaign-chart-layout">
 
 
-                <div class="chart-placeholder pie-chart"
-                     [style.background]="(dashboardData$ | async)?.conicGradient"
-                >
+                <div class="chart-placeholder pie-chart" [style.background]="(dashboardData$ | async)?.conicGradient">
 
                     <div class="pie-center">
                         100%
@@ -83,19 +79,16 @@
 
                     @for (item of (dashboardData$ | async)?.campanias_por_tipo; track item.titulo) {
 
-                        <div class="legend-item">
+                    <div class="legend-item">
 
-                            <span
-                                class="legend-color"
-                                [style.background]="item.color"
-                            ></span>
+                        <span class="legend-color" [style.background]="item.color"></span>
 
-                            <div>
-                                <strong>{{ item.titulo }}</strong>
-                                <p>{{ item.porcentaje }}%</p>
-                            </div>
-
+                        <div>
+                            <strong>{{ item.titulo }}</strong>
+                            <p>{{ item.porcentaje }}%</p>
                         </div>
+
+                    </div>
 
                     }
 
@@ -109,13 +102,11 @@
 
             <div class="card-header">
 
-              <h3>Inscripciones mensuales</h3>
+                <h3>Inscripciones mensuales</h3>
 
-                <button
-                    class="view-btn"
-                    (click)="abrirModal('inscripciones')"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button class="view-btn" (click)="abrirModal('inscripciones')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
@@ -127,31 +118,29 @@
 
                 @for (mes of (dashboardData$ | async)?.meses; track mes.mes) {
 
-                    <div class="bar-item">
+                <div class="bar-item">
 
-                        <div class="bar-tooltip">
-                            <strong>{{ mes.mes }}</strong>
-                            <span>{{ mes.inscripciones }} inscripciones</span>
-                        </div>
-
-                        <div
-                            class="bar"
-                            [style.height.%]="mes.inscripciones"
-                        ></div>
-
-                        <span class="bar-label">
-                            {{ mes.mes }}
-                        </span>
-
+                    <div class="bar-tooltip">
+                        <strong>{{ mes.mes }}</strong>
+                        <span>{{ mes.inscripciones }} inscripciones</span>
                     </div>
+
+                    <div class="bar" [style.height.%]="mes.inscripciones"></div>
+
+                    <span class="bar-label">
+                        {{ mes.mes }}
+                    </span>
+
+                </div>
 
                 }
 
             </div>
-            
+
             <p class="chart-hint">
 
-                <svg class="hint-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="hint-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -191,39 +180,36 @@
                 <tbody>
 
                     @for (
-                        campania of (dashboardData$ | async)?.campanias_recientes;
-                        track campania.id
+                    campania of (dashboardData$ | async)?.campanias_recientes;
+                    track campania.id
                     ) {
 
-                        <tr>
+                    <tr>
 
-                            <td>
-                                {{ campania.titulo }}
-                            </td>
+                        <td>
+                            {{ campania.titulo }}
+                        </td>
 
-                            <td>
-                                {{ campania.ubicacion }}
-                            </td>
+                        <td>
+                            {{ campania.ubicacion }}
+                        </td>
 
-                            <td>
+                        <td>
 
-                                <span
-                                    class="badge"
-                                    [class.active]="campania.estado_campania === 1"
-                                    [class.ended]="campania.estado_campania !== 1"
-                                >
+                            <span class="badge" [class.active]="campania.estado_campania === 1"
+                                [class.ended]="campania.estado_campania !== 1">
 
-                                    {{
-                                        campania.estado_campania === 1
-                                            ? 'Activa'
-                                            : 'Finalizada'
-                                    }}
+                                {{
+                                campania.estado_campania === 1
+                                ? 'Activa'
+                                : 'Finalizada'
+                                }}
 
-                                </span>
+                            </span>
 
-                            </td>
+                        </td>
 
-                        </tr>
+                    </tr>
 
                     }
 
@@ -239,122 +225,105 @@
 
 @if (modalAbierto) {
 
-    <div
-        class="modal-overlay"
-        (click)="cerrarModal()"
-    >
+<div class="modal-overlay" (click)="cerrarModal()">
 
-        <div
-            class="modal-content"
-            (click)="$event.stopPropagation()"
-        >
+    <div class="modal-content" (click)="$event.stopPropagation()">
 
-            <button
-                class="close-modal"
-                (click)="cerrarModal()"
-            >
-                ✕
-            </button>
+        <button class="close-modal" (click)="cerrarModal()">
+            ✕
+        </button>
 
-            @if (modalAbierto === 'campanas') {
+        @if (modalAbierto === 'campanas') {
 
-                <div class="modal-chart">
+        <div class="modal-chart">
 
-                    <h2>Tipos de campañas</h2>
+            <h2>Tipos de campañas</h2>
 
-                    <div class="campaign-chart-layout">
+            <div class="campaign-chart-layout">
 
-                        <div 
-                            class="chart-placeholder pie-chart"
-                            [style.background]="(dashboardData$ | async)?.conicGradient"
-                        >
+                <div class="chart-placeholder pie-chart" [style.background]="(dashboardData$ | async)?.conicGradient">
 
-                            <div class="pie-center">
-                                100%
-                            </div>
+                    <div class="pie-center">
+                        100%
+                    </div>
 
-                            <div class="chart-tooltip">
-                                <strong>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.titulo }}</strong>
-                                <span>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.porcentaje }}% del total</span>
-                            </div>
-
-                        </div>
-
-                        <div class="chart-legend">
-
-                            @for (item of (dashboardData$ | async)?.campanias_por_tipo; track item.titulo) {
-
-                                <div class="legend-item">
-
-                                    <span
-                                        class="legend-color"
-                                        [style.background]="item.color"
-                                    ></span>
-
-                                    <div>
-                                        <strong>{{ item.titulo }}</strong>
-                                        <p>{{ item.porcentaje }}%</p>
-                                    </div>
-
-                                </div>
-
-                            }
-
-                        </div>
-
+                    <div class="chart-tooltip">
+                        <strong>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.titulo }}</strong>
+                        <span>{{ ((dashboardData$ | async)?.campanias_por_tipo)?.[0]?.porcentaje }}% del total</span>
                     </div>
 
                 </div>
 
-            }
+                <div class="chart-legend">
 
-            @if (modalAbierto === 'inscripciones') {
+                    @for (item of (dashboardData$ | async)?.campanias_por_tipo; track item.titulo) {
 
-                <div class="modal-chart">
+                    <div class="legend-item">
 
-                    <h2>Inscripciones mensuales</h2>
+                        <span class="legend-color" [style.background]="item.color"></span>
 
-                    <div class="bar-chart">
-
-                        @for (mes of (dashboardData$ | async)?.meses; track mes.mes) {
-
-                            <div class="bar-item">
-
-                                <div class="bar-tooltip">
-                                    <strong>{{ mes.mes }}</strong>
-                                    <span>{{ mes.inscripciones }} inscripciones</span>
-                                </div>
-
-                                <div
-                                    class="bar"
-                                    [style.height.%]="mes.inscripciones"
-                                ></div>
-
-                                <span class="bar-label">
-                                    {{ mes.mes }}
-                                </span>
-
-                            </div>
-
-                        }
+                        <div>
+                            <strong>{{ item.titulo }}</strong>
+                            <p>{{ item.porcentaje }}%</p>
+                        </div>
 
                     </div>
 
-                    <p class="chart-hint">
-                        <svg class="hint-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                        Pasá el cursor sobre cada barra para ver más información.
-                    </p>
+                    }
 
                 </div>
 
-            }
+            </div>
 
         </div>
 
+        }
+
+        @if (modalAbierto === 'inscripciones') {
+
+        <div class="modal-chart">
+
+            <h2>Inscripciones mensuales</h2>
+
+            <div class="bar-chart">
+
+                @for (mes of (dashboardData$ | async)?.meses; track mes.mes) {
+
+                <div class="bar-item">
+
+                    <div class="bar-tooltip">
+                        <strong>{{ mes.mes }}</strong>
+                        <span>{{ mes.inscripciones }} inscripciones</span>
+                    </div>
+
+                    <div class="bar" [style.height.%]="mes.inscripciones"></div>
+
+                    <span class="bar-label">
+                        {{ mes.mes }}
+                    </span>
+
+                </div>
+
+                }
+
+            </div>
+
+            <p class="chart-hint">
+                <svg class="hint-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                Pasá el cursor sobre cada barra para ver más información.
+            </p>
+
+        </div>
+
+        }
+
     </div>
+
+</div>
 
 }
