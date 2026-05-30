@@ -49,6 +49,7 @@ export const routes: Routes = [
             { path: 'dashboard', component: AdminDashboard },
             { path: 'campanias', component: AdminCampanias },
             { path: 'inscripciones', component: AdminInscripciones },
+            { path: 'usuarios', component: Usuarios}
         ]
     },
 

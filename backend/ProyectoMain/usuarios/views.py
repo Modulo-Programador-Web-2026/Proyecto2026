@@ -6,12 +6,17 @@ from django.contrib.auth import authenticate
 from .models import Usuario,Rol, GrupoSanguineo
 from .serializers import UsuarioSerializer,RolSerializer, GrupoSanguineoSerializer, CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny,IsAuthenticated
 
 class UsuarioViewSet(viewsets.ModelViewSet):
 
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Usuario.objects.filter(rol__tipo_rol='Usuario Estandar')
+
 
 class RolViewSet(viewsets.ModelViewSet):
 
@@ -60,3 +65,4 @@ def registro_view(request):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
