@@ -2,12 +2,12 @@
 
   <h1>Gestión de Usuarios</h1>
 
-  
+
   <div class="card-estadistica">
 
     <div>
-        <h2>{{ usuarios.length }}</h2>   
-          <p>Usuarios Registrados</p>
+      <h2>{{ usuarios.length }}</h2>
+      <p>Usuarios Registrados</p>
     </div>
 
     <div class="icono-usuarios">
@@ -19,7 +19,7 @@
 
   <div class="barra-superior">
 
-  
+
     <div class="buscador">
 
       <input type="text" placeholder="Buscar usuario por nombre, email, DNI..." />
@@ -30,7 +30,7 @@
 
     </div>
 
-  
+
 
     <button class="btn-perfiles">
       Ver Perfiles Completos
@@ -53,7 +53,7 @@
 
   <div class="usuario-card">
 
-    
+
     <div class="perfil">
 
       <div class="avatar">
@@ -76,7 +76,7 @@
 
     </div>
 
-    
+
     <div class="contacto">
 
       <small>Contacto</small>
@@ -87,18 +87,15 @@
 
     </div>
 
-    
+
     <div class="datos">
-
       <small>Grupo Sanguíneo</small>
-
       <span class="grupo">
-        {{ usuario.grupo_sanguineo }}
+        {{ usuario.grupo_sanguineo_texto }}
       </span>
-
     </div>
 
-  
+
 
     <div class="acciones">
       <button class="btn-ver" (click)="abrirModal(usuario, 'ver')">Ver</button>
