@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -43,7 +44,7 @@ export class Registro implements OnInit {
     });
 
 
-    
+
     this.http.get<any[]>('http://localhost:8000/usuarios/grupos-sanguineos/').subscribe({
       next: (data) => this.grupos = data,
       error: () => this.error = 'No se pudieron cargar los grupos sanguíneos'
@@ -65,7 +66,13 @@ export class Registro implements OnInit {
     this.http.post('http://localhost:8000/usuarios/registro/', this.registroForm.value).subscribe({
       next: () => {
         this.cargando = false;
-        this.mensaje = 'Usuario registrado correctamente';
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario registrado',
+          text: 'El usuario fue registrado correctamente',
+          confirmButtonText: 'Aceptar'
+        });
+
         setTimeout(() => this.router.navigate(['/login']), 2000);
       },
       error: (err) => {

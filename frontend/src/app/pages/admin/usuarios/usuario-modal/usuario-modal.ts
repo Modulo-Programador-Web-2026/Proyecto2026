@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../../../services/usuario/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario-modal',
@@ -26,10 +27,10 @@ export class UsuarioModal implements OnChanges {
     private usuarioService: UsuarioService
   ) {
     this.editForm = this.fb.group({
-      nombre:   ['', Validators.required],
+      nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      email:    ['', [Validators.required, Validators.email]],
-      dni:      ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      dni: ['', Validators.required],
     });
   }
 
@@ -37,10 +38,10 @@ export class UsuarioModal implements OnChanges {
     this.error = '';
     if (this.usuario && this.modo === 'editar') {
       this.editForm.patchValue({
-        nombre:   this.usuario.nombre,
+        nombre: this.usuario.nombre,
         apellido: this.usuario.apellido,
-        email:    this.usuario.email,
-        dni:      this.usuario.dni,
+        email: this.usuario.email,
+        dni: this.usuario.dni,
       });
     }
   }
@@ -53,7 +54,16 @@ export class UsuarioModal implements OnChanges {
     this.cargando = true;
     this.usuarioService.editarUsuario(this.usuario.id, this.editForm.value).subscribe({
       next: () => {
+
         this.cargando = false;
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario actualizado',
+          text: 'Los datos fueron modificados correctamente',
+          confirmButtonText: 'Aceptar'
+        });
+
         this.actualizar.emit();
         this.cerrar.emit();
       },
@@ -69,6 +79,12 @@ export class UsuarioModal implements OnChanges {
     this.usuarioService.eliminarUsuario(this.usuario.id).subscribe({
       next: () => {
         this.cargando = false;
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario eliminado',
+          text: 'El usuario fue eliminado correctamente',
+          confirmButtonText: 'Aceptar'
+        });
         this.actualizar.emit();
         this.cerrar.emit();
       },

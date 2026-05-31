@@ -96,8 +96,7 @@ h1 {
 
 
 .filtros button,
-.filtros select,
-.btn-perfiles {
+.filtros select {
   border: none;
   padding: 12px 20px;
   border-radius: 15px;
@@ -112,10 +111,7 @@ h1 {
   font-weight: bold;
 }
 
-.btn-perfiles {
-  background: white;
-  border: 1px solid #ddd;
-}
+
 
 .tabla-header {
   display: grid;
