@@ -7,6 +7,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
 
+    grupo_sanguineo_texto = serializers.SerializerMethodField()
+
+    def get_grupo_sanguineo_texto(self, obj):
+        if obj.grupo_sanguineo:
+            return f"{obj.grupo_sanguineo.grupo} {obj.grupo_sanguineo.factor}"
+        return ""
+
     class Meta:
         model = Usuario
         fields = [
@@ -19,7 +26,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'apellido',
             'fecha_registro',
             'rol',
-            'grupo_sanguineo'
+            'grupo_sanguineo',
+            'grupo_sanguineo_texto',
         ]
 
     def create(self, validated_data):

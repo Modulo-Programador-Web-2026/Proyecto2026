@@ -1,15 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-usuario-modal',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './usuario-modal.html',
   styleUrl: './usuario-modal.css'
 })
-export class UsuarioModal {
+export class UsuarioModal implements OnChanges {
 
   @Input() usuario: any = null;
   @Input() modo: 'ver' | 'editar' | 'eliminar' = 'ver';
@@ -33,6 +34,7 @@ export class UsuarioModal {
   }
 
   ngOnChanges(): void {
+    this.error = '';
     if (this.usuario && this.modo === 'editar') {
       this.editForm.patchValue({
         nombre:   this.usuario.nombre,
