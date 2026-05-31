@@ -189,12 +189,14 @@ td {
 
 .editar-btn {
     margin-right: 8px;
-    background: #f1c40f;
+    background: #fada83;
+    color: #473903
 }
 
 .eliminar-btn {
-    background: #e74c3c;
-    color: white;
+    background: #f3a49b;
+    color: rgb(133, 2, 2);
+    
 }
 
 .badge-estado {
