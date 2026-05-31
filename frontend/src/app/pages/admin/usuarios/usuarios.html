@@ -22,7 +22,8 @@
 
     <div class="buscador">
 
-      <input type="text" placeholder="Buscar usuario por nombre, email, DNI..." />
+      <input type="text" placeholder="Buscar usuario por nombre, email, DNI..." [(ngModel)]="textoBusqueda"
+        (input)="filtrarUsuarios()" />
 
       <button>
         🔍
@@ -31,10 +32,6 @@
     </div>
 
 
-
-    <button class="btn-perfiles">
-      Ver Perfiles Completos
-    </button>
 
   </div>
 
