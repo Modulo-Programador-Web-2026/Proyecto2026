@@ -39,11 +39,11 @@ El proyecto fue desarrollado en el marco de la Tecnicatura Superior en Desarroll
 
 | Integrante | Rol |
 |---|---|
-| Astrid | Product Owner / Desarrollo Frontend y Backend |
-| Abigail | Scrum Master / Desarrollo Frontend y Backend |
-| Mauricio | Desarrollo Frontend y Backend |
-| Marcela | Desarrollo Backend y Frontend |
-| Irina | QA / Testing / Desarrollo Frontend y Backend |
+| Astrid LUPPI | Product Owner / Desarrollo Frontend y Backend |
+| Abigail PICONE| Scrum Master / Desarrollo Frontend y Backend |
+| Mauricio PUCHETA| Desarrollo Frontend y Backend |
+| Marcela VILLANUEVA | Desarrollo Backend y Frontend |
+| Irina PIRLES| QA / Testing / Desarrollo Frontend y Backend |
 
 ---
 
