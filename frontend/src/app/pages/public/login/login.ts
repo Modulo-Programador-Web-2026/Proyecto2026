@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth';
 import {
   FormBuilder,
@@ -18,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
 
   imports: [
-    CommonModule,
+    
     ReactiveFormsModule
   ],
 

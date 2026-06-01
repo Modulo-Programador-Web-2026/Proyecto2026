@@ -31,11 +31,10 @@ export const routes: Routes = [
             { path: 'campanias', component: Campanias },
             { path: 'campanias/:id/inscripcion', component: Inscripciones },
             { path: 'campanias/:id', component: CampaniaDetalle },
-            { path: 'usuarios', component: Usuarios },
             { path: 'registro', component: Registro },
 
-            { path: 'informate', component: Informate }
-
+            { path: 'informate', component: Informate },
+            { path: '**', redirectTo: '' }
 
         ]
     },
@@ -53,9 +52,10 @@ export const routes: Routes = [
             { path: 'usuarios', component: Usuarios},
             { path: 'campanias/nueva', component: CampaniaForm },
             { path: 'campanias/editar/:id', component: CampaniaForm },
+            { path: 'usuarios', component: Usuarios },
         ]
     },
 
-    // Rutas del usuario estándar en un futuro
+    
 
 ];
