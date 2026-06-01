@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CampaniaService, Campania } from '../../../services/campanias/campania.service';
@@ -21,7 +21,7 @@ export class Campanias implements OnInit {
   busqueda: string = '';
   filtroEstado: string = '';
 
-  constructor(private campaniaService: CampaniaService, private cdr: ChangeDetectorRef) {}
+  constructor(private campaniaService: CampaniaService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.campaniaService.getCampanias().subscribe({
@@ -40,28 +40,15 @@ export class Campanias implements OnInit {
 
   filtrar(): void {
     this.campaniasFiltradas = this.campanias.filter(c => {
-      const hoy    = new Date();
-      hoy.setHours(0, 0, 0, 0);
-
-      const [yi, mi, di] = c.fecha_inicio.split('-').map(Number);
-      const [yf, mf, df] = c.fecha_fin.split('-').map(Number);
-      const inicio = new Date(yi, mi - 1, di);
-      const fin    = new Date(yf, mf - 1, df);
-
-      let estado = '';
-      if (hoy < inicio) estado = 'proxima';
-      else if (hoy > fin) estado = 'finalizada';
-      else estado = 'activa';
-
       const coincideBusqueda = c.titulo.toLowerCase()
         .includes(this.busqueda.toLowerCase());
 
       if (!this.filtroEstado) {
-        return coincideBusqueda && estado !== 'finalizada';
+        return coincideBusqueda && c.estado !== 'Finalizada';
       }
-      return coincideBusqueda && estado === this.filtroEstado;
+      return coincideBusqueda && c.estado === this.filtroEstado;
     });
     this.cdr.detectChanges();
   }
-  
+
 }
