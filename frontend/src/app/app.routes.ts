@@ -32,9 +32,7 @@ export const routes: Routes = [
             { path: 'campanias/:id/inscripcion', component: Inscripciones },
             { path: 'campanias/:id', component: CampaniaDetalle },
             { path: 'registro', component: Registro },
-
             { path: 'informate', component: Informate },
-            { path: '**', redirectTo: '' }
 
         ]
     },
@@ -56,6 +54,6 @@ export const routes: Routes = [
         ]
     },
 
-    
+    { path: '**', redirectTo: '' }
 
 ];
