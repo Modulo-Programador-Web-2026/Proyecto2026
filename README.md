@@ -51,16 +51,17 @@ El proyecto fue desarrollado en el marco de la Tecnicatura Superior en Desarroll
 
 - Landing Page
 - Sección Quiénes Somos
-- Registro de usuarios (en proceso)
+- Sección Informate
+- Registro de usuarios
 - Inicio de sesión
-- CRUD de campañas
-- CRUD de usuarios
+- CRUD de campañas (dashboard administrativo)
+- CRUD de usuarios (dashboard administrativo)
 - Dashboard administrativo
 - Estadísticas administrativas
-- Vista pública de campañas
-- Formulario de inscripción a campañas
+- Vista pública de campañas (sección Campañas)
+- Inscripción a campañas (mediante botón)
 - API REST
-- Formularios reactivos (en proceso)
+- Formularios reactivos
 - Persistencia en MySQL
 - Fixtures con datos iniciales
 
@@ -79,31 +80,131 @@ El proyecto implementa una arquitectura cliente-servidor basada en API REST:
 Proyecto2026/
 ├── backend/
 │   ├── ProyectoMain/
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── serializer.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   └── wsgi.py
+│   │
 │   ├── campanias/
+│   │   ├── fixtures/
+│   │   │   ├── campanias.json
+│   │   │   └── estados.json
+│   │   ├── migrations/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   │
 │   ├── dashboard/
 │   ├── inscripciones/
 │   ├── usuarios/
+│   │
+│   ├── .env
+│   ├── .env_modelo
+│   ├── db.sqlite3
 │   ├── manage.py
-│   ├── docs/
+│   ├── docs
+│   │   ├── Diagrama_de_Clases_SangreYa.png
+│   │   ├── Modelo_Relacional_SangreYa.jpeg
+│   │   ├── Diagrama_Entidad_Relacion_SangreYa.jpg
+│   │   └── proyecto_db.sql
 │   └── requirements.txt
 │
 ├── frontend/
+│   ├── .angular/
+│   ├── .vscode/
+│   ├── node_modules/
+│   ├── public/
+│   │   ├── img/
+│   │   └── favicon.ico
 │   ├── src/
 │   │   ├── app/
+│   │   │   ├── guards/
+│   │   │   │   ├── auth-guard.spec.ts
+│   │   │   │   └── auth-guard.ts
+│   │   │   ├── interceptors/
+│   │   │   │   └── auth.interceptor.ts
 │   │   │   ├── layouts/
+│   │   │   │   ├── admin-layout/
+│   │   │   │   │   ├── admin-layout.css
+│   │   │   │   │   ├── admin-layout.html
+│   │   │   │   │   ├── admin-layout.spec.ts
+│   │   │   │   │   └── admin-layout.ts
+│   │   │   │   └── public-layout/
+│   │   │   │
 │   │   │   ├── pages/
 │   │   │   │   ├── admin/
+│   │   │   │   │   ├── campanias/
+│   │   │   │   │   │   ├── campania-form
+│   │   │   │   │   │   │   ├── campania-form.css
+│   │   │   │   │   │   │   ├── campania-form.html
+│   │   │   │   │   │   │   ├── campania-form.spec.ts
+│   │   │   │   │   │   │   └── campania-form.ts
+│   │   │   │   │   │   ├── campanias.css
+│   │   │   │   │   │   ├── campanias.html
+│   │   │   │   │   │   ├── campanias.spec.ts
+│   │   │   │   │   │   └── campanias.ts
+│   │   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── inscripciones/
+│   │   │   │   │   └── usuarios/
+│   │   │   │   │
 │   │   │   │   └── public/
+│   │   │   │       ├── campania-detalle/
+│   │   │   │       ├── campanias/
+│   │   │   │       ├── home/
+│   │   │   │       ├── informate/
+│   │   │   │       ├── inscripciones/
+│   │   │   │       ├── login/
+│   │   │   │       ├── quienes-somos/
+│   │   │   │       │     ├── quienes-somos.css
+│   │   │   │       │     ├── quienes-somos.html
+│   │   │   │       │     ├── quienes-somos.spec.ts
+│   │   │   │       │     └── quienes-somos.ts
+│   │   │   │       └── registro/
+│   │   │   ├── public/
 │   │   │   ├── services/
-│   │   │   └── app.routes.ts
+│   │   │   │       ├── auth/
+│   │   │   │       │     ├── auth.spec.ts
+│   │   │   │       │     └── auth.ts
+│   │   │   │       ├── campanias/
+│   │   │   │       │     └── campania.service.ts
+│   │   │   │       ├── dashboard/
+│   │   │   │       │     └── dashboard.service.ts
+│   │   │   │       ├── inscripciones/
+│   │   │   │       │     └── inscripcion.service.ts
+│   │   │   │       └── usuario/
+│   │   │   │            └── usuario.ts
+│   │   │   ├── app.config.ts
+│   │   │   ├── app.css
+│   │   │   ├── app.html
+│   │   │   ├── app.routes.ts
+│   │   │   ├── app.spec.ts
+│   │   │   └── app.ts
+│   │   │
+│   │   ├── index.html
 │   │   ├── main.ts
 │   │   └── styles.css
+│   │
+│   ├── .editorconfig
+│   ├── .gitignore
 │   ├── angular.json
+│   ├── package-lock.json
 │   ├── package.json
-│   └── README.md
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   └── tsconfig.spec.json
 │
-├── README.md
-└── .gitignore
+├── .gitignore
+└── README.md
 
 ```
 ---
@@ -218,13 +319,13 @@ La documentación y organización del proyecto se encuentra disponible en la Wik
 Incluye:
 - Requerimientos funcionales y no funcionales
 - Historias de usuario
-- Ceremonias Scrum
+- Actas de Reunión
 - Arquitectura del sistema
-- DER y modelo relacional
+- Diagramas (Diagrama Entidad-Relación - Diagrama de Clases - Modelo Relacional)
 - Instalación del proyecto
 
 ---
 Este proyecto fue desarrollado para:
 - Proyecto Integrador II
 - Módulo Programador Web
-- ISPC — Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales
+- ISPC — Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales — C. 2025.
