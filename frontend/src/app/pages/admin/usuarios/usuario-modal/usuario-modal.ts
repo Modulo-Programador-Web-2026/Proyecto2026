@@ -1,13 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../../../services/usuario/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './usuario-modal.html',
   styleUrl: './usuario-modal.css'
 })

@@ -1,66 +1,74 @@
-    <div class="container">
+<div class="container">
 
     <div class="panel">
 
         <div class="header">
 
-        <h1>Gestión de Campañas</h1>
+            <h1>Gestión de Campañas</h1>
 
-        <button class="nueva-btn" (click)="crearCampania()">
-            + Nueva Campaña
-        </button>
+            <button class="nueva-btn" (click)="crearCampania()">
+                + Nueva Campaña
+            </button>
 
         </div>
 
         <table>
 
-        <thead>
-            <tr>
-            <th>Título</th>
-            <th>Ubicación</th>
-            <th>Inicio</th>
-            <th>Fin</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-            </tr>
-        </thead>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Ubicación</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
 
-        @for(campania of campanias(); track campania.id){
+                @for (campania of campanias(); track campania.id) {
 
-            <tr>
+                <tr>
 
-                <td>{{ campania.titulo }}</td>
+                    <td>{{ campania.titulo }}</td>
 
-                <td>{{ campania.ubicacion }}</td>
+                    <td>{{ campania.ubicacion }}</td>
 
-                <td>{{ campania.fecha_inicio | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ campania.fecha_inicio | date:'dd/MM/yyyy' }}</td>
 
-                <td>{{ campania.fecha_fin | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ campania.fecha_fin | date:'dd/MM/yyyy' }}</td>
 
-                <td>{{ campania.estado_campania_texto }}</td>
+                    <td>{{ campania.estado_campania_texto }}</td>
 
-                <td>
+                    <td>
 
-                <button class="editar-btn" (click)="editarCampania(campania.id)">
-                Editar
-                </button>
+                        <button class="editar-btn" (click)="editarCampania(campania.id)">
+                            Editar
+                        </button>
 
-                <button class="eliminar-btn" (click)="eliminarCampania(campania.id)">
-                    Eliminar
-                </button>
+                        <button class="eliminar-btn" (click)="eliminarCampania(campania.id)">
+                            Eliminar
+                        </button>
 
-                </td>
+                    </td>
 
-            </tr>
+                </tr>
 
-            }
+                } @empty {
 
-        </tbody>
+                <tr>
+                    <td colspan="6">
+                        No hay campañas registradas.
+                    </td>
+                </tr>
+
+                }
+
+            </tbody>
 
         </table>
 
     </div>
 
-    </div>
+</div>

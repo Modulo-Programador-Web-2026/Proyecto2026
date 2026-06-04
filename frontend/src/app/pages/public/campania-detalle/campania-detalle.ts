@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CampaniaService } from '../../../services/campanias/campania.service';
 import { InscripcionService } from '../../../services/inscripciones/inscripcion.service';
@@ -9,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-campania-detalle',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './campania-detalle.html',
   styleUrl: './campania-detalle.css'
 })

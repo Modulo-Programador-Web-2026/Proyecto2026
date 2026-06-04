@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CampaniaService, Campania } from '../../../services/campanias/campania.service';
 import { RouterModule } from '@angular/router';
@@ -8,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-campanias',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './campanias.html',
   styleUrl: './campanias.css'
 })

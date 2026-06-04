@@ -1,8 +1,6 @@
-// informate.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-// ── Interfaces ────────────────────────────────────────────────────────────────
+
 
 export interface BeneficioHero {
   texto: string;
@@ -30,18 +28,17 @@ export interface PasoProcedimiento {
   icono: 'registro' | 'entrevistaMedica' | 'extraccion' | 'descanso';
 }
 
-// ── Componente ────────────────────────────────────────────────────────────────
 
 @Component({
   selector: 'app-informate',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './informate.html',
   styleUrls: ['./informate.css']
 })
 export class Informate {
 
-  // ── Sección Hero ────────────────────────────────────────────────────────────
+
   readonly tituloPrincipal = '1 Donación';
   readonly tituloSecundario = 'Salva 3 Vidas.';
 
@@ -51,7 +48,6 @@ export class Informate {
     { texto: 'Seguro de Sangre Solidario para familiares.', conIcono: true },
   ];
 
-  // ── Sección ¿Puedo ser Donante? ─────────────────────────────────────────────
 
   readonly tituloSeccionDonante = '¿Puedo ser Donante?';
 
@@ -70,7 +66,6 @@ export class Informate {
     { texto: 'Síntomas de fiebre o infecciones.' },
   ];
 
-  // ── Sección Requisitos del Día ───────────────────────────────────────────────
 
   readonly tituloRequisitos = 'Requisitos (Día de la donación)';
 
@@ -81,7 +76,6 @@ export class Informate {
     { texto: 'Entrevista médica confidencial.', icono: 'entrevista' },
   ];
 
-  // ── Sección Procedimiento ────────────────────────────────────────────────────
 
   readonly tituloProcedimiento = 'Procedimiento de Donación';
 

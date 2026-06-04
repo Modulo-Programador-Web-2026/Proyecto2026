@@ -13,3 +13,7 @@
     background: #f0f0f0;
     color: #b00101;
 }
+
+.logout-link {
+    cursor: pointer;
+}
