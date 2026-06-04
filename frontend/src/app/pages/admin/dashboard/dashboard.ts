@@ -2,13 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { DashboardService } from '../../../services/dashboard/dashboard.service';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {AsyncPipe} from "@angular/common";
 
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })

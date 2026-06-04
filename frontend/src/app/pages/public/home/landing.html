@@ -60,11 +60,11 @@
     <h2>Campañas de donación destacadas</h2>
 
 @if (cargando) {
-    <p style="color: #888; text-align:center; padding: 40px 0;">Cargando campañas...</p>
+    <p class="mensaje_cargando">Cargando campañas...</p>
 }
 
 @if (error) {
-    <p style="color: #C0392B; text-align:center; padding: 40px 0;">{{ error }}</p>
+    <p class="mensaje-error">{{ error }}</p>
 }
 
 @if (!cargando && !error) {
@@ -111,7 +111,7 @@
     }
 
         @if (campanias.length === 0) {
-        <p style="color: #888; grid-column: 1/-1; text-align:center; padding: 40px 0;">
+        <p class="campanias_vacio">
             No hay campañas activas en este momento.
         </p>
         }
