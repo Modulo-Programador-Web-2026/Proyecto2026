@@ -23,8 +23,7 @@
       "estado_campania": 2
     }
   },
-  [
-  {
+{
     "model": "campanias.campania",
     "pk": 1,
     "fields": {
@@ -96,5 +95,4 @@
       "estado_campania": 1
     }
   }
-]
 ]
