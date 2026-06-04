@@ -1,12 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../services/dashboard/dashboard.service';
 import { map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import {AsyncPipe} from "@angular/common";
+
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [AsyncPipe],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
@@ -14,6 +17,7 @@ import { map, shareReplay } from 'rxjs/operators';
 export class AdminDashboard implements OnInit {
 
   private dashboardService = inject(DashboardService);
+  private router = inject(Router);
 
   dashboardData$ = this.dashboardService.obtenerDashboard().pipe(
     map(data => {
@@ -46,7 +50,7 @@ export class AdminDashboard implements OnInit {
       count,
       porcentaje: Math.round((count / campanias.length) * 100)
     }));
-    
+
     return items.map((item, index) => ({
       ...item,
       color: this.generarColor(index, items.length)
@@ -95,7 +99,7 @@ export class AdminDashboard implements OnInit {
 
     gradiente += ')';
     return gradiente;
-    
+
   }
 
   abrirModal(tipo: string): void {
@@ -104,6 +108,14 @@ export class AdminDashboard implements OnInit {
 
   cerrarModal(): void {
     this.modalAbierto = null;
+  }
+
+  crearCampania(): void {
+
+    this.router.navigate(
+      ['/admin/campanias/nueva']
+    );
+
   }
 
 }

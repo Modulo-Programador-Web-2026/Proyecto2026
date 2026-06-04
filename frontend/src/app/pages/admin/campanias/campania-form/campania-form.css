@@ -1,0 +1,83 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    padding: 40px 16px;
+}
+
+.card {
+    width: 100%;
+    max-width: 700px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.left {
+    padding: 40px;
+}
+
+h1 {
+    font-size: 26px;
+    margin-bottom: 24px;
+    color: #1a1a1a;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+    padding: 12px 14px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.2s;
+    outline: none;
+    background: white;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    border-color: #C0392B;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #C0392B;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    background: #922B21;
+}
+
+
+.error {
+    color: #C0392B;
+    font-size: 13px;
+    margin-top: 4px;
+    font-weight: 500;
+}

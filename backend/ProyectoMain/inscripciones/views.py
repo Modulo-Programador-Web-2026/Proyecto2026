@@ -10,86 +10,25 @@ from usuarios.models import Usuario, GrupoSanguineo
 
 
 class InscripcionViewSet(viewsets.ModelViewSet):
+    
     queryset = Inscripcion.objects.all()
     serializer_class = InscripcionSerializer
+    
+    def create(self, request, *args, **kwargs):
 
-    @action(detail=False, methods=['post'], url_path='inscribirse')
-    def inscribirse(self, request):
-        nombre      = request.data.get('nombre')
-        apellido    = request.data.get('apellido')
-        username    = request.data.get('username')
-        dni         = request.data.get('dni')
-        grupo_str   = request.data.get('grupo')
-        campania_id = request.data.get('campania_id')
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(usuario=request.user)
+        campania_id = request.data.get('campania')
+        total = Inscripcion.objects.filter(campania_id=campania_id).count()
 
-        # Validar todos los campos
-        if not all([nombre, apellido, username, dni, grupo_str, campania_id]):
-            return Response(
-                {'error': 'Todos los campos son requeridos.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        return Response({
+            'data': serializer.data,
+            'totalInscriptos': total
+        }, status=status.HTTP_201_CREATED)
 
-        # Separar grupo y factor  ej: "AB+" → grupo="AB", factor="+"
-        factor = grupo_str[-1]
-        grupo  = grupo_str[:-1]
-
-        # Buscar grupo sanguíneo en la BD
-        try:
-            grupo_obj = GrupoSanguineo.objects.get(grupo=grupo, factor=factor)
-        except GrupoSanguineo.DoesNotExist:
-            return Response(
-                {'error': 'Grupo sanguíneo inválido.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        # Buscar campaña
-        try:
-            campania = Campania.objects.get(id=campania_id)
-        except Campania.DoesNotExist:
-            return Response(
-                {'error': 'Campaña no encontrada.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
-        # Verificar si el username ya existe
-        if creado := not Usuario.objects.filter(username=username).exists():
-            pass
-        if Usuario.objects.filter(username=username).exists():
-            return Response(
-                {'error': 'Ese nombre de usuario ya está en uso.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        # Buscar usuario por DNI o crearlo
-        usuario, creado = Usuario.objects.get_or_create(
-            dni=dni,
-            defaults={
-                'nombre':          nombre,
-                'apellido':        apellido,
-                'username':        username,
-                'grupo_sanguineo': grupo_obj,
-            }
-        )
-
-        # Verificar si ya está inscripto en esta campaña
-        ya_inscripto = Inscripcion.objects.filter(
-            usuario=usuario,
-            campania=campania
-        ).exists()
-
-        if ya_inscripto:
-            return Response(
-                {'error': 'Este DNI ya está inscripto en esta campaña.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        # Crear inscripción
-        inscripcion = Inscripcion.objects.create(
-            usuario=usuario,
-            campania=campania
-        )
-
-        return Response(
-            {'mensaje': '¡Inscripción exitosa!', 'id': inscripcion.id},
-            status=status.HTTP_201_CREATED
-        )
+    @action(detail=False, methods=['get'], url_path='total')  
+    def total(self, request):
+        campania_id = request.query_params.get('campania')
+        total = Inscripcion.objects.filter(campania_id=campania_id).count()
+        return Response({ 'totalInscriptos': total })

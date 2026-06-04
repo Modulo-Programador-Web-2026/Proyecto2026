@@ -1,22 +1,47 @@
+
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
+import {HttpClient,HttpHeaders} from '@angular/common/http';
+
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class InscripcionService {
 
   private apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
 
-
   getCampania(id: string): Observable<any> {
-  return this.http.get(`${this.apiUrl}/campanias/campanias/${id}/`);
+    return this.http.get(
+      `${this.apiUrl}/campanias/campanias/${id}/`
+    );
+  }
+
+  getTotalInscriptos(campaniaId: number): Observable<{ totalInscriptos: number }> {
+  return this.http.get<{ totalInscriptos: number }>(
+    `${this.apiUrl}/inscripciones/inscripciones/total/?campania=${campaniaId}`
+  );
 }
 
-  crearInscripcion(datos: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/inscripciones/inscripciones/inscribirse/`, datos);
+
+  inscribirse(datos: any): Observable<{ data: any, totalInscriptos: number }> { 
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+ return this.http.post<{ data: any, totalInscriptos: number }>( 
+      `${this.apiUrl}/inscripciones/inscripciones/`,
+      datos,
+      { headers }
+    );
   }
 }
+
+
+

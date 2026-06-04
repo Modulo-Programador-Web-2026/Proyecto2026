@@ -1,5 +1,4 @@
 import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CampaniaService, Campania } from '../../../services/campanias/campania.service';
 
@@ -8,7 +7,7 @@ import { CampaniaService, Campania } from '../../../services/campanias/campania.
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
 })

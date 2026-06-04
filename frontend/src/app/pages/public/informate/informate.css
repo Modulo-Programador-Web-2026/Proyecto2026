@@ -1,0 +1,320 @@
+:host {
+  --rojo:          #DC2626;
+  --rojo-claro:    #FEE2E2;
+  --rojo-oscuro:   #B91C1C;
+  --fondo:         #F3F4F6;
+  --tarjeta:       #FFFFFF;
+  --texto:         #111827;
+  --texto-suave:   #6B7280;
+  --borde:         #E5E7EB;
+  --radio:         12px;
+  --sombra:        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.contenedor-pagina {
+  background: var(--fondo);
+  min-height: 100vh;
+  padding: 32px 24px 48px;
+  max-width: 960px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
+  color: var(--texto);
+}
+
+.titulo-pagina {
+  font-size: 2.3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 24px;
+  color: var(--texto);
+}
+
+.tarjeta {
+  background: var(--tarjeta);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.titulo-tarjeta {
+  
+  font-size: 1.50rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--texto);
+}
+
+.tarjeta-hero {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-texto {
+  min-width: 175px;
+}
+
+.hero-etiqueta {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin: 0 0 20px;
+}
+
+.hero-titular {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--texto);
+}
+
+.hero-ilustracion {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-svg {
+  width: 200px;
+  height: auto;
+}
+
+img {
+    width: 250px;
+    height: auto;
+}
+
+.lista-beneficios {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.25rem;
+  min-width: 225px;
+}
+
+.lista-beneficios li {
+  padding: 4px 0 4px 16px;
+  position: relative;
+  line-height: 1.45;
+}
+
+.lista-beneficios li:not(.beneficio-con-icono)::before {
+  content: '•';
+  position: absolute;
+  left: 2px;
+}
+
+.beneficio-con-icono {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 6px;
+  padding-left: 0 !important;
+  margin-top: 6px;
+}
+
+.beneficio-con-icono::before {
+  display: none !important;
+}
+
+.icono-check-rojo {
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.grilla-dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.grilla-dos-columnas .tarjeta {
+  margin-bottom: 0;
+}
+
+.donante-interior {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.lista-donante {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.10rem;
+}
+
+.lista-donante li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.lista-donante li:last-child {
+  border-bottom: none;
+}
+
+.icono-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.icono-check-negro {
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.caja-exclusiones {
+  background: var(--rojo-claro);
+  border-radius: 8px;
+  padding: 30px 10px;
+  font-size: 1rem;
+
+}
+
+.titulo-exclusiones {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--rojo-oscuro);
+  margin: 0 0 8px;
+}
+
+.lista-exclusiones {
+  list-style: disc;
+  padding-left: 16px;
+  margin: 0;
+  color: var(--texto);
+  line-height: 1.75;
+}
+
+.lista-requisitos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.10rem;
+  align-items: center;
+  text-align: center;
+}
+
+.lista-requisitos li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.lista-requisitos li:last-child {
+  border-bottom: none;
+}
+
+.icono-requisito {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.fila-procedimiento {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.procedimiento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 88px;
+}
+
+.procedimiento-icono-contenedor {
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+.procedimiento-icono {
+  width: 95px;
+  height: 95px;
+}
+
+.procedimiento-etiqueta {
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 1.4;
+  color: var(--texto);
+}
+
+.flecha-procedimiento {
+  font-size: 5rem;
+  color: var(--rojo);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-bottom: 22px;
+}
+
+.pie-procedimiento {
+  margin: 18px 130px 0;
+  font-size: 1.25rem;
+  color: var(--texto-suave);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flecha-pie {
+  color: var(--rojo);
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .tarjeta-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-ilustracion {
+    order: -1;
+  }
+
+  .lista-beneficios li:not(.beneficio-con-icono)::before {
+    display: none;
+  }
+
+  .grilla-dos-columnas {
+    grid-template-columns: 1fr;
+  }
+
+  .donante-interior {
+    grid-template-columns: 1fr;
+  }
+
+  .fila-pasos {
+    gap: 4px;
+  }
+
+  .paso {
+    min-width: 68px;
+  }
+
+  .paso-etiqueta {
+    font-size: 0.68rem;
+  }
+}

@@ -80,8 +80,8 @@ h1 {
 
 .buscador button {
   border: none;
-  background: #d64045;
-  color: white;
+  background: transparent;
+  color: #555;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -96,8 +96,7 @@ h1 {
 
 
 .filtros button,
-.filtros select,
-.btn-perfiles {
+.filtros select {
   border: none;
   padding: 12px 20px;
   border-radius: 15px;
@@ -112,14 +111,11 @@ h1 {
   font-weight: bold;
 }
 
-.btn-perfiles {
-  background: white;
-  border: 1px solid #ddd;
-}
+
 
 .tabla-header {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr 100px;
+  grid-template-columns: 2fr 2fr 1fr 220px;
   padding: 20px;
   background: white;
   border-radius: 18px 18px 0 0;
@@ -129,7 +125,7 @@ h1 {
 
 .usuario-card {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr 100px;
+  grid-template-columns: 2fr 2fr 1fr 220px;
   align-items: center;
   background: white;
   padding: 25px 20px;
@@ -173,7 +169,65 @@ h1 {
 }
 
 .acciones {
-  font-size: 28px;
-  text-align: center;
-  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
+
+.btn-ver, .btn-editar, .btn-eliminar {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+
+  .tabla-header {
+    display: none;
+  }
+
+  .usuario-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .perfil,
+  .contacto,
+  .datos,
+  .acciones {
+    width: 100%;
+  }
+
+  .acciones {
+    flex-wrap: wrap;
+  }
+
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.grupo {
+  background: #f5d9dc;
+  color: #d64045;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.btn-ver      { background: #EBF5FB; color: #185FA5; }
+.btn-editar   { background: #FEF9E7; color: #B7950B; }
+.btn-eliminar { background: #FCEBEB; color: #C0392B; }

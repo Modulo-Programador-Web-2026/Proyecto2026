@@ -1,10 +1,104 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { signal } from '@angular/core';
+import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-campanias-admin',
   standalone: true,
+  imports: [DatePipe],
   templateUrl: './campanias.html',
   styleUrls: ['./campanias.css']
 })
+export class AdminCampanias implements OnInit {
 
-export class AdminCampanias {}
+  campanias = signal<any[]>([]);
+  estados: any[] = [];
+  
+
+  error = '';
+
+  constructor(
+  private http: HttpClient,
+  private router: Router
+) {}
+
+  ngOnInit(): void {
+
+    this.http.get<any[]>(
+      'http://localhost:8000/campanias/estados-campania/'
+    ).subscribe({
+      next: (data) => this.estados = data,
+      error: () => this.error = 'No se pudieron cargar los estados'
+    });
+
+    this.cargarCampanias();
+
+  }
+
+  cargarCampanias() {
+    this.http.get<any[]>(
+      'http://localhost:8000/campanias/campanias/'
+    ).subscribe({
+
+      next: (data) => {
+        this.campanias.set(data);
+      },
+
+      error: () => {
+        this.error = 'No se pudieron cargar las campañas';
+      }
+
+    });
+  }
+
+  crearCampania() {
+    this.router.navigate(['/admin/campanias/nueva']);
+  }
+
+  editarCampania(id: number) {
+    this.router.navigate(['/admin/campanias/editar', id]);
+  }
+
+  
+  eliminarCampania(id: number) {
+
+  Swal.fire({
+    title: '¿Eliminar campaña?',
+    text: 'Esta acción no se puede deshacer',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#C0392B',
+    cancelButtonColor: '#7f8c8d',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+
+    if (!result.isConfirmed) return;
+
+    this.http.delete(
+      `http://localhost:8000/campanias/campanias/${id}/`
+    ).subscribe({
+
+      next: () => {
+
+        this.campanias.set(this.campanias().filter(c => c.id !== id));
+
+        Swal.fire({
+          title: 'Eliminada',
+          text: 'La campaña fue eliminada correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+      },
+
+      error: () => { Swal.fire('Error', 'No se pudo eliminar la campaña', 'error'); }
+    });
+  });
+}
+}

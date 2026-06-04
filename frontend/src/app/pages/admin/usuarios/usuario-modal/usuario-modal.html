@@ -1,0 +1,83 @@
+<div class="overlay" (click)="cerrar.emit()">
+  <div class="usuario-modal" (click)="$event.stopPropagation()">
+
+    <!-- HEADER -->
+    <div class="modal-header">
+      @if (modo === 'ver')     { <h2>Detalle del usuario</h2> }
+      @if (modo === 'editar')  { <h2>Editar usuario</h2> }
+      @if (modo === 'eliminar'){ <h2>Eliminar usuario</h2> }
+      <button class="btn-cerrar" (click)="cerrar.emit()">✕</button>
+    </div>
+
+    <!-- MODO VER -->
+    @if (modo === 'ver' && usuario) {
+      <div class="modal-body">
+        <div class="campo"><span>Nombre</span><p>{{ usuario.nombre }} {{ usuario.apellido }}</p></div>
+        <div class="campo"><span>Email</span><p>{{ usuario.email }}</p></div>
+        <div class="campo"><span>DNI</span><p>{{ usuario.dni }}</p></div>
+        <div class="campo"><span>Grupo sanguíneo</span><p>{{ usuario.grupo_sanguineo_texto }}</p></div>
+        <div class="campo"><span>Fecha de registro</span><p>{{ usuario.fecha_registro }}</p></div>
+      </div>
+    }
+
+    <!-- MODO EDITAR -->
+    @if (modo === 'editar') {
+      <form [formGroup]="editForm" (ngSubmit)="guardar()" class="modal-body">
+        <div class="campo">
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre">
+          @if (editForm.get('nombre')?.invalid && editForm.get('nombre')?.touched) {
+            <small class="error">Obligatorio</small>
+          }
+        </div>
+        <div class="campo">
+          <label>Apellido</label>
+          <input type="text" formControlName="apellido">
+          @if (editForm.get('apellido')?.invalid && editForm.get('apellido')?.touched) {
+            <small class="error">Obligatorio</small>
+          }
+        </div>
+        <div class="campo">
+          <label>Email</label>
+          <input type="email" formControlName="email">
+          @if (editForm.get('email')?.invalid && editForm.get('email')?.touched) {
+            <small class="error">Email inválido</small>
+          }
+        </div>
+        <div class="campo">
+          <label>DNI</label>
+          <input type="text" formControlName="dni">
+          @if (editForm.get('dni')?.invalid && editForm.get('dni')?.touched) {
+            <small class="error">Obligatorio</small>
+          }
+        </div>
+        @if (error) { <p class="error">{{ error }}</p> }
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar" (click)="cerrar.emit()">Cancelar</button>
+          <button type="submit" class="btn-guardar" [disabled]="cargando">
+            {{ cargando ? 'Guardando...' : 'Guardar cambios' }}
+          </button>
+        </div>
+      </form>
+    }
+
+    <!-- MODO ELIMINAR -->
+    @if (modo === 'eliminar' && usuario) {
+      <div class="modal-body">
+        <p class="advertencia">
+          ¿Estás segura que querés eliminar a
+          <strong>{{ usuario.nombre }} {{ usuario.apellido }}</strong>?
+          Esta acción no se puede deshacer.
+        </p>
+        @if (error) { <p class="error">{{ error }}</p> }
+        <div class="modal-footer">
+          <button class="btn-cancelar" (click)="cerrar.emit()">Cancelar</button>
+          <button class="btn-eliminar" (click)="confirmarEliminar()" [disabled]="cargando">
+            {{ cargando ? 'Eliminando...' : 'Sí, eliminar' }}
+          </button>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>

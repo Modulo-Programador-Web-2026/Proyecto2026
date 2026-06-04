@@ -1,13 +1,73 @@
-<div class="placeholder-page">
+<div class="container">
 
-    <div class="placeholder-card">
+    <div class="panel">
 
-        <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"></path>
-            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-        </svg>
-        <h2>Pendiente de desarrollo</h2>
-        <p>La sección de campañas estará disponible próximamente.</p>
+        <div class="header">
+
+            <h1>Gestión de Campañas</h1>
+
+            <button class="nueva-btn" (click)="crearCampania()">
+                + Nueva Campaña
+            </button>
+
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Ubicación</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @for (campania of campanias(); track campania.id) {
+
+                <tr>
+
+                    <td>{{ campania.titulo }}</td>
+
+                    <td>{{ campania.ubicacion }}</td>
+
+                    <td>{{ campania.fecha_inicio | date:'dd/MM/yyyy' }}</td>
+
+                    <td>{{ campania.fecha_fin | date:'dd/MM/yyyy' }}</td>
+
+                    <td>{{ campania.estado_campania_texto }}</td>
+
+                    <td>
+
+                        <button class="editar-btn" (click)="editarCampania(campania.id)">
+                            Editar
+                        </button>
+
+                        <button class="eliminar-btn" (click)="eliminarCampania(campania.id)">
+                            Eliminar
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                } @empty {
+
+                <tr>
+                    <td colspan="6">
+                        No hay campañas registradas.
+                    </td>
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
 
     </div>
 

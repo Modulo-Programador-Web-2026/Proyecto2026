@@ -1,0 +1,180 @@
+<div class="contenedor-pagina">
+
+  <h1 class="titulo-pagina">Información sobre la Donación de Sangre</h1>
+
+  <div class="tarjeta tarjeta-hero">
+    <div class="hero-texto">
+      <h2 class="hero-titular">
+        {{ tituloPrincipal }}<br>{{ tituloSecundario }}
+      </h2>
+    </div>
+
+  <div class="hero-imagen">
+    <!-- Imagen del hero -->
+      <img src="img/nene-donando.png" alt="Nene feliz donando sangre">
+  </div>  
+
+    <!-- Lista de beneficios derecha -->
+    <ul class="lista-beneficios">
+      @for (beneficio of beneficiosHero; track beneficio.texto) {
+      <li [class.beneficio-con-icono]="beneficio.conIcono">
+        @if (beneficio.conIcono) {
+        <span class="icono-check-rojo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="9" fill="#DC2626" />
+            <path d="M5 9.5 L7.5 12 L13 7" stroke="white" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </span>
+        }
+        {{ beneficio.texto }}
+      </li>
+      }
+    </ul>
+
+  </div>
+
+  <div class="grilla-dos-columnas">
+
+    <div class="tarjeta">
+      <h3 class="titulo-tarjeta">{{ tituloSeccionDonante }}</h3>
+
+      <div class="donante-interior">
+
+        <ul class="lista-donante">
+          @for (req of requisitosBasicos; track req.texto) {
+          <li>
+            @if (req.icono === 'persona') {
+            <span class="icono-item" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="4" r="3" fill="#DC2626" />
+                <path d="M2 14 C2 10.5 5 8.5 8 8.5 C11 8.5 14 10.5 14 14" stroke="#DC2626" stroke-width="1.8"
+                  fill="none" stroke-linecap="round" />
+              </svg>
+            </span>
+            } @else {
+            <span class="icono-check-negro" aria-hidden="true">✓</span>
+            }
+            {{ req.texto }}
+          </li>
+          }
+        </ul>
+
+        <div class="caja-exclusiones">
+          <p class="titulo-exclusiones">
+            <span aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="8" r="7" stroke="#DC2626" stroke-width="1.8" />
+                <line x1="4.5" y1="8" x2="11.5" y2="8" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </span>
+            {{ tituloExclusiones }}
+          </p>
+          <ul class="lista-exclusiones">
+            @for (excl of exclusionesTemporales; track excl.texto) {
+            <li>{{ excl.texto }}</li>
+            }
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h3 class="titulo-tarjeta">{{ tituloRequisitos }}</h3>
+
+      <ul class="lista-requisitos">
+        @for (req of requisitosDia; track req.texto) {
+        <li>
+          <span class="icono-requisito" aria-hidden="true">
+
+            @if (req.icono === 'dni') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="4" width="16" height="12" rx="2" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+              <circle cx="6.5" cy="9" r="2" fill="#DC2626" />
+              <line x1="10" y1="8" x2="16" y2="8" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="10" y1="11" x2="15" y2="11" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            }
+
+            @if (req.icono === 'agua') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 4 L7 16 H13 L14 4 Z" fill="#DBEAFE" stroke="#DC2626" stroke-width="1.5"
+                stroke-linejoin="round" />
+              <path d="M6 7 Q10 9 14 7" stroke="#93C5FD" stroke-width="1" fill="none" />
+            </svg>
+            }
+
+            @if (req.icono === 'noAyuno') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="8" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+              <line x1="4" y1="4" x2="16" y2="16" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+              <path d="M7 10 H13" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            }
+
+            @if (req.icono === 'entrevista') {
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="2" width="14" height="16" rx="2" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+              <line x1="7" y1="7" x2="13" y2="7" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="7" y1="10" x2="13" y2="10" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="7" y1="13" x2="10" y2="13" stroke="#DC2626" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            }
+
+          </span>
+          {{ req.texto }}
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  
+  <div class="tarjeta tarjeta-procedimiento">
+    <h3 class="titulo-tarjeta">{{ tituloProcedimiento }}</h3>
+
+    <div class="fila-procedimiento">
+      @for (paso of pasosProcedimiento; track paso.numero; let ultimo = $last) {
+
+      <div class="procedimiento">
+        <div class="procedimiento-icono-contenedor">
+
+          @if (paso.icono === 'registro') {
+          <img src="img/computer.png" alt="Nene feliz donando sangre" class="procedimiento-icono">
+          }
+
+          @if (paso.icono === 'entrevistaMedica') {
+          <img src="img/doctor.png" alt="Nene feliz donando sangre" class="procedimiento-icono">
+          }
+
+          @if (paso.icono === 'extraccion') {
+          <img src="img/blood-donor.png" alt="Nene feliz donando sangre" class="procedimiento-icono">
+          }
+
+          @if (paso.icono === 'descanso') {
+          <img src="img/clock.png" alt="Nene feliz donando sangre" class="procedimiento-icono">
+          }
+
+        </div>
+        <p class="procedimiento-etiqueta">
+          <strong>{{ paso.numero }}. {{ paso.titulo }}</strong><br>
+          {{ paso.subtitulo }}
+        </p>
+      </div>
+
+      @if (!ultimo) {
+      <span class="flecha-procedimiento" aria-hidden="true">→</span>
+      }
+
+      }
+    </div>
+
+    <p class="pie-procedimiento">
+      <strong>{{ pieProcedimiento }}</strong>
+      <span class="flecha-pie" aria-hidden="true">→</span>
+      {{ avisoPostDonacion }}
+    </p>
+
+  </div>
+</div>

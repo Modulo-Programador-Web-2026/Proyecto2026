@@ -1,0 +1,19 @@
+.btn-regresar {
+    background: none;
+    border: none;
+    color: #070707;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: background 0.2s;
+    margin-right: 12px;
+}
+
+.btn-regresar:hover {
+    background: #f0f0f0;
+    color: #b00101;
+}
+
+.logout-link {
+    cursor: pointer;
+}

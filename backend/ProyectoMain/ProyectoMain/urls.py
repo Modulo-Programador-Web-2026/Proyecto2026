@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import TestView
 from usuarios.views import login_view
+from rest_framework_simplejwt.views import TokenRefreshView
+from usuarios.views import CustomTokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,4 +13,6 @@ urlpatterns = [
     path('campanias/', include('campanias.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('login/', login_view),
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

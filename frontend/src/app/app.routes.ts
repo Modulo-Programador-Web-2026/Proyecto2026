@@ -11,6 +11,10 @@ import { Campanias } from './pages/public/campanias/campanias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
 import { Inscripciones } from './pages/public/inscripciones/inscripciones';
 import { CampaniaDetalle } from './pages/public/campania-detalle/campania-detalle';
+import { Registro } from './pages/public/registro/registro';
+import { Informate } from './pages/public/informate/informate';
+import { authGuard } from './guards/auth-guard';
+import { CampaniaForm } from './pages/admin/campanias/campania-form/campania-form';
 
 
 
@@ -27,24 +31,29 @@ export const routes: Routes = [
             { path: 'campanias', component: Campanias },
             { path: 'campanias/:id/inscripcion', component: Inscripciones },
             { path: 'campanias/:id', component: CampaniaDetalle },
-            { path: 'usuarios', component: Usuarios },
-
+            { path: 'registro', component: Registro },
+            { path: 'informate', component: Informate },
 
         ]
     },
 
     // Rutas del administrador
-    {
+        {
         path: 'admin',
         component: AdminLayout,
+        canActivate: [authGuard],   
         children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: AdminDashboard },
             { path: 'campanias', component: AdminCampanias },
             { path: 'inscripciones', component: AdminInscripciones },
-            
+            { path: 'usuarios', component: Usuarios},
+            { path: 'campanias/nueva', component: CampaniaForm },
+            { path: 'campanias/editar/:id', component: CampaniaForm },
+            { path: 'usuarios', component: Usuarios },
         ]
     },
 
-    // Rutas del usuario estándar en un futuro
+    { path: '**', redirectTo: '' }
 
 ];

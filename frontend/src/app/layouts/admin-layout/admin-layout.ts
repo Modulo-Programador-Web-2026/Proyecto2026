@@ -27,7 +27,9 @@ export class AdminLayout {
     }
 
     confirmarLogout(): void {
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('rol');
         this.router.navigate(['/login']);
     }
 

@@ -2,7 +2,7 @@
 
   <h1>Gestión de Usuarios</h1>
 
-  <!-- CARD ESTADÍSTICA -->
+
   <div class="card-estadistica">
 
     <div>
@@ -16,16 +16,14 @@
 
   </div>
 
-  <!-- BARRA SUPERIOR -->
+
   <div class="barra-superior">
 
-    <!-- BUSCADOR -->
+
     <div class="buscador">
 
-      <input
-        type="text"
-        placeholder="Buscar usuario por nombre, email, DNI..."
-      />
+      <input type="text" placeholder="Buscar usuario por nombre, email, DNI..." [(ngModel)]="textoBusqueda"
+        (input)="filtrarUsuarios()" />
 
       <button>
         🔍
@@ -33,37 +31,11 @@
 
     </div>
 
-    <!-- FILTROS -->
-    <div class="filtros">
 
-      <button class="activo">
-        Todos
-      </button>
-
-      <button>
-        Donantes
-      </button>
-
-      <button>
-        Voluntarios
-      </button>
-
-      <select>
-        <option>
-          Grupo Sanguíneo
-        </option>
-      </select>
-
-    </div>
-
-    <!-- BOTÓN -->
-    <button class="btn-perfiles">
-      Ver Perfiles Completos
-    </button>
 
   </div>
 
-  <!-- HEADER TABLA -->
+
   <div class="tabla-header">
 
     <span>Perfil</span>
@@ -73,63 +45,67 @@
 
   </div>
 
-  <!-- LISTA USUARIOS -->
+
   @for (usuario of usuarios; track usuario.id) {
 
-    <div class="usuario-card">
+  <div class="usuario-card">
 
-      <!-- PERFIL -->
-      <div class="perfil">
 
-        <div class="avatar">
-          👤
-        </div>
+    <div class="perfil">
 
-        <div>
-
-          <small>Perfil</small>
-
-          <h3>
-            {{ usuario.nombre }} {{ usuario.apellido }}
-          </h3>
-
-          <p>
-            DNI: #{{ usuario.dni }}
-          </p>
-
-        </div>
-
+      <div class="avatar">
+        👤
       </div>
 
-      <!-- CONTACTO -->
-      <div class="contacto">
+      <div>
 
-        <small>Contacto</small>
+        <small>Perfil</small>
+
+        <h3>
+          {{ usuario.nombre }} {{ usuario.apellido }}
+        </h3>
 
         <p>
-          {{ usuario.email }}
+          DNI: #{{ usuario.dni }}
         </p>
 
       </div>
 
-      <!-- DATOS -->
-      <div class="datos">
+    </div>
 
-        <small>Grupo Sanguíneo</small>
 
-        <span class="grupo">
-          {{ usuario.grupo_sanguineo }}
-        </span>
+    <div class="contacto">
 
-      </div>
+      <small>Contacto</small>
 
-      <!-- ACCIONES -->
-      <div class="acciones">
-        ⋯
-      </div>
+      <p>
+        {{ usuario.email }}
+      </p>
 
     </div>
 
+
+    <div class="datos">
+      <small>Grupo Sanguíneo</small>
+      <span class="grupo">
+        {{ usuario.grupo_sanguineo_texto }}
+      </span>
+    </div>
+
+
+
+    <div class="acciones">
+      <button class="btn-ver" (click)="abrirModal(usuario, 'ver')">Ver</button>
+      <button class="btn-editar" (click)="abrirModal(usuario, 'editar')">Editar</button>
+      <button class="btn-eliminar" (click)="abrirModal(usuario, 'eliminar')">Eliminar</button>
+    </div>
+  </div>
   }
+
+  @if (mostrarModal) {
+  <app-usuario-modal [usuario]="usuarioSeleccionado" [modo]="modoModal" (cerrar)="cerrarModal()"
+    (actualizar)="cargarUsuarios()" />
+  }
+
 
 </div>

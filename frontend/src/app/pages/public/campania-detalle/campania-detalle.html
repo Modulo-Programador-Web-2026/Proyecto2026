@@ -8,7 +8,6 @@
     <div class="estado-error">{{ error }}</div>
 }
 
-<!-- Contenido -->
 @if (!cargando && !error && campania) {
     <div class="detalle-card">
 
@@ -39,18 +38,20 @@
             <line x1="244" y1="108" x2="370" y2="85" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
             <line x1="516" y1="116" x2="458" y2="90" stroke="#e74c3c" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
         </svg>
-        <!-- Badge de estado dinámico -->
-        <span class="estado-badge"
-            [class.badge-proximo]="getEstado() === 'Próximamente'"
-            [class.badge-curso]="getEstado() === 'En Curso'"
-            [class.badge-fin]="getEstado() === 'Finalizada'">
-            {{ getEstado() }}</span>
+
+
+    
+    <span class="estado-badge"
+        [class.badge-proximo]="getEstado() === 'Proxima'"
+        [class.badge-curso]="getEstado() === 'En Curso'"
+        [class.badge-fin]="getEstado() === 'Finalizada'">
+        {{ getEstado() }}</span>
+
+
     </div>
 
-<!-- Contenido principal -->
     <div class="detalle-cuerpo">
 
-        <!-- Título y ubicación -->
         <div class="detalle-info">
         <h1 class="detalle-titulo">{{ campania.titulo }}</h1>
         <p class="detalle-ubicacion">
@@ -62,7 +63,6 @@
         </p>
         </div>
 
-        <!-- Fechas e inscritos -->
         <div class="detalle-stats">
 
         <div class="stat-fechas">
@@ -92,24 +92,21 @@
             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
             <div>
-            <span class="inscritos-numero">{{ campania.total_inscritos ?? 0 }}</span>
+            <span class="inscritos-numero">{{ inscriptosCount }}</span>
             <span class="inscritos-label">Personas Inscritas</span>
             </div>
         </div>
 
         </div>
 
-        <!-- Descripción -->
         <div class="detalle-descripcion">
         <h2 class="descripcion-titulo">Descripción</h2>
         <p>{{ campania.descripcion }}</p>
         </div>
 
-        <!-- Botón -->
-        <button class="btn-donar" (click)="irAInscripcion()">
-        Inscribirse
-        </button>
-        <p class="btn-sub">Inscripción en 2 minutos</p>
+        <button class="btn-donar" (click)="inscribirse()">Inscribirse a la campaña</button>
+        <p class="btn-sub">Hacé clic para inscribirte automáticamente</p>
+        
 
     </div>
 </div>

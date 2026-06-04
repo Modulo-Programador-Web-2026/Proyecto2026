@@ -76,10 +76,11 @@
         </div>
 
         </article>
-    }
+    } @empty {
 
-    @if (campaniasFiltradas.length === 0) {
-        <p class="campanias__vacio">No se encontraron campañas.</p>
+    <p class="campanias__vacio">
+        No se encontraron campañas.
+    </p>
     }
     </div>
 }
