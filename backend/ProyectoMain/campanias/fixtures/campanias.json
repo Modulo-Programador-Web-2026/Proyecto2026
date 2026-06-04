@@ -22,5 +22,79 @@
       "fecha_fin": "2026-07-02",
       "estado_campania": 2
     }
+  },
+  [
+  {
+    "model": "campanias.campania",
+    "pk": 1,
+    "fields": {
+      "titulo": "Donación de Sangre Hospital Central",
+      "descripcion": "Campaña solidaria para pacientes en cirugías y emergencias críticas.",
+      "ubicacion": "Hospital Central Córdoba",
+      "fecha_inicio": "2026-06-10",
+      "fecha_fin": "2026-06-15",
+      "estado_campania": 1
+    }
+  },
+  {
+    "model": "campanias.campania",
+    "pk": 2,
+    "fields": {
+      "titulo": "Jornada Solidaria Barrio Güemes",
+      "descripcion": "Recolección de sangre para hospitales públicos de la ciudad.",
+      "ubicacion": "Centro Cultural Güemes",
+      "fecha_inicio": "2026-06-18",
+      "fecha_fin": "2026-06-20",
+      "estado_campania": 3
+    }
+  },
+  {
+    "model": "campanias.campania",
+    "pk": 3,
+    "fields": {
+      "titulo": "Maratón de Donación Universitaria",
+      "descripcion": "Evento organizado por universidades para fomentar la donación voluntaria.",
+      "ubicacion": "Ciudad Universitaria Córdoba",
+      "fecha_inicio": "2026-05-01",
+      "fecha_fin": "2026-05-05",
+      "estado_campania": 2
+    }
+  },
+  {
+    "model": "campanias.campania",
+    "pk": 4,
+    "fields": {
+      "titulo": "Campaña Emergencia Pediátrica",
+      "descripcion": "Donación urgente para niños en terapia intensiva.",
+      "ubicacion": "Hospital de Niños",
+      "fecha_inicio": "2026-06-12",
+      "fecha_fin": "2026-06-14",
+      "estado_campania": 1
+    }
+  },
+  {
+    "model": "campanias.campania",
+    "pk": 5,
+    "fields": {
+      "titulo": "Donación en Empresas Tech",
+      "descripcion": "Campaña en empresas de tecnología para concientizar sobre donación.",
+      "ubicacion": "Parque Empresarial Córdoba",
+      "fecha_inicio": "2026-06-25",
+      "fecha_fin": "2026-06-27",
+      "estado_campania": 3
+    }
+  },
+  {
+    "model": "campanias.campania",
+    "pk": 6,
+    "fields": {
+      "titulo": "Campaña Día Mundial del Donante de Sangre - Córdoba",
+      "descripcion": "Evento masivo de donación de sangre con participación ciudadana.",
+      "ubicacion": "Plaza San Martín",
+      "fecha_inicio": "2026-06-08",
+      "fecha_fin": "2026-06-15",
+      "estado_campania": 1
+    }
   }
+]
 ]
