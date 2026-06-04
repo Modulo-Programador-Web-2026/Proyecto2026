@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { InscripcionService } from '../../../services/inscripciones/inscripcion.service';
@@ -7,7 +6,7 @@ import { InscripcionService } from '../../../services/inscripciones/inscripcion.
 @Component({
   selector: 'app-inscripciones',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './inscripciones.html',
   styleUrl: './inscripciones.css'
 })

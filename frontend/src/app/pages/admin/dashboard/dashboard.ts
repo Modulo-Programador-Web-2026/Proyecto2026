@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../services/dashboard/dashboard.service';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
