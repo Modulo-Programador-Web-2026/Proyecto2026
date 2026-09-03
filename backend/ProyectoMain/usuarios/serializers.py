@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.core.validators import RegexValidator
-from .models import Usuario
+from .models import Usuario, RolChoices
 from django.contrib.auth import authenticate
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -46,9 +46,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'rol',
             'grupo_sanguineo',
         ]
+        read_only_fields = [
+            'rol',
+        ]
 
     def create(self, validated_data):
         password = validated_data.pop('password')
+        validated_data['rol'] = RolChoices.USUARIO_ESTANDAR
         user = Usuario(**validated_data)
         user.set_password(password)  
         user.save()
@@ -56,6 +60,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
+        validated_data.pop('rol', None)
         user = super().update(instance, validated_data)
 
         if password:
