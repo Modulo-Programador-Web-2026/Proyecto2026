@@ -62,7 +62,7 @@
                     @if (registroForm.get('password')?.invalid && registroForm.get('password')?.touched) {
                     <small class="error">
                         @if (registroForm.get('password')?.errors?.['required']) { La contraseña es obligatoria }
-                        @if (registroForm.get('password')?.errors?.['minlength']) { Mínimo 6 caracteres }
+                        @if (registroForm.get('password')?.errors?.['minlength']) { Mínimo 10 caracteres }
                     </small>
                     }
                 </div>
@@ -71,8 +71,8 @@
                     <label>Grupo sanguíneo</label>
                     <select formControlName="grupo_sanguineo">
                         <option value="">Seleccioná tu grupo</option>
-                        @for (grupo of grupos; track grupo.id) {
-                        <option [value]="grupo.id">{{ grupo.grupo }} {{ grupo.factor }}</option>
+                        @for (grupo of grupos; track grupo) {
+                        <option [value]="grupo">{{ grupo }}</option>
                         }
                     </select>
                     @if (registroForm.get('grupo_sanguineo')?.invalid && registroForm.get('grupo_sanguineo')?.touched) {

@@ -1,57 +1,28 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from django.contrib.auth import authenticate
-from .models import Usuario,Rol, GrupoSanguineo
-from .serializers import UsuarioSerializer,RolSerializer, GrupoSanguineoSerializer, CustomTokenObtainPairSerializer
+from .models import Usuario, RolChoices
+from .serializers import UsuarioSerializer, CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.permissions import AllowAny
+from usuarios.permissions import EsAdministrador, EsAdministradorOSiMismo
 
 class UsuarioViewSet(viewsets.ModelViewSet):
-
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [EsAdministradorOSiMismo]
 
     def get_queryset(self):
-        return Usuario.objects.filter(rol__tipo_rol='Usuario Estandar')
+        if self.request.user.rol == RolChoices.ADMINISTRADOR:
+            return Usuario.objects.all()
+        return Usuario.objects.filter(
+            pk=self.request.user.pk
+        )
 
-
-class RolViewSet(viewsets.ModelViewSet):
-
-    queryset = Rol.objects.all()
-    serializer_class = RolSerializer
-
-class GrupoSanguineoViewSet(viewsets.ModelViewSet):
-
-    queryset = GrupoSanguineo.objects.all()
-    serializer_class = GrupoSanguineoSerializer
-    permission_classes = [AllowAny]
-
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def login_view(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
-
-    user = authenticate(
-        request=request,
-        username=email,
-        password=password
-    )
-
-    if user is not None:
-        return Response({
-            'message': 'Login correcto',
-            'user': {
-                'id': user.id,
-                'email': user.email,
-                'rol': user.rol.tipo_rol if user.rol else None  
-            }
-        }, status=200)
-
-    return Response({'error': 'Credenciales incorrectas'}, status=400)
+    def get_permissions(self):
+        if self.action == 'create':
+            return [EsAdministrador()]
+        return [EsAdministradorOSiMismo()]
 
 
 @api_view(['POST'])

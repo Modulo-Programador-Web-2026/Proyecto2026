@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from .models import Inscripcion
 from .serializers import InscripcionSerializer
 from campanias.models import Campania
-from usuarios.models import Usuario, GrupoSanguineo
+from usuarios.models import Usuario
 
 
 class InscripcionViewSet(viewsets.ModelViewSet):

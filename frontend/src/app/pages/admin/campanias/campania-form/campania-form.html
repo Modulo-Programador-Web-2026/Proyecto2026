@@ -47,8 +47,8 @@
 
                         <option [ngValue]="null">Seleccionar</option>
 
-                        @for (estado of estado_campania; track estado.id) {
-                        <option [ngValue]="estado.id">{{ estado.estado }}</option>
+                        @for (estado of estado_campania; track estado.value) {
+                        <option [ngValue]="estado.value">{{ estado.label }}</option>
                         }
 
                     </select>
