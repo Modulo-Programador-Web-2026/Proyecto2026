@@ -1,18 +1,36 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Usuario, Rol, GrupoSanguineo
+from django.core.validators import RegexValidator
+from .models import Usuario
 from django.contrib.auth import authenticate
 
 class UsuarioSerializer(serializers.ModelSerializer):
 
-    password = serializers.CharField(write_only=True)
-
-    grupo_sanguineo_texto = serializers.SerializerMethodField()
-
-    def get_grupo_sanguineo_texto(self, obj):
-        if obj.grupo_sanguineo:
-            return f"{obj.grupo_sanguineo.grupo} {obj.grupo_sanguineo.factor}"
-        return ""
+    password = serializers.CharField(
+        write_only=True,
+        min_length=10,
+        error_messages={
+            'min_length': 'La contraseña debe tener al menos 10 caracteres.'
+        },
+        validators=[
+            RegexValidator(
+                regex=r'[A-Z]',
+                message='La contraseña debe contener al menos una mayúscula.'
+            ),
+            RegexValidator(
+                regex=r'[a-z]',
+                message='La contraseña debe contener al menos una minúscula.'
+            ),
+            RegexValidator(
+                regex=r'[0-9]',
+                message='La contraseña debe contener al menos un número.'
+            ),
+            RegexValidator(
+                regex=r'[^A-Za-zÁÉÍÓÚáéíóúÑñÜü0-9\s]',
+                message='La contraseña debe contener al menos un carácter especial.'
+            ),
+        ]
+    )
 
     class Meta:
         model = Usuario
@@ -27,7 +45,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'fecha_registro',
             'rol',
             'grupo_sanguineo',
-            'grupo_sanguineo_texto',
         ]
 
     def create(self, validated_data):
@@ -36,19 +53,17 @@ class UsuarioSerializer(serializers.ModelSerializer):
         user.set_password(password)  
         user.save()
         return user
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        user = super().update(instance, validated_data)
+
+        if password:
+            user.set_password(password)
+            user.save(update_fields=['password'])
+
+        return user
     
-
-class RolSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Rol
-        fields = '__all__'
-
-class GrupoSanguineoSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = GrupoSanguineo
-        fields = '__all__'
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
@@ -76,7 +91,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             'user': {
                 'id': user.id,
                 'email': user.email,
-                'rol': user.rol.tipo_rol if user.rol else None
+                'rol': user.rol
             }
         }
 
@@ -89,6 +104,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         token['id'] = user.id
         token['email'] = user.email
-        token['rol'] = user.rol.tipo_rol if user.rol else None
+        token['rol'] = user.rol
 
         return token

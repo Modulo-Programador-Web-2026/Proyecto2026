@@ -1,4 +1,5 @@
 from rest_framework.permissions import BasePermission
+from usuarios.models import RolChoices
 
 class EsAdministrador(BasePermission):
 
@@ -7,5 +8,5 @@ class EsAdministrador(BasePermission):
         return (
             request.user.is_authenticated
             and request.user.rol
-            and request.user.rol.tipo_rol.upper() == 'Administrador'.upper()
+            and request.user.rol == RolChoices.ADMINISTRADOR
         )

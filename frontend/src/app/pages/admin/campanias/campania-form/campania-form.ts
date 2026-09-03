@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,11 @@ import Swal from 'sweetalert2';
 export class CampaniaForm implements OnInit {
 
   campaniaForm: FormGroup;
-  estado_campania: any[] = [];
+  estado_campania = [
+    { value: 'Activa', label: 'Activa' },
+    { value: 'Finalizada', label: 'Finalizada' },
+    { value: 'Proximamente', label: 'Próximamente' }
+  ];
   modoEdicion = false;
   campaniaId: number | null = null;
 
@@ -44,7 +48,6 @@ export class CampaniaForm implements OnInit {
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private cdr = inject(ChangeDetectorRef);
 
   constructor() {
     this.campaniaForm = this.fb.group({
@@ -70,7 +73,6 @@ export class CampaniaForm implements OnInit {
 
 
   ngOnInit(): void {
-    this.cargarEstados();
     this.campaniaId = Number(this.route.snapshot.paramMap.get('id'));
 
     if (this.campaniaId) {
@@ -78,17 +80,6 @@ export class CampaniaForm implements OnInit {
       this.cargarCampania(this.campaniaId);
     }
   }
-
-
-  cargarEstados() {
-    this.http.get<any[]>('http://localhost:8000/campanias/estados-campania/')
-      .subscribe({
-        next: (data) => {
-          this.estado_campania = data;
-          this.cdr.detectChanges();
-        },
-      });
-    }
 
 
   cargarCampania(id: number) {

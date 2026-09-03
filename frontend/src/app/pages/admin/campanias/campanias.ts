@@ -16,8 +16,6 @@ import { DatePipe } from '@angular/common';
 export class AdminCampanias implements OnInit {
 
   campanias = signal<any[]>([]);
-  estados: any[] = [];
-  
 
   error = '';
 
@@ -27,16 +25,7 @@ export class AdminCampanias implements OnInit {
 ) {}
 
   ngOnInit(): void {
-
-    this.http.get<any[]>(
-      'http://localhost:8000/campanias/estados-campania/'
-    ).subscribe({
-      next: (data) => this.estados = data,
-      error: () => this.error = 'No se pudieron cargar los estados'
-    });
-
     this.cargarCampanias();
-
   }
 
   cargarCampanias() {
