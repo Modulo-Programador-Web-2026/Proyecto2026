@@ -29,34 +29,25 @@
 
                 <div class="input-group">
                     <label>Fecha inicio</label>
-                    <input type="date" formControlName="fecha_inicio" />
+                     <input type="date" formControlName="fecha_inicio" [min]="minFechaInicio" />
                     @if (obtenerError('fecha_inicio')) {
                     <p class="error"> {{ obtenerError('fecha_inicio') }}</p>}
                 </div>
 
                 <div class="input-group">
                     <label>Fecha fin</label>
-                    <input type="date" formControlName="fecha_fin" />
-                    @if (obtenerError('fecha_fin')) {
-                    <p class="error"> {{ obtenerError('fecha_fin') }}</p>}
-                </div>
+                     <input type="date" formControlName="fecha_fin" [min]="fechaMinima" />
+                     @if (obtenerError('fecha_fin')) {
+                     <p class="error"> {{ obtenerError('fecha_fin') }}</p>}
+                     @if (mensajeErrorFechas) {
+                     <p class="error">{{ mensajeErrorFechas }}</p>
+                     }
+                 </div>
 
-                <div class="input-group">
-                    <label>Estado</label>
-                    <select formControlName="estado_campania">
-
-                        <option [ngValue]="null">Seleccionar</option>
-
-                        @for (estado of estado_campania; track estado.value) {
-                        <option [ngValue]="estado.value">{{ estado.label }}</option>
-                        }
-
-                    </select>
-
-                    @if (obtenerError('estado_campania')) {
-                    <p class="error">{{ obtenerError('estado_campania') }}</p>
-                    }
-                </div>
+                 <div class="input-group">
+                     <label>Estado (automático)</label>
+                     <input formControlName="estado_campania" readonly />
+                 </div>
 
                 <button type="submit" class="submit-btn">
                     {{ modoEdicion ? 'Actualizar' : 'Crear' }}

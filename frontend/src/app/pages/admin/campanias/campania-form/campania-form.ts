@@ -15,13 +15,13 @@ import Swal from 'sweetalert2';
 export class CampaniaForm implements OnInit {
 
   campaniaForm: FormGroup;
-  estado_campania = [
-    { value: 'Activa', label: 'Activa' },
-    { value: 'Finalizada', label: 'Finalizada' },
-    { value: 'Proximamente', label: 'Próximamente' }
-  ];
   modoEdicion = false;
   campaniaId: number | null = null;
+  estadoActual = '';
+  mensajeErrorFechas = '';
+  fechaInicioOriginal: string | null = null;
+  readonly fechaMinima = this.formatearFechaParaInput(new Date());
+  minFechaInicio = this.fechaMinima;
 
   mensajesError: any = {
     titulo: {
@@ -40,8 +40,7 @@ export class CampaniaForm implements OnInit {
       maxlength: 'La ubicación no puede superar los 100 caracteres.'
     },
     fecha_inicio: { required: 'La fecha de inicio es obligatoria.' },
-    fecha_fin: { required: 'La fecha de finalización es obligatoria.' },
-    estado_campania: { required: 'Debe seleccionar un estado.' }
+    fecha_fin: { required: 'La fecha de finalización es obligatoria.' }
   };
 
   private fb = inject(FormBuilder);
@@ -51,7 +50,6 @@ export class CampaniaForm implements OnInit {
 
   constructor() {
     this.campaniaForm = this.fb.group({
-
       titulo: ['',
         [Validators.required,
         Validators.minLength(5),
@@ -67,7 +65,11 @@ export class CampaniaForm implements OnInit {
         Validators.maxLength(100)]],
       fecha_inicio: ['', Validators.required],
       fecha_fin: ['', Validators.required],
-      estado_campania: [null, Validators.required]
+      estado_campania: [{ value: '', disabled: true }]
+    });
+
+    this.campaniaForm.valueChanges.subscribe(() => {
+      this.actualizarEstado();
     });
   }
 
@@ -78,6 +80,8 @@ export class CampaniaForm implements OnInit {
     if (this.campaniaId) {
       this.modoEdicion = true;
       this.cargarCampania(this.campaniaId);
+    } else {
+      this.actualizarEstado();
     }
   }
 
@@ -85,22 +89,75 @@ export class CampaniaForm implements OnInit {
   cargarCampania(id: number) {
     this.http.get<any>(`http://localhost:8000/campanias/campanias/${id}/`)
       .subscribe(data => {
+        this.fechaInicioOriginal = data.fecha_inicio;
+        this.minFechaInicio = data.fecha_inicio < this.fechaMinima
+          ? data.fecha_inicio
+          : this.fechaMinima;
         this.campaniaForm.patchValue(data);
+        this.actualizarEstado();
       });
   }
 
 
-  validarFechas(): boolean {
-    const inicio = new Date(
-      this.campaniaForm.value.fecha_inicio
+  validarFechas(): string {
+    const inicio = this.campaniaForm.value.fecha_inicio;
+    const fin = this.campaniaForm.value.fecha_fin;
+
+    if (!inicio || !fin) {
+      return '';
+    }
+
+    if (
+      (!this.modoEdicion && inicio < this.fechaMinima) ||
+      (this.modoEdicion && inicio < this.fechaMinima && inicio !== this.fechaInicioOriginal)
+    ) {
+      return 'La fecha de inicio no puede ser anterior a hoy.';
+    }
+
+    if (fin < this.fechaMinima) {
+      return 'No se puede crear o editar una campaña finalizada.';
+    }
+
+    if (fin < inicio) {
+      return 'La fecha de fin no puede ser anterior a la fecha de inicio.';
+    }
+
+    return '';
+  }
+
+
+  private actualizarEstado(): void {
+    const inicio = this.campaniaForm.value.fecha_inicio;
+    const fin = this.campaniaForm.value.fecha_fin;
+
+    this.mensajeErrorFechas = this.validarFechas();
+
+    if (!inicio || !fin) {
+      this.estadoActual = '';
+      this.campaniaForm.get('estado_campania')?.setValue('', { emitEvent: false });
+      return;
+    }
+
+    if (fin < this.fechaMinima) {
+      this.estadoActual = 'Finalizada';
+    } else if (inicio > this.fechaMinima) {
+      this.estadoActual = 'Proximamente';
+    } else {
+      this.estadoActual = 'Activa';
+    }
+
+    this.campaniaForm.get('estado_campania')?.setValue(
+      this.estadoActual,
+      { emitEvent: false }
     );
+  }
 
-    const fin = new Date(
-      this.campaniaForm.value.fecha_fin
-    );
 
-    return fin >= inicio;
-
+  private formatearFechaParaInput(fecha: Date): string {
+    const anio = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    return `${anio}-${mes}-${dia}`;
   }
 
 
@@ -116,25 +173,29 @@ export class CampaniaForm implements OnInit {
     return this.mensajesError[campo]?.[primerError] || '';
   }
 
+
   onSubmit() {
     this.campaniaForm.markAllAsTouched();
     if (this.campaniaForm.invalid) {
       return;
     }
 
-    if (!this.validarFechas()) {
+    const errorFechas = this.validarFechas();
+    if (errorFechas) {
       Swal.fire({
         title: 'Fechas inválidas',
-        text: 'La fecha de finalización no puede ser anterior a la fecha de inicio',
+        text: errorFechas,
         icon: 'error'
       });
       return;
     }
 
-    const data = this.campaniaForm.value;
+    const data = {
+      ...this.campaniaForm.value,
+      estado_campania: this.estadoActual
+    };
 
     if (this.modoEdicion) {
-
       this.http.put(
         `http://localhost:8000/campanias/campanias/${this.campaniaId}/`,
         data
@@ -155,7 +216,6 @@ export class CampaniaForm implements OnInit {
       });
 
     } else {
-
       this.http.post(
         'http://localhost:8000/campanias/campanias/',
         data
