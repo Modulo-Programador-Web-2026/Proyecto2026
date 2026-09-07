@@ -64,7 +64,8 @@ class DashboardView(APIView):
             .count()
         )
         campanias_recientes = (
-            Campania.objects.filter(fecha_fin__gte=hoy)
+            Campania.objects.select_related('centro_salud')
+            .filter(fecha_fin__gte=hoy)
             .annotate(
                 prioridad=Case(
                     When(fecha_inicio__lte=hoy, then=Value(0)),

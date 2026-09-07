@@ -30,6 +30,8 @@ class CampaniaRecienteSerializer(CampaniaSerializer):
             'titulo',
             'descripcion',
             'ubicacion',
+            'centro_salud',
+            'centro_salud_detalle',
             'fecha_inicio',
             'fecha_fin',
             'estado_campania',

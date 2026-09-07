@@ -28,6 +28,22 @@
                 </div>
 
                 <div class="input-group">
+                    <label>Centro de salud asociado</label>
+                    <select formControlName="centro_salud">
+                        <option [ngValue]="null" disabled>Seleccioná un centro</option>
+                        @for (centro of centrosSalud; track centro.id) {
+                        <option [ngValue]="centro.id">
+                            {{ centro.nombre }} - {{ centro.localidad }}
+                        </option>
+                        }
+                    </select>
+                    @if (obtenerError('centro_salud')) {
+                    <p class="error">{{ obtenerError('centro_salud') }}</p>}
+                    @if (errorCentros) {
+                    <p class="error">{{ errorCentros }}</p>}
+                </div>
+
+                <div class="input-group">
                     <label>Fecha inicio</label>
                      <input type="date" formControlName="fecha_inicio" [min]="minFechaInicio" />
                     @if (obtenerError('fecha_inicio')) {

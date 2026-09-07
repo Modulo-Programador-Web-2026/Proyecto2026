@@ -61,6 +61,11 @@
                 </svg>
                 {{ campania.ubicacion }}
             </span>
+            @if (campania.centro_salud_detalle) {
+            <span class="card__meta-item">
+                Centro asociado: {{ campania.centro_salud_detalle.nombre }}
+            </span>
+            }
             <span class="card__meta-item">
                 <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <rect x="2" y="3" width="12" height="11" rx="2" stroke="#888" stroke-width="1.5" fill="none"/>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CampaniaService } from '../../../services/campanias/campania.service';
+import { Campania, CampaniaService } from '../../../services/campanias/campania.service';
 import { InscripcionService } from '../../../services/inscripciones/inscripcion.service';
 import { AuthService } from '../../../services/auth/auth';
 import Swal from 'sweetalert2';
@@ -14,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class CampaniaDetalle implements OnInit {
 
-  campania: any = null;
+  campania: Campania | null = null;
   cargando: boolean = true;
   error: string = '';
   inscriptosCount = 0;
@@ -34,7 +35,7 @@ export class CampaniaDetalle implements OnInit {
     const obs = this.campaniaService.getCampania(id!);
 
     obs.subscribe({
-      next: (data: any) => {
+      next: (data: Campania) => {
         this.campania = data;
         this.cargando = false;
 
@@ -74,6 +75,9 @@ export class CampaniaDetalle implements OnInit {
   }
 
   inscribirse() {
+    if (!this.campania) {
+      return;
+    }
 
     if (!this.authService.isAuthenticated()) {
       Swal.fire({
@@ -93,6 +97,7 @@ export class CampaniaDetalle implements OnInit {
 
       next: (respuesta) => {
         this.inscriptosCount = respuesta.totalInscriptos;
+        this.cdr.detectChanges();
         Swal.fire({
           icon: 'success',
           title: 'Inscripción exitosa',
@@ -102,12 +107,17 @@ export class CampaniaDetalle implements OnInit {
         });
       },
 
-      error: (err) => {
-        console.log(err);
+      error: (err: HttpErrorResponse) => {
+        const inscripcionDuplicada =
+          err.status === 409 &&
+          err.error?.codigo === 'inscripcion_duplicada';
+
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un problema al inscribirse a la campaña',
+          icon: inscripcionDuplicada ? 'info' : 'error',
+          title: inscripcionDuplicada ? 'Inscripción existente' : 'Error',
+          text: inscripcionDuplicada
+            ? err.error.mensaje
+            : 'Hubo un problema al inscribirse a la campaña',
           showConfirmButton: false,
           timer: 2000
         });

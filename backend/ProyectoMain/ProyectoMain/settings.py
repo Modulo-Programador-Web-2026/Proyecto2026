@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'inscripciones',
     'campanias',
-    'dashboard'
+    'dashboard',
+    'centros_salud',
 ]
 
 MIDDLEWARE = [

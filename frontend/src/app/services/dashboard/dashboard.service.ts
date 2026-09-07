@@ -1,12 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CentroSalud } from '../campanias/campania.service';
 
 export interface DashboardCampania {
     id: number;
     titulo: string;
     descripcion: string;
     ubicacion: string;
+    centro_salud: number | null;
+    centro_salud_detalle: CentroSalud | null;
     fecha_inicio: string;
     fecha_fin: string;
     estado_campania: string;

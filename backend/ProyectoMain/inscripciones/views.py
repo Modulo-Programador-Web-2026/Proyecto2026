@@ -1,12 +1,9 @@
-from django.shortcuts import render
-from datetime import date
+from django.db import IntegrityError, transaction
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Inscripcion
 from .serializers import InscripcionSerializer
-from campanias.models import Campania
-from usuarios.models import Usuario
 
 
 class InscripcionViewSet(viewsets.ModelViewSet):
@@ -15,11 +12,27 @@ class InscripcionViewSet(viewsets.ModelViewSet):
     serializer_class = InscripcionSerializer
     
     def create(self, request, *args, **kwargs):
+        campania_id = request.data.get('campania')
+        if Inscripcion.objects.filter(
+            usuario=request.user,
+            campania_id=campania_id,
+        ).exists():
+            return Response({
+                'codigo': 'inscripcion_duplicada',
+                'mensaje': 'Ya estás inscripto en esta campaña.',
+            }, status=status.HTTP_409_CONFLICT)
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(usuario=request.user)
-        campania_id = request.data.get('campania')
+        try:
+            with transaction.atomic():
+                serializer.save(usuario=request.user)
+        except IntegrityError:
+            return Response({
+                'codigo': 'inscripcion_duplicada',
+                'mensaje': 'Ya estás inscripto en esta campaña.',
+            }, status=status.HTTP_409_CONFLICT)
+
         total = Inscripcion.objects.filter(campania_id=campania_id).count()
 
         return Response({
