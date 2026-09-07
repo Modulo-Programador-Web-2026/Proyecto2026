@@ -241,7 +241,7 @@ export class CampaniaForm implements OnInit {
 
     if (this.modoEdicion) {
       this.http.put(
-        `http://localhost:8000/campanias/campanias/${this.campaniaId}/`,
+        `http://localhost:8000/campanias/${this.campaniaId}/`,
         data
       ).subscribe(() => {
         Swal.fire({
@@ -261,7 +261,7 @@ export class CampaniaForm implements OnInit {
 
     } else {
       this.http.post(
-        'http://localhost:8000/campanias/campanias/',
+        'http://localhost:8000/campanias/',
         data
       ).subscribe(() => {
         Swal.fire({

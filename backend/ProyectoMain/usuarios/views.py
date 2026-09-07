@@ -11,6 +11,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [EsAdministradorOSiMismo]
+    lookup_value_regex = r'\d+'
 
     def get_queryset(self):
         if self.request.user.rol == RolChoices.ADMINISTRADOR:

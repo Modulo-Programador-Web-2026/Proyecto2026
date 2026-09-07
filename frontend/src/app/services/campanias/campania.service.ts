@@ -41,7 +41,7 @@ export interface Campania {
 })
 export class CampaniaService {
 
-  private apiUrl = 'http://localhost:8000/campanias/campanias/';
+  private apiUrl = 'http://localhost:8000/campanias/';
 
   constructor(private http: HttpClient) { }
 
@@ -67,7 +67,7 @@ export class CampaniaService {
 
   getCentrosSalud(): Observable<CentroSalud[]> {
     return this.http.get<CentroSalud[]>(
-      'http://localhost:8000/centros-salud/centros/'
+      'http://localhost:8000/centros-salud/'
     );
   }
 

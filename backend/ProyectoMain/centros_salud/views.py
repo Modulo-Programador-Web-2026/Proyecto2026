@@ -9,3 +9,4 @@ class CentroSaludViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CentroSalud.objects.all()
     serializer_class = CentroSaludSerializer
     permission_classes = [AllowAny]
+    lookup_value_regex = r'\d+'

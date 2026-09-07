@@ -4,6 +4,6 @@ from .views import CentroSaludViewSet
 
 
 router = DefaultRouter()
-router.register(r'centros', CentroSaludViewSet)
+router.register(r'', CentroSaludViewSet, basename='centro-salud')
 
 urlpatterns = router.urls
