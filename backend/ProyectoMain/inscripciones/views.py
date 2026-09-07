@@ -4,10 +4,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
 from campanias.models import Campania
 from usuarios.permissions import EsUsuarioEstandar
-
 from .models import Inscripcion
 from .serializers import InscripcionSerializer
 
@@ -15,12 +13,6 @@ from .serializers import InscripcionSerializer
 @api_view(['POST'])
 @permission_classes([EsUsuarioEstandar])
 def inscribirse_campania(request, campania_id):
-    if request.data:
-        return Response({
-            'codigo': 'body_no_permitido',
-            'mensaje': 'Este endpoint no recibe datos en el body.',
-        }, status=status.HTTP_400_BAD_REQUEST)
-
     campania = get_object_or_404(Campania, pk=campania_id)
     if campania.fecha_fin < timezone.localdate():
         return Response({

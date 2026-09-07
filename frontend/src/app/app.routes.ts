@@ -14,6 +14,7 @@ import { Registro } from './pages/public/registro/registro';
 import { Informate } from './pages/public/informate/informate';
 import { authGuard } from './guards/auth-guard';
 import { CampaniaForm } from './pages/admin/campanias/campania-form/campania-form';
+import { RecuperarPassword } from './pages/public/recuperar-password/recuperar-password';
 
 
 
@@ -27,6 +28,7 @@ export const routes: Routes = [
             { path: '', component: Landing },
             { path: 'quienes-somos', component: QuienesSomos },
             { path: 'login', component: Login },
+            { path: 'recuperar-password', component: RecuperarPassword },
             { path: 'campanias', component: Campanias },
             { path: 'campanias/:id', component: CampaniaDetalle },
             { path: 'registro', component: Registro },

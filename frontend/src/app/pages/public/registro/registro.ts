@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import {
+  passwordsCoinciden,
+  validadoresPassword
+} from '../../../validators/password.validators';
 
 @Component({
   selector: 'app-registro',
@@ -36,13 +40,14 @@ export class Registro {
     this.registroForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-       password: ['', [Validators.required, Validators.minLength(10)]],
+       password: ['', validadoresPassword()],
+       confirmar_password: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       dni: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
        rol: ['Usuario Estandar'],
-       grupo_sanguineo: ['', Validators.required]
-     });
+      grupo_sanguineo: ['', Validators.required]
+     }, { validators: passwordsCoinciden });
   }
 
   onSubmit() {
@@ -57,7 +62,9 @@ export class Registro {
     if (this.cargando) return;
     this.cargando = true;
 
-    this.http.post('http://localhost:8000/usuarios/registro/', this.registroForm.value).subscribe({
+    const { confirmar_password, ...datosRegistro } = this.registroForm.getRawValue();
+
+    this.http.post('http://localhost:8000/usuarios/registro/', datosRegistro).subscribe({
       next: () => {
         this.cargando = false;
         Swal.fire({
