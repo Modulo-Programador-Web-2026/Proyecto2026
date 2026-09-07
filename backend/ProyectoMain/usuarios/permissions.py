@@ -7,6 +7,14 @@ class EsAdministrador(BasePermission):
             request.user.is_authenticated
             and request.user.rol == RolChoices.ADMINISTRADOR
         )
+
+
+class EsUsuarioEstandar(BasePermission):
+    def has_permission(self, request, view):
+        return (
+            request.user.is_authenticated
+            and request.user.rol == RolChoices.USUARIO_ESTANDAR
+        )
         
 class EsAdministradorOSiMismo(BasePermission):
     def has_permission(self, request, view):
