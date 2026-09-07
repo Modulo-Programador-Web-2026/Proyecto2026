@@ -28,7 +28,7 @@ def inscribirse_campania(request, campania_id):
     return Response({"mensaje": "Inscripción correcta"})
 
 class CampaniaViewSet(viewsets.ModelViewSet):
-    queryset = Campania.objects.all()
+    queryset = Campania.objects.select_related('centro_salud').all()
     serializer_class = CampaniaSerializer
 
     def get_permissions(self):

@@ -1,10 +1,15 @@
 from rest_framework import serializers
 from .models import Campania, EstadoCampaniaChoices
+from centros_salud.serializers import CentroSaludSerializer
 from django.utils import timezone
 
 class CampaniaSerializer(serializers.ModelSerializer):
 
-    estado_calculado = serializers.SerializerMethodField() 
+    estado_calculado = serializers.SerializerMethodField()
+    centro_salud_detalle = CentroSaludSerializer(
+        source='centro_salud',
+        read_only=True,
+    )
 
     class Meta:
         model = Campania
@@ -56,8 +61,10 @@ class CampaniaSerializer(serializers.ModelSerializer):
         return attrs
 
     def get_estado_calculado(self, obj):
-        fecha_inicio = obj.fecha_inicio;
-        fecha_fin = obj.fecha_fin;
+        return self.calcular_estado(obj.fecha_inicio, obj.fecha_fin)
+
+    @staticmethod
+    def calcular_estado(fecha_inicio, fecha_fin):
         hoy = timezone.localdate()
         if fecha_inicio > hoy:
             return EstadoCampaniaChoices.PROXIMAMENTE

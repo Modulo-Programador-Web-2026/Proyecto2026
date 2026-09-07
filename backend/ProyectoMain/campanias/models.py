@@ -9,6 +9,13 @@ class Campania(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=1500)
     ubicacion = models.CharField(max_length=100)
+    centro_salud = models.ForeignKey(
+        'centros_salud.CentroSalud',
+        on_delete=models.PROTECT,
+        related_name='campanias',
+        null=True,
+        blank=True,
+    )
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     estado_campania = models.CharField(

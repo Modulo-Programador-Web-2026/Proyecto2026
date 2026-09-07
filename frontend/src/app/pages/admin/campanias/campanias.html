@@ -18,6 +18,7 @@
                 <tr>
                     <th>Título</th>
                     <th>Ubicación</th>
+                    <th>Centro asociado</th>
                     <th>Inicio</th>
                     <th>Fin</th>
                     <th>Estado</th>
@@ -35,6 +36,8 @@
 
                     <td>{{ campania.ubicacion }}</td>
 
+                    <td>{{ campania.centro_salud_detalle?.nombre || 'Sin asociar' }}</td>
+
                     <td>{{ campania.fecha_inicio | date:'dd/MM/yyyy' }}</td>
 
                     <td>{{ campania.fecha_fin | date:'dd/MM/yyyy' }}</td>
@@ -42,7 +45,7 @@
                     <td>{{ campania.estado_campania }}</td>
 
                     <td>
-
+                        <div class="acciones">
                         <button class="editar-btn" (click)="editarCampania(campania.id)">
                             Editar
                         </button>
@@ -50,6 +53,7 @@
                         <button class="eliminar-btn" (click)="eliminarCampania(campania.id)">
                             Eliminar
                         </button>
+                        </div>
 
                     </td>
 
@@ -58,7 +62,7 @@
                 } @empty {
 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         No hay campañas registradas.
                     </td>
                 </tr>

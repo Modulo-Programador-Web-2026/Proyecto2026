@@ -16,6 +16,12 @@ class Inscripcion(models.Model):
 
         class Meta:
             db_table = 'inscripciones'
+            constraints = [
+                models.UniqueConstraint(
+                    fields=['usuario', 'campania'],
+                    name='inscripcion_unica_usuario_campania',
+                )
+            ]
         
         def __str__(self):
             return f"{self.usuario} - {self.campania}"

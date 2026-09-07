@@ -1,8 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { forkJoin } from 'rxjs';
+import {
+  CampaniaService,
+  CentroSalud
+} from '../../../../services/campanias/campania.service';
 
 
 @Component({
@@ -22,6 +27,8 @@ export class CampaniaForm implements OnInit {
   fechaInicioOriginal: string | null = null;
   readonly fechaMinima = this.formatearFechaParaInput(new Date());
   minFechaInicio = this.fechaMinima;
+  centrosSalud: CentroSalud[] = [];
+  errorCentros = '';
 
   mensajesError: any = {
     titulo: {
@@ -39,6 +46,9 @@ export class CampaniaForm implements OnInit {
       minlength: 'La ubicación debe tener al menos 5 caracteres.',
       maxlength: 'La ubicación no puede superar los 100 caracteres.'
     },
+    centro_salud: {
+      required: 'El centro de salud es obligatorio.'
+    },
     fecha_inicio: { required: 'La fecha de inicio es obligatoria.' },
     fecha_fin: { required: 'La fecha de finalización es obligatoria.' }
   };
@@ -47,6 +57,8 @@ export class CampaniaForm implements OnInit {
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private campaniaService = inject(CampaniaService);
+  private cdr = inject(ChangeDetectorRef);
 
   constructor() {
     this.campaniaForm = this.fb.group({
@@ -63,6 +75,7 @@ export class CampaniaForm implements OnInit {
         [Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100)]],
+      centro_salud: [null, Validators.required],
       fecha_inicio: ['', Validators.required],
       fecha_fin: ['', Validators.required],
       estado_campania: [{ value: '', disabled: true }]
@@ -79,23 +92,54 @@ export class CampaniaForm implements OnInit {
 
     if (this.campaniaId) {
       this.modoEdicion = true;
-      this.cargarCampania(this.campaniaId);
+      this.cargarDatosEdicion(this.campaniaId);
     } else {
+      this.cargarCentrosSalud();
       this.actualizarEstado();
     }
   }
 
+  cargarCentrosSalud(): void {
+    this.campaniaService.getCentrosSalud().subscribe({
+      next: centros => {
+        this.centrosSalud = centros;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorCentros = 'No se pudieron cargar los centros de salud.';
+      }
+    });
+  }
 
-  cargarCampania(id: number) {
-    this.http.get<any>(`http://localhost:8000/campanias/campanias/${id}/`)
-      .subscribe(data => {
+
+  cargarDatosEdicion(id: number): void {
+    forkJoin({
+      centros: this.campaniaService.getCentrosSalud(),
+      campania: this.campaniaService.getCampania(String(id))
+    }).subscribe({
+      next: ({ centros, campania }) => {
+        this.centrosSalud = centros;
+        const data = campania;
         this.fechaInicioOriginal = data.fecha_inicio;
         this.minFechaInicio = data.fecha_inicio < this.fechaMinima
           ? data.fecha_inicio
           : this.fechaMinima;
-        this.campaniaForm.patchValue(data);
+        this.campaniaForm.patchValue({
+          titulo: data.titulo,
+          descripcion: data.descripcion,
+          ubicacion: data.ubicacion,
+          centro_salud: data.centro_salud,
+          fecha_inicio: data.fecha_inicio,
+          fecha_fin: data.fecha_fin
+        });
         this.actualizarEstado();
-      });
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorCentros = 'No se pudieron recuperar los datos de la campaña.';
+        this.cdr.detectChanges();
+      }
+    });
   }
 
 
