@@ -91,9 +91,7 @@ export class CampaniaDetalle implements OnInit {
       return;
     };
 
-    this.inscripcionService.inscribirse({
-      campania: this.campania.id
-    }).subscribe({
+    this.inscripcionService.inscribirse(this.campania.id).subscribe({
 
       next: (respuesta) => {
         this.inscriptosCount = respuesta.totalInscriptos;

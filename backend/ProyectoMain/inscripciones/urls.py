@@ -1,7 +1,8 @@
-from rest_framework.routers import DefaultRouter
-from .views import InscripcionViewSet
+from django.urls import path
 
-router = DefaultRouter()
-router.register(r'inscripciones', InscripcionViewSet)
+from .views import total_inscriptos
 
-urlpatterns = router.urls
+
+urlpatterns = [
+    path('total/', total_inscriptos, name='total-inscriptos'),
+]

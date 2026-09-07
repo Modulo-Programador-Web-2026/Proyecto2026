@@ -9,7 +9,6 @@ import { AdminInscripciones } from './pages/admin/inscripciones/inscripciones';
 import { Login } from './pages/public/login/login';
 import { Campanias } from './pages/public/campanias/campanias';
 import { Usuarios } from './pages/admin/usuarios/usuarios';
-import { Inscripciones } from './pages/public/inscripciones/inscripciones';
 import { CampaniaDetalle } from './pages/public/campania-detalle/campania-detalle';
 import { Registro } from './pages/public/registro/registro';
 import { Informate } from './pages/public/informate/informate';
@@ -29,7 +28,6 @@ export const routes: Routes = [
             { path: 'quienes-somos', component: QuienesSomos },
             { path: 'login', component: Login },
             { path: 'campanias', component: Campanias },
-            { path: 'campanias/:id/inscripcion', component: Inscripciones },
             { path: 'campanias/:id', component: CampaniaDetalle },
             { path: 'registro', component: Registro },
             { path: 'informate', component: Informate },
