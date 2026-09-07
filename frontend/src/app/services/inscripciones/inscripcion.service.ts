@@ -18,20 +18,20 @@ export class InscripcionService {
 
   getCampania(id: string): Observable<any> {
     return this.http.get(
-      `${this.apiUrl}/campanias/campanias/${id}/`
+      `${this.apiUrl}/campanias/${id}/`
     );
   }
 
   getTotalInscriptos(campaniaId: number): Observable<{ totalInscriptos: number }> {
   return this.http.get<{ totalInscriptos: number }>(
-    `${this.apiUrl}/inscripciones/total/?campania=${campaniaId}`
+    `${this.apiUrl}/inscripciones/campanias/${campaniaId}/total/`
   );
 }
 
 
   inscribirse(campaniaId: number): Observable<{ data: any, totalInscriptos: number }> {
     return this.http.post<{ data: any, totalInscriptos: number }>(
-      `${this.apiUrl}/campanias/campanias/${campaniaId}/inscribirse/`,
+      `${this.apiUrl}/inscripciones/campanias/${campaniaId}/`,
       null
     );
   }

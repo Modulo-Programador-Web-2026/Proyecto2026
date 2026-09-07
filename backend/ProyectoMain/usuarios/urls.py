@@ -5,8 +5,8 @@ from django.urls import path
 
 router = DefaultRouter()
 
-router.register(r'usuarios', UsuarioViewSet)
+router.register(r'', UsuarioViewSet, basename='usuario')
 
-urlpatterns = router.urls +[
+urlpatterns = [
     path('registro/', registro_view),
-]
+] + router.urls

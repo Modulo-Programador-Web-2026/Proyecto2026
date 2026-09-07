@@ -30,7 +30,7 @@ export class AdminCampanias implements OnInit {
 
   cargarCampanias() {
     this.http.get<any[]>(
-      'http://localhost:8000/campanias/campanias/'
+      'http://localhost:8000/campanias/'
     ).subscribe({
 
       next: (data) => {
@@ -69,7 +69,7 @@ export class AdminCampanias implements OnInit {
     if (!result.isConfirmed) return;
 
     this.http.delete(
-      `http://localhost:8000/campanias/campanias/${id}/`
+      `http://localhost:8000/campanias/${id}/`
     ).subscribe({
 
       next: () => {
