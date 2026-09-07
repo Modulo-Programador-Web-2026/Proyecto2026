@@ -4,33 +4,41 @@ from django.core.validators import RegexValidator
 from .models import Usuario, RolChoices
 from django.contrib.auth import authenticate
 
-class UsuarioSerializer(serializers.ModelSerializer):
 
-    password = serializers.CharField(
+VALIDADORES_PASSWORD = [
+    RegexValidator(
+        regex=r'[A-Z]',
+        message='La contraseña debe contener al menos una mayúscula.'
+    ),
+    RegexValidator(
+        regex=r'[a-z]',
+        message='La contraseña debe contener al menos una minúscula.'
+    ),
+    RegexValidator(
+        regex=r'[0-9]',
+        message='La contraseña debe contener al menos un número.'
+    ),
+    RegexValidator(
+        regex=r'[^A-Za-zÁÉÍÓÚáéíóúÑñÜü0-9\s]',
+        message='La contraseña debe contener al menos un carácter especial.'
+    ),
+]
+
+
+def campo_password():
+    return serializers.CharField(
         write_only=True,
         min_length=10,
         error_messages={
             'min_length': 'La contraseña debe tener al menos 10 caracteres.'
         },
-        validators=[
-            RegexValidator(
-                regex=r'[A-Z]',
-                message='La contraseña debe contener al menos una mayúscula.'
-            ),
-            RegexValidator(
-                regex=r'[a-z]',
-                message='La contraseña debe contener al menos una minúscula.'
-            ),
-            RegexValidator(
-                regex=r'[0-9]',
-                message='La contraseña debe contener al menos un número.'
-            ),
-            RegexValidator(
-                regex=r'[^A-Za-zÁÉÍÓÚáéíóúÑñÜü0-9\s]',
-                message='La contraseña debe contener al menos un carácter especial.'
-            ),
-        ]
+        validators=VALIDADORES_PASSWORD,
     )
+
+
+class UsuarioSerializer(serializers.ModelSerializer):
+
+    password = campo_password()
 
     class Meta:
         model = Usuario
@@ -68,7 +76,12 @@ class UsuarioSerializer(serializers.ModelSerializer):
             user.save(update_fields=['password'])
 
         return user
-    
+
+
+class RecuperarPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = campo_password()
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 

@@ -63,6 +63,25 @@
                     <small class="error">
                         @if (registroForm.get('password')?.errors?.['required']) { La contraseña es obligatoria }
                         @if (registroForm.get('password')?.errors?.['minlength']) { Mínimo 10 caracteres }
+                        @if (registroForm.get('password')?.errors?.['pattern']) {
+                        Debe incluir mayúscula, minúscula, número y carácter especial
+                        }
+                    </small>
+                    }
+                </div>
+
+                <div class="input-group">
+                    <label>Repetir contraseña</label>
+                    <input type="password" placeholder="Repetir contraseña" formControlName="confirmar_password">
+                    @if (registroForm.get('confirmar_password')?.touched &&
+                    (registroForm.get('confirmar_password')?.errors?.['required'] ||
+                    registroForm.errors?.['passwordsNoCoinciden'])) {
+                    <small class="error">
+                        @if (registroForm.get('confirmar_password')?.errors?.['required']) {
+                        Repetí la contraseña
+                        } @else {
+                        Las contraseñas no coinciden
+                        }
                     </small>
                     }
                 </div>
